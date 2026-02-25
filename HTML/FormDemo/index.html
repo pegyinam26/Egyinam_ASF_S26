@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form Demo</title>
+</head>
+<body>
+
+<!--Forms: we need to know where info is going, How it is going, and what info looks like-->
+<!--ONLY that which is in the form will be submitted-->
+<form action="/admin/users" method="POST">
+    <!--inputs = user giving data-->
+    <label>First name:
+        <input type="text" name="fname" minlength="10" required>
+    </label>
+    <br>
+    <label>Last name:
+        <input type="text" name="lname">
+    </label>
+    <br>
+    <label>Password:
+        <input type="password" name="" id="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+               title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
+    </label>
+    <br>
+    <label>Email:
+        <input type="email" name="" id="" pattern="">
+    </label>
+
+    <!--number input-->
+    <input type="number" name="" id="" min="21" max="99" >
+    <!--radio buttons-->
+    <br>
+    <label>
+        Is you dead or alive???
+        <input type="radio" name="livingStatus" value="yes" checked> Yep
+        <input type="radio" name="livingStatus" value="no"> Nope
+        <input type="radio" name="livingStatus" value="zombie"> Zombie
+
+    </label>
+
+
+    <br>
+    <!--need to submit data = button-->
+    <button type="submit">Submit</button>
+</form>
+
+
+
+</body>
+</html>
