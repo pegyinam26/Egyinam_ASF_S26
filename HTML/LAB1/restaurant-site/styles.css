@@ -1,0 +1,47 @@
+body {
+    background-color: bisque;
+    margin: 0;
+    padding: 0;
+    position: relative; /* Make body the positioning context */
+    padding-top: 80px; /* Add padding to body to prevent content overlap with logo */
+}
+
+body, html {
+    height: 100%;
+}
+
+.logo-text-inline {
+    vertical-align: middle; /* Aligns the middle of the elements */
+}
+
+.logo-absolute {
+    position: absolute; /* Position relative to the nearest positioned ancestor (body) */
+    top: 10px; /* Distance from the top */
+    left: 10px; /* Distance from the left */
+    height: 60px; /* Adjust logo size as needed */
+}
+
+/* The hero image */
+.hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (image1.jpg). This will make the text easier to read */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/image1.jpg");
+
+    /* Set a specific height */
+    height: 100%;
+
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}

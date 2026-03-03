@@ -1,0 +1,45 @@
+/*setting default margins and paddings to zero for the browser*/
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+
+/*using body tag*/
+body{
+    background-color: yellowgreen;
+}
+
+/*using div tag*/
+div {
+    border: 3px red solid;
+}
+
+/*using onion id*/
+#onions {
+    border: 3px blue solid;
+    margin-top: 50px;
+    padding: 100px;
+}
+
+/*using yummy class*/
+.yummy{
+    font-size: 50px;
+}
+
+/*calling all fries id which also has a yummy class*/
+#fries.yummy{
+    font-weight: bolder;
+}
+
+#burger.yummy{
+    margin-bottom: 50px;
+    border-bottom: black 20px ridge;
+    border-bottom: none;
+}
+
+/*using font family from google fonts*/
+h1 {
+    font-family: "Henny Penny", system-ui;
+}
