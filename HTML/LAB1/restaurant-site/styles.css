@@ -1,24 +1,54 @@
-body {
-    background-color: bisque;
+* {
     margin: 0;
     padding: 0;
-    position: relative; /* Make body the positioning context */
-    padding-top: 80px; /* Add padding to body to prevent content overlap with logo */
+    box-sizing: border-box;
 }
 
 body, html {
     height: 100%;
 }
 
-.logo-text-inline {
-    vertical-align: middle; /* Aligns the middle of the elements */
+.nav-links{
+    list-style: none; /*removes bullet points from nav list */
+    display: flex;
 }
 
-.logo-absolute {
-    position: absolute; /* Position relative to the nearest positioned ancestor (body) */
-    top: 10px; /* Distance from the top */
-    left: 10px; /* Distance from the left */
-    height: 60px; /* Adjust logo size as needed */
+a {
+    text-decoration: underline; /*adds underlines from links */
+    color: black;
+}
+
+.nav-links li{
+    margin: 0 1rem;/*adds horizontal spacing between links */
+    margin-left: auto;
+    font-size: x-large;
+    cursor: pointer;
+
+}
+
+.nav-links a{
+    padding: 14px 20px;/*makes the links easier to click and provides visual spacing */
+    color: yellowgreen;
+    transition: all 200ms ease-in;
+}
+.nav-links a:hover{
+    color: white;
+}
+
+
+
+.logo-image {
+    margin-right: auto;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between; /* pushes logo to the left, links to the right*/
+    align-items: center; /*vertically centers items within the navbar */
+    height: 70px;
+    background-color: #333;
+    padding: 0 20px;
+
 }
 
 /* The hero image */
@@ -37,11 +67,26 @@ body, html {
 }
 
 /* Place text in the middle of the image */
-.hero-text {
+.hero-text{
     text-align: center;
+    text-size-adjust: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
+    color: crimson;
+
 }
+
+.hero-text:first-child{
+    font-size: x-large;
+    font-weight: bolder;
+
+}
+
+.tagline{
+    padding: 100px;
+    font-size: x-large;
+    font-style: italic;
+}
+
