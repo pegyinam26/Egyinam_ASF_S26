@@ -54,7 +54,7 @@ a {
 /* The hero image */
 .hero-image {
     /* Use "linear-gradient" to add a darken background effect to the image (image1.jpg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("images/image1.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("images/image1_3.jpg");
 
     /* Set a specific height */
     height: 100%;
@@ -74,7 +74,7 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: crimson;
+    color: #e11515;
 
 }
 
@@ -84,9 +84,19 @@ a {
 
 }
 
+h1{
+    text-shadow: 7px 7px 7px black;
+    margin: 0 auto;
+    font-size: 150px;
+    font-weight: bolder;
+    width: 1000px;
+}
+
 .tagline{
-    padding: 100px;
-    font-size: x-large;
+    padding: 50px;
+    font-size: 50px;
     font-style: italic;
+    color: wheat;
+    margin: 0 auto;
 }
 
