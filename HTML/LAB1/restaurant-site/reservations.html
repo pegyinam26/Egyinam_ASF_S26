@@ -7,12 +7,73 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>G & G's Bar and Brewery</h1>
-    <h2>Reservations Page</h2>
-    <!--logo image-->
-    <img src="./images/logo.png" alt="logo_image" width="70" height="20" class="logo-absolute">
-    <a href="index.html">Home</a>
-    <a href="menu.html">Menu</a>
-    <a href="reservations.html">Reservations</a>
+<div>
+    <!-- NAV bar for navigation links and restaurant logo-->
+    <nav class="navbar">
+
+        <div class="logo-image">
+
+            <img src="./images/logo.png" alt="logo_image" width="50" height="50">
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="reservations.html">Reservations</a></li>
+        </ul>
+    </nav>
+    <!--Reservation page title and a short paragraph explaining reservations are "request only"-->
+    <div class="reservation-container">
+        <h1 class="reservation-title">Book A Table</h1>
+            <p id="request-only">Please note that reservations are accepted on a <span>request-only</span> basis and are not guaranteed until confirmed by our staff. While we make every effort to accommodate all requests, availability may vary depending on seating capacity and demand. A member of our team will contact you to confirm your reservation once your request has been reviewed. We appreciate your understanding and look forward to serving you.</p>
+    </div>
+    <!--reservation form-->
+    <form action="/submit-reservation" method="post">
+
+        <div class="form-break">
+            <div class="subform-break1">
+                <label> First Name:
+                    <input type="text" id="fname" name="fname" minlength="10" required>
+                </label>
+            </div>
+            <div class="subform-break2">
+                <label> Last Name:
+                    <input type="text" id="lname" name="lname">
+                </label>
+            </div>
+        </div>
+        <div class="form-break">
+            <label> Email:<input type="email" name="" id="" pattern=""></label>
+            <label> Party Size:<input type="number" name="" min="1" max="8"></label>
+            <label> Date:<input type="date" name="" id="" pattern="" required></label>
+            <label> Time:<input type="time" name="" id="" pattern="" required></label>
+        </div>
+
+        <div class="form-break">
+            <fieldset>
+                <legend>Seating Preference:</legend>
+                <label>Indoor: <input type="radio" name="seatingChoice" value="Indoor" checked> </label>
+                <label>Outdoor: <input type="radio" name="seatingChoice" value="Indoor"> </label>
+                <label>Barside: <input type="radio" name="seatingChoice" value="Indoor"> </label>
+            </fieldset>
+        </div>
+        <div class="form-break">
+            <legend> Dietary Notes (max 30 characters):</legend>
+            <label>
+                <textarea name="dietarynotes" id="mytextarea" cols="30" rows="5" maxlength="30"></textarea>
+            </label>
+        </div>
+        <div class="form-break">
+            <label>Newsletter opt-in:
+                <input type="checkbox" name="checkbox1"> Check
+            </label>
+        </div>
+        <div class="form-break">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
+    </form>
+
+
+</div>
 </body>
 </html>
