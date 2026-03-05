@@ -1,0 +1,58 @@
+/* creating variables for a color palette*/
+:root{
+    --bg:#7F5384; /*Dark Purple for backgrounds*/
+    --text:#949963; /*Burnt peach for text*/
+    --errors: #F0EDE5; /*bright white for errors*/
+    --shadows: #EDE2F3; /* light blue for shadows*/
+    --highlights: #DAD961; /* bright yello for highlights*/
+}
+
+/* for usage*/
+
+body{
+    background-color: var(--highlights);
+}
+
+.fa-dumpster{
+    color: green;
+    font-size: 400px;
+    text-shadow: 5px 5px 0 white;
+}
+
+h1{
+    text-shadow: 5px 5px 5px brown;
+    text-align: center;
+    margin: 0 auto;
+    /*width: 50vw;/* this is percentage of the parent body, vw-viewer width (browser width) */
+    width: 100px;
+    color: blue;
+}
+span{
+    color:var(--shadows);
+}
+
+div{
+    width: 300px;
+    height: 300px;
+    background-color: var(--bg);
+    box-shadow: 5px 5px 5px black;
+
+}
+
+input{
+    width: 15vw;
+}
+/* working with pseudo classes hover, focus */
+h1:hover{
+    background-color: purple;
+}
+button:hover{
+    color:red;
+}
+input:focus{
+    padding-top: 100px;
+    background-color: red;
+}
+input::placeholder{
+    color:red;
+}
