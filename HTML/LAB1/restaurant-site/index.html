@@ -4,38 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>G & G's Steakhouse</title>
-
+    <!--kit from Font Awesome-->
+    <script src="https://kit.fontawesome.com/1e9c4867e3.js" crossorigin="anonymous"></script>
+    <!--    external css link - Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
+<!-- NAVBAR SECTION-->
 
-
-<div>
-        <!--content image-->
-
-        <!-- USE NAV BAR for these links-->
-        <nav class="navbar">
-            <div class="logo-image">
-                <img src="./images/logo.png" alt="logo_image" width="50" height="50">
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="reservations.html">Reservations</a></li>
-            </ul>
-        </nav>
-
+<div class="navbar">
+    <div class="logo">
+        <img src="./images/logo-image.png" alt="Steakhouse logo">
     </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservations.html">Reservations</a>
+    </div>
+</div>
 
-    <!--using image #1 and hero page-->
-    <div class="hero-container">
-        <img src="images/image1.jpg" alt="image1 as hero-image" width="1000" height="1000" class="hero-image">
-        <div class="hero-text">
-            <h1 class="restaurant-name">G & G's Steakhouse</h1>
-                 <p class="tagline">...where great food and drinks await ya!<p>
+<!-- HERO BANNER SECTION -->
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>G & G's Steakhouse</h1>
+        <p>...where great food and drinks await ya!</p>
+        <a href="reservations.html" class="btn">Reserve a Table</a>
+    </div>
+</section>
+
+<!-- FEATURED FAVORITES MENU SNIPPET -->
+
+<section class="featured">
+    <h2>Featured Favorites</h2>
+    <div class="card-container">
+        <div class="card">
+            <img src="./images/signature_rib-eye-with-linguine.jpg" alt="Grilled ribeye steak">
+            <h3>Signature Ribeye Pasta</h3>
+            <p>Garlic Butter Cajun Steak Linguine with Creamy Parmesan Sauce.</p>
         </div>
-    </div>
 
+        <div class="card">
+            <img src="./images/filet_mignon_steak.jpg" alt="Filet mignon">
+            <h3>Filet Mignon Steak</h3>
+            <p>10 oz. of the finest aged beef tenderloin. Comes with a tossed salad, hot sourdough bread, ranch beans, and your choice of house side.</p>
+        </div>
+
+        <div class="card">
+            <img src="./images/old-fashioned3.jpg" alt="Classic old fashioned cocktail">
+            <h3>Old Fashioned</h3>
+            <p>A classic bourbon cocktail with bitters, sugar and orange peel.</p>
+        </div>
+
+    </div>
+</section>
+<!-- FOOTER SECTION TO DISPLAY COPYRIGHTS-->
+<footer>
+    <!--USING FONT AWESOME ON HOME PAGE-->
+    <i class="fa-solid fa-bone"></i>
+    <p>© 2026 G & G's Steakhouse | All Rights Reserved</p>
+</footer>
 </body>
 </html>

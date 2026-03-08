@@ -1,211 +1,414 @@
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-body, html {
-    height: 100%;
+/* COLOR THEMES USED THROUGHOUT DESIGN */
+:root{
+    --bg:#111; /*black background color*/
+    --bn:#333; /*darkgreen banner color*/
+    --txtgold:#d4af37; /*gold color for text*/
+    --txtwhite:#ECE4E4FF; /*white color for text*/
+    --drkgry:#1a1a1a; /*dark grey*/
+    --bgbw:#DCB586FF; /*beige burley wood for light background */
+}
+body{
+    margin:0;
+    font-family:"Google Sans", sans-serif;/*USING GOOGLE FONT*/
+    background-color: var(--bg);
+    color: var(--txtwhite);
 }
 
-.nav-links{
-    list-style: none; /*removes bullet points from nav list */
-    display: flex;
-}
-
-a {
-    text-decoration: underline; /*adds underlines from links */
-    color: black;
-}
-
-.nav-links li{
-    margin: 0 1rem;/*adds horizontal spacing between links */
-    margin-left: auto;
-    font-size: x-large;
-    cursor: pointer;
-
-}
-
-.nav-links a{
-    padding: 14px 20px;/*makes the links easier to click and provides visual spacing */
-    color: yellowgreen;
-    transition: all 200ms ease-in;
-}
-.nav-links a:hover{
-    color: white;
-}
-
-
-
-.logo-image {
-    margin-right: auto;
-}
-
-.navbar{
-    display: flex;
-    justify-content: space-between; /* pushes logo to the left, links to the right*/
-    align-items: center; /*vertically centers items within the navbar */
-    height: 70px;
-    background-color: #333;
-    padding: 0 20px;
-
-}
-
-/* The hero image */
-
-.hero-container{
-    position: absolute;
-    height: 500px;
-    width: 100%;
-}
-.hero-image {
-    /* Use "linear-gradient" to add a darken background effect to the image (image1.jpg). This will make the text easier to read */
-    /*background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("images/image1.jpg");*/
-
-    /* Set a specific height */
-    width: 100%;
-    height: 200%;
-
-    /* Position and center the image to scale nicely on all screens */
-    /*background-position: center;*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
-    object-fit: cover;
-    /*position: relative;*/
-    display: block;
-}
-
-
-/* Place text in the middle of the image */
-.hero-text{
-    text-align: center;
-    text-size-adjust: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #e11515;
-}
-
-.hero-text:first-child{
-    font-size: x-large;
-    font-weight: bolder;
-
-}
-
-.restaurant-name{
-    text-shadow: 7px 7px 7px black;
-    margin: 0 auto;
-    font-size: 150px;
-    font-weight: bolder;
-    width: 1000px;
-}
-
-.tagline{
-    text-shadow: 3px 3px 2px white;
-    padding: 50px;
-    font-size: 60px;
-    font-weight: bolder;
-    font-style: italic;
-    color: #7e7467;
-    margin: 0 auto;
-}
-
-.reservation-title{
-    color: darkolivegreen;
-    text-shadow: 3px 3px 2px black;
-    text-align: center;
-    margin: 0 auto;
-    font-family: "Henny Penny", system-ui;
+/* USING FONT AWESOME ON HOME PAGE-AS A BULLDOG SIGNATURE ICON*/
+.fa-bone{
+    color: var(--txtgold);
     font-size: 50px;
-    font-weight: bolder;
-    width: 1000px;
-    padding-left: 1vw;
-    padding-right: 20vw;
-    padding-top: 1vw;
-
+    justify-content: flex-end;
+    text-shadow: 5px 5px 0 white;
 }
 
-#request-only{
-    border: 3px solid #000;
+/*-------------------NAV BAR FOR ALL PAGES BEGIN-------------------*/
+/* NAVBAR SECTION */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background-color: var(--bn);
+    padding:15px 40px;
+    position:sticky;
+    top:0;
+}
+.logo{
+    display:flex;
+    align-items:center;
+    color: var(--txtgold);
+    font-weight:bold;
+    font-size:20px;
+}
+.logo img{
+    width:40px;
+    margin-left: 1px;
+    padding: 1px 1px 1px 5px;
+}
+.logo p{
+    margin-left: 15px;
+}
+.nav-links a{
+    color:var(--txtgold);
+    text-decoration:none;
+    margin-left:30px;
+    font-size:18px;
+    position:relative;
+}
+a{
+    text-decoration: underline;
+    color: var(--bg);
+}
+/* GOLD HOVER ANIMATION */
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    width:0;
+    height:2px;
+    left:0;
+    bottom:-5px;
+    background-color:var(--txtgold);
+    transition:0.3s;
+}
+.nav-links a:hover::after{
+    width:100%;
+}
+/*-------------------NAV BAR FOR ALL PAGES END-------------------*/
+/*--------------HOME PAGE BEGIN---------------*/
+/* HERO SECTION */
+.hero{
+    height:85vh;
+    max-width: 100%;
+    background:url("./images/image1_not_used.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.hero-content{
+    background-color:rgba(0,0,0,0.6);
+    padding:40px;
+    border-radius:10px;
+}
+.hero h1{
+    font-size:70px;
+    font-weight: bolder;
+    text-shadow: 4px 4px 4px var(--txtwhite);
+    color: var(--txtgold);
+    margin:0;
+}
+.hero p{
+    font-size:22px;
+    font-style: italic;
+    margin:15px 0;
+}
+/* RESERVATION BUTTON */
+.btn{
+    display:inline-block;
+    padding:12px 28px;
+    background-color: var(--txtgold);
+    color: var(--bg);
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:5px;
+    transition:0.3s;
+}
+.btn:hover{
+    background-color: var(--txtwhite);
+}
+/* FEATURED FAVORITES MENU SNIPPET */
+.featured{
+    padding:60px 10%;
+    text-align:center;
+}
+.featured h2{
+    color: var(--txtgold);
+    font-size:36px;
+    margin-bottom:40px;
+}
+/* CARD LAYOUT */
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+.card{
+    background-color: var(--drkgry);
+    border-radius:10px;
+    overflow:hidden;
+    transition:0.3s;
+}
+.card img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.card h3{
+    color: var(--txtgold);
+    margin:15px;
+}
+.card p{
+    padding:0 15px 20px;
+    font-size:15px;
+}
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 10px var(--txtgold);
+}
+/* RESPONSIVE */
+@media(max-width:900px){
+    .card-container{
+        grid-template-columns:1fr;
+    }
+    .hero h1{
+        font-size:40px;
+    }
+}
+/*-------------------HOME PAGE END-------------------*/
+/*-------------------MENU PAGE BEGIN-------------------*/
+/* MENU HERO */
+.menu-hero{
+    height:300px;
+    background:url("./images/menu-hero-image8.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.menu-hero h1{
+    background:rgba(0,0,0,0.6);
+    padding:20px 40px;
+    border-radius:8px;
+    color: var(--txtgold);
+    font-size:40px;
+}
+/* TWO COLUMN MENU LAYOUT */
+.menu-wrapper{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    width:90%;
+    margin:auto;
+    padding:40px 0;
+}
+.menu-description{
+    border: 3px solid var(--bg);
     padding: 10px;
     margin: 15px;
-    background-color: burlywood;
-    color: black;
-    font-family: "Henny Penny", system-ui;
+    background-color: var(--bgbw);
+    color: var(--bg);
+    font-family: "Google Sans", sans-serif;/*USING GOOGLE FONT*/
 }
-
-.menu-title{
-    /*flex: auto;*/
-    color: darkolivegreen;
-    text-shadow: 3px 3px 2px black;
-    text-align: center;
-    margin: 0 auto;
-    font-family: "Henny Penny", system-ui;
-    font-size: 50px;
-    font-weight: bolder;
-    width: 100px;
-    padding-left: 5vw;
-    padding-right: 20vw;
-    padding-top: 1vw;
-    white-space: nowrap;
+table{
+    width:100%;
+    border-collapse:collapse;
+    background-color:var(--drkgry);
 }
-
-#menu-style{
-    /*border: 3px solid #000;*/
-    /*padding: 10px;*/
-    /*margin: 15px;*/
-    /*background-color: burlywood;*/
-    color: black;
+caption{
+    font-family:'Playfair Display', serif;
+    font-size:26px;
+    color:var(--txtgold);
+    padding:15px;
 }
-
-.menu-info{
-    width: 1500px;
-    height: 70px;
-    background-color: burlywood;
-    box-shadow: 5px 5px 5px black;
+thead{
+    background-color:var(--txtgold);
+    color:var(--bg);
 }
-
-.form-break + .form-break {
-    margin-top: 1em;
+th, td{
+    padding:12px;
+    border-bottom:1px solid #444;
 }
-.form-break{
-    margin: 0 6px;
-    padding: 16px;
-    background-color: wheat;
-    border: 0.5px solid #000;
-    box-shadow: 2px 2px 2px brown;
-    font-family: "Henny Penny", system-ui;
-    display: block;
-    color: brown;
+/* FOOD IMAGES */
+.food-img{
+    width:60px;
+    height:60px;
+    object-fit:cover;
+    border-radius:8px;
 }
-span {
-    font-weight: bolder;
+/* SECTION DIVIDERS */
+.section{
+    background-color:var(--bg);
+    color:var(--txtgold);
+    font-weight:bold;
+    text-transform:uppercase;
 }
-
-#mytextarea{
+.section td{
+    padding:12px;
+}
+/* GOLD HOVER EFFECT */
+tbody tr{
+    transition:all .3s ease;
+}
+tbody tr:hover{
+    background-color:var(--drkgry);
+    transform:scale(1.02);
+    box-shadow:0 0 8px var(--txtgold);
+}
+.price{
+    text-align:right;
+    font-weight:bold;
+    color:var(--txtgold);
+}
+/* RESPONSIVE DESIGN */
+@media(max-width:900px){
+    .menu-wrapper{
+        grid-template-columns:1fr;
+    }
+    th:nth-child(3),
+    td:nth-child(3){/* USING ZEBRA STRIPING */
+        display:none;
+    }
+    header{
+        font-size:32px;
+    }
+}
+/*-------------------MENU PAGE END-------------------*/
+/*-------------RESERVATIONS PAGE BEGIN--------------------*/
+/* RESERVATION HERO */
+.reservation-hero{
+    height:300px;
+    background:url("./images/reservation-image.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.reservation-hero h1{
+    background:rgba(0,0,0,0.6);
+    padding:20px 40px;
+    border-radius:8px;
+    color: var(--txtgold);
+    font-size:40px;
+}
+#request-only{
+    border: 3px solid var(--bg);
+    padding: 10px;
+    margin: 15px;
+    background-color: var(--bgbw);
+    color: var(--bg);
+    font-family:"Google Sans", sans-serif;/*GOOGLE FONT*/
+}
+/* RESERVATION FORM */
+form{
+    background-color: var(--drkgry);
+    padding:30px;
+    border-radius:10px;
+}
+/* TWO COLUMN LAYOUT */
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+.full-width{
+    grid-column:1 / span 2;
+}
+label{
+    display:block;
+    margin-bottom:5px;
+}
+input, select, textarea{
+    width:100%;
+    padding:10px;
+    border-radius:5px;
+    border:1px solid #444;
+    background-color:var(--drkgry);
+    color:var(--txtwhite);
+}
+/* GOLD FOCUS ANIMATION */
+input:focus, select:focus, textarea:focus{
+    outline:none;
+    border:1px solid var(--txtgold);
+    box-shadow:0 0 6px var(--txtgold);
+}
+/* FIELDSET */
+fieldset{
+    border:1px solid var(--txtgold);
+    padding:15px;
+    margin-top:10px;
+}
+legend{
+    color:var(--txtgold);
+    display: flex;
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Inverts the default dark icon to white */
+}
+#radio1, #radio2, #radio3{
+    display: inline-block;
+    width: fit-content;
+}
+.radio-group{
+    display: inline-table;
+    align-content: space-evenly;
     width: 100%;
-    box-sizing: border-box;
-    resize: vertical;
 }
-
-.subform-break1{
-    display: inline-grid;
-    margin: 0.5vw 0.5vw 0.5vw 0.5vw;
-    /*justify-content: stretch;*/
+input[type="radio"], label {
+    display: inline-block; /* Forces elements to sit side-by-side */
+    margin-right: 15px; /* Optional: Adds space between options */
+    justify-content: space-between;
 }
-
-.subform-break2{
-    display: inline-grid;
-    margin: 0.5vw 0.5vw 1vw 20vw;
-    /*justify-content: stretch;*/
+.newsletter{
+    display:flex;
+    gap:10px;
+    justify-content: left;
+    padding-left:0.1vw;
+    margin-left:0.1vw;
 }
-#fname{
-    justify-content: space-evenly;
+.newsletter label{
+    white-space: nowrap;
+    padding-right: 5vw;
+    margin-right: 5vw;
+    order: 2;
 }
-
-#lname{
-    justify-content: space-evenly;
+.newsletter input{
+    width: 5vw;
+    padding-right:0;
+    margin-right: 0;
+    order: 1;
 }
-
-
+/* BUTTONS */
+.buttons{
+    margin-top:20px;
+}
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:5px;
+    font-weight:bold;
+    margin-right:10px;
+    cursor:pointer;
+}
+.submit-btn{
+    background:var(--txtgold);
+    color:black;
+}
+.reset-btn{
+    background:#555;
+    color:var(--txtwhite);
+}
+button:hover{
+    opacity:0.9;
+}
+/* RESPONSIVE */
+@media(max-width:800px) {
+    .form-grid {
+        grid-template-columns:1fr;
+    }
+    .full-width {
+        grid-column: 1;
+    }
+}
+/*-------------RESERVATIONS PAGE END--------------------*/
+/*--------------FOOTER SECTION-------------------------*/
+footer{
+    text-align: center;
+    font-size: small;
+}

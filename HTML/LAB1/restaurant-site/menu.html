@@ -3,55 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>G & G's Bar and Brewery</title>
+    <title>G & G's Steakhouse</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div>
-    <!--content image-->
+<!-- NAVBAR SECTION-->
 
-    <!-- USE NAV BAR for these links-->
-    <nav class="navbar">
-        <div class="logo-image">
-            <img src="./images/logo.png" alt="logo_image" width="50" height="50">
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="reservations.html">Reservations</a></li>
-        </ul>
-    </nav>
+<div class="navbar">
 
-</div>
-
-    <!--intro paragraph-->
-    <div class="menu-container">
-        <h1 class="menu-title">Our Menu</h1>
-
-            <div class="menu-info">
-                <p id="menu-style">
-        G & G's menu is customized to meet any palette. Start your G & G's experience off right with mouth-watering, internationally curated appetizers, soups and fresh salads and ensure your last bite is as good as your first by delving into our signature steak made with USDA prime beef  cooked to perfection, and finally top it off with our delectable desserts, handcrafted to end on a sweet note.
-                </p>
-            </div>
-
+    <div class="logo">
+        <img src="./images/logo-image.png" alt="Steakhouse logo">
     </div>
 
-    <!--table-->
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="reservations.html">Reservations</a>
+    </div>
 
-    <table border="5">
-        <caption> Menu Selection</caption>
+</div>
+<!-- MENU HERO-->
+<div class="menu-hero">
+    <h1>Our Menu</h1>
+</div>
+<!-- MENU DESCRIPTION SHORT PARAGRAPH-->
+<div class="menu-description">
+    <p>
+        Start your G & G's experience off right with mouth-watering, internationally curated appetizers, soups and fresh salads and ensure your last bite is as good as your first by delving into our signature steak made with USDA prime beef  cooked to perfection, and finally top it off with our delectable desserts, handcrafted to end on a sweet note.
+    </p>
+</div>
+
+<!-- MENU TABLE -->
+
+<div class="menu-wrapper">
+
+    <!-- LEFT MENU TABLE -->
+
+    <table>
+
+        <caption>Starters & Salads</caption>
+
+        <thead>
         <tr>
-            <th>Meal</th>
+            <th>Image</th>
+            <th>Item</th>
+            <th>Description</th>
             <th>Price</th>
         </tr>
-        <tr>
-            <td>Burger's</td>
-            <td>$15</td>
+        </thead>
+
+        <tbody>
+
+        <tr class="section">
+            <td colspan="4">Appetizers</td>
         </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/steakhouse-wings.jpg"></td>
+            <td>Steakhouse Wings</td>
+            <td>Grilled wings with smoky BBQ glaze</td>
+            <td class="price">$12</td>
+        </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/loaded-potato-skins.jpg"></td>
+            <td>Loaded Potato Skins</td>
+            <td>Cheddar, bacon, sour cream</td>
+            <td class="price">$11</td>
+        </tr>
+
+        <tr class="section">
+            <td colspan="4">Soups & Salads</td>
+        </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/french-onion-soup.jpg"></td>
+            <td>French Onion Soup</td>
+            <td>Beef broth, caramelized onions</td>
+            <td class="price">$9</td>
+        </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/caesar-salad.jpg"></td>
+            <td>Caesar Salad</td>
+            <td>Romaine, parmesan, garlic croutons</td>
+            <td class="price">$10</td>
+        </tr>
+
+        </tbody>
 
     </table>
 
 
-    <!--image #3-->
+    <!-- RIGHT MENU TABLE -->
+
+    <table>
+
+        <caption>Steaks, Desserts & Drinks</caption>
+
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr class="section">
+            <td colspan="4">Steaks</td>
+        </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/12oz-ribeye.jpg"></td>
+            <td>12oz Ribeye</td>
+            <td>Prime ribeye grilled over open flame</td>
+            <td class="price">$34</td>
+        </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/filet_mignon_steak.jpg"></td>
+            <td>Filet Mignon</td>
+            <td>8oz center-cut filet with herb butter</td>
+            <td class="price">$39</td>
+        </tr>
+
+        <tr class="section">
+            <td colspan="4">Desserts</td>
+        </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/chocolate-cake.jpg"></td>
+            <td>Chocolate Lava Cake</td>
+            <td>Warm molten chocolate cake</td>
+            <td class="price">$9</td>
+        </tr>
+
+        <tr class="section">
+            <td colspan="4">Drinks</td>
+        </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/premium-cabernet-sauvignon.jpg"></td>
+            <td>House Cabernet</td>
+            <td>Premium cabernet sauvignon</td>
+            <td class="price">$12</td>
+        </tr>
+
+        <tr>
+            <td><img class="food-img" src="./images/old-fashioned3.jpg"></td>
+            <td>Old Fashioned</td>
+            <td>Bourbon, bitters, orange peel</td>
+            <td class="price">$14</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- FOOTER SECTION TO DISPLAY COPYRIGHTS-->
+<footer>
+    <p>© 2026 G & G's Steakhouse | All Rights Reserved</p>
+</footer>
 </body>
 </html>

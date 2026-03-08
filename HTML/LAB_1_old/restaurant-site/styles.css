@@ -1,0 +1,213 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+.nav-links{
+    list-style: none; /*removes bullet points from nav list */
+    display: flex;
+}
+
+a {
+    text-decoration: underline; /*adds underlines from links */
+    color: black;
+}
+
+.nav-links li{
+    margin: 0 1rem;/*adds horizontal spacing between links */
+    margin-left: auto;
+    font-size: x-large;
+    cursor: pointer;
+
+}
+
+.nav-links a{
+    padding: 14px 20px;/*makes the links easier to click and provides visual spacing */
+    color: yellowgreen;
+    transition: all 200ms ease-in;
+}
+.nav-links a:hover{
+    color: white;
+}
+
+
+
+.logo-image {
+    margin-right: auto;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between; /* pushes logo to the left, links to the right*/
+    align-items: center; /*vertically centers items within the navbar */
+    height: 70px;
+    background-color: #333;
+    padding: 0 20px;
+
+}
+
+/* The hero image */
+
+.hero-container{
+    position: absolute;
+    height: 500px;
+    width: 100%;
+}
+.hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (image1.jpg). This will make the text easier to read */
+    /*background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("images/image1.jpg");*/
+
+    /* Set a specific height */
+    width: 100%;
+    height: 200%;
+
+    /* Position and center the image to scale nicely on all screens */
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    object-fit: cover;
+    /*position: relative;*/
+    display: block;
+}
+
+
+/* Place text in the middle of the image */
+.hero-text{
+    text-align: center;
+    text-size-adjust: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #e11515;
+}
+
+.hero-text:first-child{
+    font-size: x-large;
+    font-weight: bolder;
+
+}
+
+.restaurant-name{
+    text-shadow: 7px 7px 7px black;
+    margin: 0 auto;
+    font-size: 150px;
+    font-weight: bolder;
+    width: 1000px;
+}
+
+.tagline{
+    text-shadow: 3px 3px 2px white;
+    padding: 50px;
+    font-size: 60px;
+    font-weight: bolder;
+    font-style: italic;
+    color: #7e7467;
+    margin: 0 auto;
+}
+
+.reservation-title{
+    color: darkolivegreen;
+    text-shadow: 3px 3px 2px black;
+    text-align: center;
+    margin: 0 auto;
+    font-family: "Henny Penny", system-ui;
+    font-size: 50px;
+    font-weight: bolder;
+    width: 100px;
+    padding-left: 5vw;
+    padding-right: 20vw;
+    padding-top: 1vw;
+    white-space: nowrap;
+}
+#request-only{
+    border: 3px solid #000;
+    padding: 10px;
+    margin: 15px;
+    background-color: burlywood;
+    color: black;
+    font-family: "Henny Penny", system-ui;
+}
+.menu-title{
+    /*flex: auto;*/
+    color: darkolivegreen;
+    text-shadow: 3px 3px 2px black;
+    text-align: center;
+    margin: 0 auto;
+    font-family: "Henny Penny", system-ui;
+    font-size: 50px;
+    font-weight: bolder;
+    width: 100px;
+    padding-left: 5vw;
+    padding-right: 20vw;
+    padding-top: 1vw;
+    white-space: nowrap;
+}
+
+#menu-style{
+    /*border: 3px solid #000;*/
+    /*padding: 10px;*/
+    /*margin: 15px;*/
+    /*background-color: burlywood;*/
+    color: black;
+}
+
+.menu-info{
+    width: 1500px;
+    height: 70px;
+    background-color: burlywood;
+    box-shadow: 5px 5px 5px black;
+}
+
+.form-break + .form-break {
+    margin-top: 1em;
+}
+.form-break{
+    margin: 0 6px;
+    padding: 16px;
+    background-color: wheat;
+    border: 0.5px solid #000;
+    box-shadow: 2px 2px 2px brown;
+    font-family: "Henny Penny", system-ui;
+    display: block;
+    color: brown;
+}
+span {
+    font-weight: bolder;
+}
+
+input[type="text"]{
+    width: 300px;
+}
+
+#mytextarea{
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.subform-break1{
+    display: inline-grid;
+    margin: 0.5vw 0.5vw 0.5vw 0.5vw;
+    /*justify-content: stretch;*/
+}
+
+.subform-break2{
+    display: inline-grid;
+    margin: 0.5vw 0.5vw 1vw 20vw;
+    /*justify-content: stretch;*/
+}
+#fname{
+    justify-content: space-evenly;
+}
+
+#lname{
+    justify-content: space-evenly;
+}
+
+
