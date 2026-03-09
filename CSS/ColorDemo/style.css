@@ -1,6 +1,6 @@
 /* creating variables for a color palette*/
 :root{
-    --bg:#7F5384; /*Dark Purple for backgrounds*/
+    --bgd:#7F5384; /*Dark Purple for backgrounds*/
     --text:#949963; /*Burnt peach for text*/
     --errors: #F0EDE5; /*bright white for errors*/
     --shadows: #EDE2F3; /* light blue for shadows*/
