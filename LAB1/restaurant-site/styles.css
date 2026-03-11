@@ -17,6 +17,11 @@ body{
     font-family:"Google Sans", sans-serif;/*USING GOOGLE FONT*/
     background-color: var(--bg);
     color: var(--txtwhite);
+    background-image: url(images/matted-finish1.jpg);
+    /*ensures background covers the entire viewport*/
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* USING FONT AWESOME ON HOME PAGE-AS A BULLDOG SIGNATURE ICON*/
@@ -36,6 +41,7 @@ body{
     background-color: var(--bn);
     padding:15px 40px;
     position:sticky;
+    z-index:1000;/*keeps navbar on top while scrolling up */
     top:0;
 }
 .logo{
@@ -46,12 +52,14 @@ body{
     font-size:20px;
 }
 .logo img{
-    width:40px;
+    width:50px;
     margin-left: 1px;
-    padding: 1px 1px 1px 5px;
+    padding-left: -50px;
+    /*padding: 1px 1px 1px 5px;*/
 }
-.logo p{
+.logo h2{
     margin-left: 15px;
+    font-family: "Google Sans", sans-serif;
 }
 .nav-links a{
     color:var(--txtgold);
@@ -84,7 +92,7 @@ a{
 .hero{
     height:85vh;
     max-width: 100%;
-    background:url("./images/image1_not_used.jpg") center/cover no-repeat;
+    background:url("images/image1_not_used.jpg") center/cover no-repeat;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -130,6 +138,23 @@ a{
     color: var(--txtgold);
     font-size:36px;
     margin-bottom:40px;
+    text-decoration: underline;
+    text-decoration-color: var(--txtgold);
+}
+.full-menu-hero{
+    height:150px;
+    background:url("images/menu-hero-image2.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.full-menu-hero h1{
+    background:rgba(0,0,0,0.6);
+    padding:20px 40px;
+    border-radius:20px;
+    color: var(--txtgold);
+    font-size:60px;
 }
 /* CARD LAYOUT */
 .card-container{
@@ -138,7 +163,7 @@ a{
     gap:30px;
 }
 .card{
-    background-color: var(--drkgry);
+    /*background-color: var(--drkgry);*/
     border-radius:10px;
     overflow:hidden;
     transition:0.3s;
@@ -174,7 +199,7 @@ a{
 /* MENU HERO */
 .menu-hero{
     height:300px;
-    background:url("./images/menu-hero-image8.jpg") center/cover no-repeat;
+    background:url("images/menu-hero-image8.jpg") center/cover no-repeat;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -190,9 +215,9 @@ a{
 /* TWO COLUMN MENU LAYOUT */
 .menu-wrapper{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     gap:30px;
-    width:90%;
+    width:60vw;
     margin:auto;
     padding:40px 0;
 }
@@ -207,7 +232,7 @@ a{
 table{
     width:100%;
     border-collapse:collapse;
-    background-color:var(--drkgry);
+    /*background-color:var(--drkgry);*/
 }
 caption{
     font-family:'Playfair Display', serif;
@@ -225,8 +250,8 @@ th, td{
 }
 /* FOOD IMAGES */
 .food-img{
-    width:60px;
-    height:60px;
+    width:200px;
+    height:150px;
     object-fit:cover;
     border-radius:8px;
 }
@@ -239,13 +264,14 @@ th, td{
 }
 .section td{
     padding:12px;
+    text-align:center;
 }
 /* GOLD HOVER EFFECT */
 tbody tr{
     transition:all .3s ease;
 }
 tbody tr:hover{
-    background-color:var(--drkgry);
+    /*background-color:var(--drkgry);*/
     transform:scale(1.02);
     box-shadow:0 0 8px var(--txtgold);
 }
@@ -272,7 +298,7 @@ tbody tr:hover{
 /* RESERVATION HERO */
 .reservation-hero{
     height:300px;
-    background:url("./images/reservation-image.jpg") center/cover no-repeat;
+    background:url("images/reservation-image.jpg") center/cover no-repeat;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -295,7 +321,7 @@ tbody tr:hover{
 }
 /* RESERVATION FORM */
 form{
-    background-color: var(--drkgry);
+    /*background-color: var(--drkgry);*/
     padding:30px;
     border-radius:10px;
 }
@@ -304,6 +330,8 @@ form{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:20px;
+    width:60vw;
+    margin:auto;
 }
 .full-width{
     grid-column:1 / span 2;
@@ -311,6 +339,11 @@ form{
 label{
     display:block;
     margin-bottom:5px;
+}
+::placeholder{
+    color:#999;
+    font-style:italic;
+    opacity:1;/*consistency across browsers*/
 }
 input, select, textarea{
     width:100%;
@@ -328,12 +361,12 @@ input:focus, select:focus, textarea:focus{
 }
 /* FIELDSET */
 fieldset{
-    border:1px solid var(--txtgold);
+    border:1px solid var(--drkgry);
     padding:15px;
     margin-top:10px;
 }
 legend{
-    color:var(--txtgold);
+    color:var(--txtwhite);
     display: flex;
 }
 input[type="date"]::-webkit-calendar-picker-indicator,
@@ -356,11 +389,16 @@ input[type="radio"], label {
     justify-content: space-between;
 }
 .newsletter{
+    margin-top:20px;
     display:flex;
     gap:10px;
-    justify-content: left;
-    padding-left:0.1vw;
-    margin-left:0.1vw;
+    /*justify-self: center;*/
+    /*padding-left:0.1vw;
+    margin-left:0.1vw;*/
+}
+input[type="checkbox"],label[for="myCheckbox"]{
+    display:flex;
+    /*justify-self: center;*/
 }
 .newsletter label{
     white-space: nowrap;
@@ -369,7 +407,7 @@ input[type="radio"], label {
     order: 2;
 }
 .newsletter input{
-    width: 5vw;
+    width: 3vw;
     padding-right:0;
     margin-right: 0;
     order: 1;
@@ -377,6 +415,7 @@ input[type="radio"], label {
 /* BUTTONS */
 .buttons{
     margin-top:20px;
+    justify-self: center;
 }
 button{
     padding:12px 25px;
@@ -388,7 +427,7 @@ button{
 }
 .submit-btn{
     background:var(--txtgold);
-    color:black;
+    color:var(--bg);
 }
 .reset-btn{
     background:#555;
