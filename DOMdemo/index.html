@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>DOM - Demo 1</title>
+</head>
+<body>
+
+<!--   /* <h1>Avenger</h1> */-->
+<!--    //<h1>X-Men</h1>-->
+<!--    <ul>-->
+<!--        <li id="teamLeader">Wolverine</li>-->
+<!--        <li class="mutant">Cyclops</li>-->
+<!--        <li class="mutant">ShadowCat</li>-->
+<!--   // </ul>-->
+
+<h1>X-Men Roster Application</h1>
+<form action="/cerebro">
+    <label for="first_name">First Name:</label>
+    <input type="text" name="fname" id="first_name"/>
+    <br><br>
+    <label for="">Password
+        <input type="password" name="pw" id="pw">
+    </label>
+    <br>
+    <label for=""> Are you Alive?
+        <input type="radio" name="isAlive" id="isAliveYes" value="Yes">
+        <input type="radio" name="isAlive" id="isAliveNo" value="No">
+        <input type="radio" name="isAlive" id="isAliveZom" value="Zombie">
+    </label>
+    <br>
+    <button type="Submit">Join Team</button>
+</form>
+</body>
+    <script>
+       // let xmenteamLeader = document.getElementById("teamLeader");
+       // console.log(xmenteamLeader);
+       // let mutants = document.getElementsByClassName("mutant");
+       // console.log(mutants);
+        //console.log(mutants[1]);
+       /*
+        let allXmen = document.getElementsByTagName("li");
+        console.log(allXmen[1]);
+        let selectedXmen = document.querySelector(".mutant");
+        console.log(selectedXmen);
+       let allTeams = document.querySelectorAll("h1")
+       console.log(allTeams[0]);
+       allTeams.style.color="red";
+       allTeams.style.border="green 3px solid";
+       allTeams.style.fontSize="48px";
+       //get content of first h1
+       let teamContent = allTeams[0].textContent;
+       console.log(teamContent);
+       //set content of second h1
+       allTeams[1].textContent = "New Mutants";
+       //usinig innerHTML
+       let teamContent1 = allTeams[0].innerHTML;
+       allTeams[1].innerHTML = "<b>X-Factor</b>";
+       console.log(teamContent1);
+       */
+
+
+       const rosterHeader = document.querySelector("h1");
+       //add event listener
+       // listening for a click event on the h1 element
+       rosterHeader.addEventListener("click", ()=>{
+           console.log("You clicked h1")
+           //set new content
+           rosterHeader.textContent = "Avengers Assemble!";
+           });
+
+       const form = document.getElementsByTagName("form");
+       form[0].addEventListener("submit",(event)=>{
+           event.preventDefault();
+           let firstName = document.getElementById("first_name")
+           let password = document.getElementById("pw")
+           /*let isAlive = document.getElementById("radio")*/
+           let isAlive = document.querySelector('input[name="isAlive"]:checked')
+           console.log("Submitted");
+           console.log("Value from first name input: ",firstName.value, password.value,isAlive.value);
+           //building an object from these values obtained
+           let newData={
+               fname: firstName.value,
+               password: password.value,
+               isAlive: isAlive.value
+           }
+
+
+            //turning object into a string to parsed to the server
+           console.log(JSON.stringify(newData))
+       });
+
+
+    </script>
+
+</html>

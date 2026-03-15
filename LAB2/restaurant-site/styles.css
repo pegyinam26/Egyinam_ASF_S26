@@ -1,0 +1,522 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* COLOR THEMES USED THROUGHOUT DESIGN */
+:root{
+    --bg:#111; /*black background color*/
+    --bn:#333; /*darkgreen banner color*/
+    --txtgold:#d4af37; /*gold color for text*/
+    --txtwhite:#ECE4E4FF; /*white color for text*/
+    --drkgry:#1a1a1a; /*dark grey*/
+    --bgbw:#DCB586FF; /*beige burley wood for light background */
+}
+body{
+    margin:0;
+    font-family:"Google Sans", sans-serif;/*USING GOOGLE FONT*/
+    background-color: var(--bg);
+    color: var(--txtwhite);
+    background-image: url(images/matted-finish1.jpg);
+    /*ensures background covers the entire viewport*/
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* USING FONT AWESOME ON HOME PAGE-AS A BULLDOG SIGNATURE ICON*/
+.fa-bone{
+    color: var(--txtgold);
+    font-size: 50px;
+    justify-content: flex-end;
+    text-shadow: 5px 5px 0 white;
+}
+
+/*-------------------NAV BAR FOR ALL PAGES BEGIN-------------------*/
+/* NAVBAR SECTION */
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    font-family: "Google Sans", sans-serif;
+    /*font-style: italic;*/
+    font-weight: bold;
+    font-size: x-large;
+    align-items: center;
+    background-color: var(--bn);
+    padding:15px 40px;
+    position:sticky;
+    z-index:1000;/*keeps navbar on top while scrolling up */
+    top:0;
+    color: var(--txtgold);
+}
+.logo{
+    display:flex;
+    align-items:center;
+    color: var(--txtgold);
+    font-weight:bold;
+    font-size:20px;
+}
+.logo img{
+    width:50px;
+    margin-left: 1px;
+    padding-left: 10px;
+    /*padding: 1px 1px 1px 5px;*/
+}
+
+.me-2 img{
+    width:50px;
+    margin-left: 1px;
+    padding-left: 10px;
+}
+.navbar-brand{
+    color: var(--txtgold);
+}
+
+#navMenu{
+    padding-right: -10px;
+    margin-right: -10px;
+}
+.logo h2{
+    margin-left: 15px;
+    font-family: "Google Sans", sans-serif;
+}
+.nav-link{
+    color:var(--txtgold);
+    text-decoration:none;
+    margin-left:30px;
+    font-size:18px;
+    position:relative;
+    font-family: "Google Sans", sans-serif;
+}
+a{
+    text-decoration: underline;
+    color: var(--bg);
+}
+/* GOLD HOVER ANIMATION */
+.nav-link::after{
+    content:"";
+    position:absolute;
+    width:0;
+    height:2px;
+    left:0;
+    bottom:-5px;
+    background-color:var(--txtgold);
+    color:var(--txtgold);
+    font-family: 'Playfair Display', serif;
+    transition:0.3s;
+}
+.nav-link:hover::after{
+    width: 5vw;
+}
+/*-------------------NAV BAR FOR ALL PAGES END-------------------*/
+/*--------------HOME PAGE BEGIN---------------*/
+/* HERO SECTION */
+.hero{
+    height:85vh;
+    max-width: 100%;
+    background:url("images/image1_not_used.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.hero-content{
+    background-color:rgba(0,0,0,0.6);
+    padding:40px;
+    border-radius:10px;
+}
+.hero h1{
+    font-size:70px;
+    font-weight: bolder;
+    text-shadow: 4px 4px 4px var(--txtwhite);
+    color: var(--txtgold);
+    margin:0;
+}
+.hero p{
+    font-size:22px;
+    font-style: italic;
+    margin:15px 0;
+}
+/* RESERVATION BUTTON */
+.btn{
+    display:inline-block;
+    padding:12px 28px;
+    background-color: var(--txtgold);
+    color: var(--bg);
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:5px;
+    transition:0.3s;
+}
+.btn:hover{
+    background-color: var(--txtwhite);
+    color: var(--bg);
+}
+/* FEATURED FAVORITES MENU SNIPPET */
+.featured{
+    padding:60px 10%;
+    text-align:center;
+}
+.featured h2{
+    color: var(--txtgold);
+    font-size:36px;
+    margin-bottom:40px;
+    text-decoration: underline;
+    text-decoration-color: var(--txtgold);
+}
+.full-menu-hero{
+    height:150px;
+    background:url("images/menu-hero-image2.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.full-menu-hero h1{
+    background:rgba(0,0,0,0.6);
+    padding:20px 40px;
+    border-radius:20px;
+    color: var(--txtgold);
+    font-size:60px;
+}
+/* CARD LAYOUT */
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+.card{
+    background-color: var(--drkgry);
+    border-radius:10px;
+    overflow:hidden;
+    transition:0.3s;
+    color: var(--txtwhite);
+}
+.card img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.card h3{
+    color: var(--txtgold);
+    margin:15px;
+}
+.card p{
+    padding:0 15px 20px;
+    font-size:15px;
+}
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 30px var(--txtgold);
+}
+/* RESPONSIVE */
+@media(max-width:900px){
+    .card-container{
+        grid-template-columns:1fr;
+    }
+    .hero h1{
+        font-size:40px;
+    }
+}
+/*-------------------HOME PAGE END-------------------*/
+/*-------------------MENU PAGE BEGIN-------------------*/
+/* MENU HERO */
+.menu-hero{
+    height:300px;
+    background:url("images/menu-hero-image8.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.menu-hero h1{
+    background:rgba(0,0,0,0.6);
+    padding:20px 40px;
+    border-radius:8px;
+    color: var(--txtgold);
+    font-size:40px;
+}
+/* TWO COLUMN MENU LAYOUT */
+.menu-wrapper{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:30px;
+    width:60vw;
+    margin:auto;
+    padding:40px 0;
+}
+.menu-description{
+    border: 3px solid var(--bg);
+    padding: 10px;
+    margin: 15px;
+    background-color: var(--bgbw);
+    color: var(--bg);
+    font-family: "Google Sans", sans-serif;/*USING GOOGLE FONT*/
+}
+
+.menu-filter{
+    margin:5px;
+}
+.mb-3:after{
+    transform: translateY(-8px);
+    transition:0.2s;
+    box-shadow: 0 0 20px var(--txtgold);
+}
+
+/*GOLD GLOW HOVER EFFECT ON FULL MENU CARDS, DIFFERENT FROM HOMEPAGE FEATURED MENU CARDS*/
+.h-100:hover{
+    transform: translateX(-8px);
+    transition:0.2s;
+    box-shadow: 0 0 20px var(--txtgold);
+    /*box-shadow-color: var(--txtgold);*/
+}
+.card-title{
+    color: var(--txtgold);/*TITLE OF FULL MENU CARDS */
+}
+.badge{
+    color: var(--txtgold);/*MEAL CATEGORY OF FULL MENU CARDS */
+    font-size: medium;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    /*background-color:var(--drkgry);*/
+}
+caption{
+    font-family:'Playfair Display', serif;
+    font-size:26px;
+    color:var(--txtgold);
+    padding:15px;
+}
+thead{
+    background-color:var(--txtgold);
+    color:var(--bg);
+}
+th, td{
+    padding:12px;
+    border-bottom:1px solid #444;
+}
+/* FOOD IMAGES */
+.food-img{
+    width:200px;
+    height:150px;
+    object-fit:cover;
+    border-radius:8px;
+}
+/* SECTION DIVIDERS */
+.section{
+    background-color:var(--bg);
+    color:var(--txtgold);
+    font-weight:bold;
+    text-transform:uppercase;
+}
+.section td{
+    padding:12px;
+    text-align:center;
+}
+
+/* RESPONSIVE DESIGN */
+@media(max-width:900px){
+    .menu-wrapper{
+        grid-template-columns:1fr;
+    }
+    th:nth-child(3),
+    td:nth-child(3){/* USING ZEBRA STRIPING */
+        display:none;
+    }
+    header{
+        font-size:32px;
+    }
+}
+/*-------------------MENU PAGE END-------------------*/
+/*-------------RESERVATIONS PAGE BEGIN--------------------*/
+/* RESERVATION HERO */
+.reservation-hero{
+    height:300px;
+    background:url("images/reservation-image.jpg") center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+.reservation-hero h1{
+    background:rgba(0,0,0,0.6);
+    padding:20px 40px;
+    border-radius:8px;
+    color: var(--txtgold);
+    font-size:40px;
+}
+#request-only{
+    border: 3px solid var(--bg);
+    padding: 10px;
+    margin: 15px;
+    background-color: var(--bgbw);
+    color: var(--bg);
+    font-family:"Google Sans", sans-serif;/*GOOGLE FONT*/
+}
+/*RESIZING ALERT SUCCESS CAPTION*/
+
+.alert{
+    width:25vw;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+}
+
+/* RESERVATION FORM */
+form{
+    /*background-color: var(--drkgry);*/
+    padding:30px;
+    border-radius:10px;
+}
+/* TWO COLUMN LAYOUT */
+.form-grid{
+    display:table;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    width:25vw;
+    margin:auto;
+    justify-content: center;
+}
+.full-width{
+    grid-column:1 / span 2;
+}
+label{
+    color:var(--txtwhite);
+    font-weight: bolder;
+    font-size: large;
+    display:block;
+    margin-bottom:5px;
+}
+input{
+    align-content: space-evenly;
+}
+::placeholder{
+    color:#999;
+    font-style:italic;
+    opacity:1;/*consistency across browsers*/
+}
+#id{
+    color:var(--txtgold);
+    text-align-all: left;
+}
+input, select, textarea{
+    width: 100%;
+    padding:10px;
+    border-radius:5px;
+    border:1px solid #444;
+    background-color:var(--drkgry);
+    color:var(--txtwhite);
+    font-weight: lighter;
+}
+/* GOLD FOCUS ANIMATION */
+input:focus, select:focus, textarea:focus{
+    outline:none;
+    border:1px solid var(--txtgold);
+    box-shadow:0 0 6px var(--txtgold);
+}
+/* FIELDSET */
+fieldset{
+    border:1px solid var(--drkgry);
+    font-weight: lighter;
+    padding:15px;
+    margin-top:10px;
+    color:var(--txtwhite);
+}
+legend{
+    border:0 solid var(--drkgry);
+    font-weight: bold;
+    font-size: larger;
+    /*text-emphasis-color: #d4af37;*/
+    color:var(--txtwhite);
+    display: grid;
+    text-align: center; /*SEATING PREFERENCE CENTERED*/
+    font-family:"Google Sans", sans-serif
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Inverts the default dark icon to white */
+}
+#radio1, #radio2, #radio3{
+    display: inline-block;
+    width: fit-content;
+    justify-content: left;
+    align-content: center;
+}
+.radio-group{
+    display: inline-flex;
+    align-content: space-evenly;
+    justify-content: center;
+    width: 100%;
+}
+input[type="radio"], label {
+    display: inline-block; /* Forces elements to sit side-by-side */
+    margin-right: 15px; /* Optional: Adds space between options */
+    justify-content: space-between;
+}
+.newsletter{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+    /*justify-self: center;*/
+    /*padding-left:0.1vw;
+    margin-left:0.1vw;*/
+}
+input[type="checkbox"],label[for="myCheckbox"]{
+    display:flex;
+    /*justify-self: center;*/
+}
+.newsletter label{
+    white-space: nowrap;
+    padding-right: 5vw;
+    margin-right: 5vw;
+    order: 2;
+}
+.newsletter input{
+    width: 3vw;
+    padding-right:0;
+    margin-right: 0;
+    order: 1;
+}
+/* BUTTONS */
+.buttons{
+    margin-top:20px;
+    justify-self: center;
+}
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:5px;
+    font-weight:bold;
+    margin-right:10px;
+    cursor:pointer;
+}
+.submit-btn{
+    background:var(--txtgold);
+    color:var(--bg);
+}
+.reset-btn{
+    background:#555;
+    color:var(--txtwhite);
+}
+button:hover{
+    opacity:0.9;
+}
+/* RESPONSIVE */
+@media(max-width:800px) {
+    .form-grid {
+        grid-template-columns:1fr 1fr;
+    }
+    .full-width {
+        grid-column: 1;
+    }
+}
+/*-------------RESERVATIONS PAGE END--------------------*/
+/*--------------FOOTER SECTION-------------------------*/
+footer{
+    text-align: center;
+    font-size: small;
+}
