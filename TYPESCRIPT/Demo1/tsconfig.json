@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS", /*different based on module or vanilla*/
+    "target": "ES2022", /*which javascript "generation"*/
+    "outDir": "./build",
+    "removeComments": true
+  },
+  "include": ["./src/**/*.ts"], /*can be as flexible or strict as you need*/
+}

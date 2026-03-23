@@ -265,7 +265,7 @@ a{
 
 /*GOLD GLOW HOVER EFFECT ON FULL MENU CARDS, DIFFERENT FROM HOMEPAGE FEATURED MENU CARDS*/
 .h-100:hover{
-    transform: translateX(-8px);
+    transform: translateY(-8px);
     transition:0.2s;
     box-shadow: 0 0 20px var(--txtgold);
     /*box-shadow-color: var(--txtgold);*/
