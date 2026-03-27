@@ -28,7 +28,7 @@ function isPalindrome(text) {
     if (newtext.trim() === "") return false;
 
     //check for palindrome after cleaning
-    const polishedText = newtext.trim().toLowerCase().replaceAll(/[^a-z0-9]|[^\w\s+]/g, '');
+    const polishedText = newtext.trim().toLowerCase().replaceAll(/[^a-z0-9]|_[^\w\s+]/g, '');
     const reversedPolishedText = polishedText.split('').reverse().join('');
     if(polishedText !== reversedPolishedText) return false;
     return true;
