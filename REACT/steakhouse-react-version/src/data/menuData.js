@@ -1,0 +1,20 @@
+export const MENU_ITEMS = [
+    {id:1, name:"Pancake Stack", description:"Fluffy pancakes with maple syrup", price:8.99, category:"Breakfast",image: "./images/fluffy-pancakes.jpg"},
+    {id:2, name:"Steak & Eggs", description:"Grilled steak with eggs and toast", price:14.99, category:"Breakfast",image:"./images/grilled-steak-egg-n-toast.jpg"},
+    {id:3, name:"French Toast", description:"Classic cinnamon french toast", price:9.99, category:"Breakfast",image:"./images/Cinnamon-French-Toast.jpg"},
+    {id:4, name:"Breakfast Burrito", description:"Burrito with scrambled eggs, sausage, and hash rounds", price:7.99, category:"Breakfast",image:"./images/Breakfast-Burritos.jpg"},
+    {id:5, name:"Caesar Salad", description:"Romaine lettuce, parmesan, croutons", price:10.99, category:"Lunch",image:"./images/caesar-salad61.jpg"},
+    {id:6, name:"Steakhouse Wings", description:"Grilled wings with smoky BBQ glaze", price:12.99, category:"Lunch",image:"./images/steakhouse-wings.jpg"},
+    {id:7, name:"Loaded Tater Skins", description:"Baked potato halves with bacon and cheese", price:11.99, category:"Lunch",image:"./images/loaded-potato-skins.jpg"},
+    {id:8, name:"Half-Pound Cheeseburger", description:"Classic burger, grilled to order", price:14.99, category:"Lunch",image:"./images/Half-pound-cheeseburger.jpg"},
+    {id:9, name:"12oz Ribeye", description:"Prime ribeye grilled over open flame", price:34.99, category:"Dinner",image:"./images/12oz-ribeye.jpg"},
+    {id:10, name:"Filet Mignon", description:"Center cut filet with herb butter and fries", price:39.99, category:"Dinner",image:"./images/filet_mignon_steak.jpg"},
+    {id:11, name:"Ribeye Pasta", description:"Cajun Steak Linguine with Creamy Parmesan sauce", price:29.99, category:"Dinner",image:"./images/signature_rib-eye-with-linguine.jpg"},
+    {id:12, name:"French Onion Soup", description:"Beef broth, caramelized onions", price:9.99, category:"Dinner",image:"./images/french-onion-soup.jpg"},
+    {id:13, name:"Tomato Basil Soup", description:"Velvety tomato puree with cream and spices", price:7.99, category:"Dinner",image:"./images/Tomato-basil-soup.jpg"},
+    {id:14, name:"Chocolate Cake", description:"Warm molten chocolate lava dessert", price:9.99, category:"Dinner",image:"./images/chocolate-cake.jpg"},
+    {id:15, name:"Chantilly Berry Parfait", description:"Mixed Berry Parfait with Chantilly Cream", price:6.99, category:"Dinner",image:"./images/chantilly-berry-parfait.jpg"},
+    {id:16, name:"House Cabernet", description:"Premium cabernet sauvignon", price:12.99, category:"Dinner",image:"./images/premium-cabernet-sauvignon.jpg"},
+    {id:17, name:"Old Fashioned", description:"Bourbon, bitters, orange peel", price:11.99, category:"Dinner",image:"./images/old-fashioned3.jpg"},
+    {id:18, name:"Mediterranean Mint Cocktail", description:"Curated mint cocktail with seasonal ingredients", price:9.99, category:"Dinner",image:"./images/Mediterranean-mint-cocktail.jpg"}
+];
