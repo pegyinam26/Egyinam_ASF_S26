@@ -4,18 +4,48 @@ import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
 import ReservationsPage from "./pages/ReservationsPage";
 import CartPage from "./pages/CartPage";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Footer from "./components/Footer";
-import CartToast from "./components/CartToast";
+import CartCTA from "./components/CartCTA.jsx";
 
 
 function App() {
-    const [showToast, setShowToast] = useState(false);
+    const [ux, setUX] = useState({
+        cta: false,
+        message: "",
+        count: 0,
+        total: 0
+    });
+    let ctaTimer;
+    const triggerUX = (itemName, cart) => {
+        const count = cart.reduce((sum, i) => sum + i.quantity, 0);
+        const total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+        setUX({
+            cta: true,
+            message: `${itemName} added`,
+            count,
+            total
+        });
+
+        // reset timer if user clicks again quickly
+        clearTimeout(ctaTimer);
+
+        ctaTimer = setTimeout(() => {
+            setUX(prev => ({ ...prev, cta: false }));
+        }, 2000); // ⏳ longer display time
+    };
+
+
     const [cart, setCart] = useState([]);
-    const [showCTA, setShowCTA] = useState(false);
+
     const [animateBadge, setAnimateBadge] = useState(false);
-    // setAnimateBadge(true);---causes infinite loop
-    setTimeout(() => setAnimateBadge(false), 400);
+
+    useEffect(() => {
+        if (animateBadge) {
+            const timer = setTimeout(() => setAnimateBadge(false), 400);
+            return () => clearTimeout(timer);
+        }
+    }, [animateBadge]);
     return (
       <Router>
           <div className="d-flex flex-column min-vh-100">
@@ -29,10 +59,8 @@ function App() {
                               <MenuPage
                                   cart={cart}
                                   setCart={setCart}
-                                  showToast={showToast}
-                                  setShowToast={setShowToast}
-                                  showCTA={showCTA}
-                                  setShowCTA={setShowCTA}
+                                  ux={ux}
+                                  triggerUX={triggerUX}
                               />
                           }
                       />
@@ -41,6 +69,12 @@ function App() {
                   </Routes>
               </div>
 
+              <CartCTA
+                  show={ux.cta}
+                  message={ux.message}
+                  count={ux.count}
+                  total={ux.total}
+              />
           <Footer />
           </div>
       </Router>

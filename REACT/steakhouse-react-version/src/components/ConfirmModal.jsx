@@ -6,33 +6,7 @@ import {
     Button
 } from "reactstrap";
 
-// export default function ConfirmModal({
-//                                          isOpen,
-//                                          toggle,
-//                                          confirm,
-//                                          title = "Confirm Action",
-//                                          message = "Are you sure?"
-//                                      }) {
-//     return (
-//         <Modal isOpen={isOpen} toggle={toggle}>
-//             <ModalHeader toggle={toggle}>{title}</ModalHeader>
-//
-//             <ModalBody>
-//                 {message}
-//             </ModalBody>
-//
-//             <ModalFooter>
-//                 <Button color="secondary" onClick={toggle}>
-//                     Cancel
-//                 </Button>
-//
-//                 <Button color="danger" onClick={confirm}>
-//                     Yes
-//                 </Button>
-//             </ModalFooter>
-//         </Modal>
-//     );
-// }
+
 
 export default function ConfirmModal({
                                          isOpen,
@@ -53,13 +27,13 @@ export default function ConfirmModal({
                 {message}
             </ModalBody>
 
-            {showActions && (
-                <ModalFooter>
-                    <Button color="secondary" onClick={toggle}>
-                        Cancel
-                    </Button>
 
-                    <Button color="danger" onClick={confirm}>
+            {showActions !== false && (
+                <ModalFooter className="justify-content-center">
+                    <Button color="secondary" onClick={toggle}>
+                        No
+                    </Button>
+                    <Button color="warning" onClick={confirm}>
                         Yes
                     </Button>
                 </ModalFooter>

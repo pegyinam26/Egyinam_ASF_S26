@@ -4,10 +4,9 @@ import {MENU_ITEMS} from "../data/menuData";
 import MenuFilter from "../components/MenuFilter";
 import MenuItemCard from "../components/MenuItemCard";
 import PageHero from "../components/PageHero";
-import CartToast from "../components/CartToast";
 import CartCTA from "../components/CartCTA";
 
-export default function MenuPage({ cart, setCart,showToast, setShowToast, showCTA, setShowCTA }) {
+export default function MenuPage({ cart, setCart,ux, triggerUX }) {
 
     const [category, setCategory] = useState("All");
     const [search, setSearch] = useState("");
@@ -29,7 +28,7 @@ export default function MenuPage({ cart, setCart,showToast, setShowToast, showCT
             <div className="menu-description-text">
                 <p>
                     Start your G & G's experience off right with mouth-watering, internationally curated breakfast,
-                    appetizers, soups and fresh salads, and ensure your last bite is as good as your first by delving
+                    appetizers, soups and fresh salads, and ensure your last bite is as good as your first. More importantly, delve
                     into our signature steak made with USDA prime beef cooked to perfection, and finally top it off with
                     our delectable desserts, handcrafted to end on a sweet note.
                 </p>
@@ -45,15 +44,21 @@ export default function MenuPage({ cart, setCart,showToast, setShowToast, showCT
                         item={item}
                         cart={cart}
                         setCart={setCart}
-                        setShowToast={setShowToast}
-                        setShowCTA={setShowCTA}
+                        // setShowToast={setShowToast}
+                        // setShowCTA={setShowCTA}
+                        ux={ux}
+                        triggerUX={triggerUX}
                     />
                 ))}
             </Row>
 
+
         </Container>
-            <CartToast show={showToast} message="Item added to cart 🛒" />
-            {/*<CartCTA show={showCTA} />*/}
+            {/*<CartToast show={showToast} message="Item added to cart 🛒" />*/}
+            {/*<CartCTA show={showCTA} message="Item added to cart 🛒"  />*/}
+            {/*<CartToast show={ux.toast} message={ux.message} />*/}
+
+
         </>
 
     );

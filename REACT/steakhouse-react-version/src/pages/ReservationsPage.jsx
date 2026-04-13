@@ -7,35 +7,64 @@ import {Container, Row, Col, Form, FormGroup,
     Label, Input, Button, FormFeedback} from "reactstrap";
 import {useState} from "react";
 
-//Building reservation form with Yup schema validation
-const schema = yup.object({
-    name: yup.string().required("Name required").max(20),
-    email: yup.string().email("Invalid email").required("Email required"),
-    party: yup.number().required("Party size required").min(1).max(8),
-    date: yup.string().required("Date required"),
-    time: yup.string().required("Time required"),
-    seating: yup.string().required("Select seating"),
-    notes: yup.string().max(30, "Max 30 characters"),
-});
+export default function ReservationsPage({onReserve}) {
+    const emptyValues = {
+        name: " ",
+        email: " ",
+        party: 0,
+        date: " ",
+        time: " ",
+        seating: "Indoor",
+        notes: " ",
+        newsletter: false
+    };
+    //Building reservation form with Yup schema validation
+    const validationSchema = yup.object({
+        name: yup.string().required("Name required").max(20,"No more than 20 characters"),
+        email: yup.string().email("Invalid email").required("Email required"),
+        party: yup.number().required("Party size required").min(1).max(8),
+        date: yup.string().required("Date required"),
+        time: yup.string().required("Time required"),
+        seating: yup.string().required("Seating preference required"),
+        notes: yup.string().max(30, "Max 30 characters")
+    });
 
-export default function ReservationsPage() {
     const [modal, setModal] = useState(false);
     const {
         register,
         handleSubmit,
         reset,
+        setValue,
+        watch,
         formState: { errors }
     } = useForm({
-        resolver: yupResolver(schema),
-        defaultValues: {
-            seating: "Indoor"
-        }
+        mode: "onBlur",//provides error messaging while form is filled
+        resolver: yupResolver(validationSchema),
+        defaultValues: {emptyValues},
+        shouldUnregister: false
     });
-    const onSubmit = (data) => {
-        alert("Reservation submitted!");
-        reset();
-    };
+    const onSubmit =(data) =>{
 
+        onReserve && onReserve(data);
+        setModal(true);
+        // console.log(data);
+        reset({emptyValues}, {
+            keepValues: false,
+            keepDirty: false,
+            keepTouched: false,
+            keepErrors: false,
+            keepDefaultValues: false
+        });
+        // console.log(data);
+        // data.preventDefault();
+    }
+    const handleChange = (event) => {
+        setValue(event.target.name, event.target.value, {
+            shouldValidate: true,
+            shouldDirty: true,
+            shouldTouch: true
+        });
+    };
     return (
         <>
             <PageHero title="Reserve a Table" className="reservation-hero" />
@@ -50,7 +79,7 @@ export default function ReservationsPage() {
                     understanding and look forward to providing you a fine dining experience.
                 </p>
             </div>
-            <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form onSubmit={handleSubmit(onSubmit, () => setModal(false))}>
 
                 <Row className="g-3">
 
@@ -58,7 +87,14 @@ export default function ReservationsPage() {
                     <Col md={6}>
                         <FormGroup>
                             <Label>Name</Label>
-                            <Input  placeholder="Enter your name" {...register("name")} invalid={!!errors.name}/>
+                            <Input
+                                placeholder="Enter your name"
+                                {...register("name")}
+                                value={watch("name") || ""}
+                                onChange={handleChange}
+                                invalid={!!errors.name}
+
+                            />
                             <FormFeedback>{errors.name?.message}</FormFeedback>
                         </FormGroup>
                     </Col>
@@ -67,7 +103,15 @@ export default function ReservationsPage() {
                     <Col md={6}>
                         <FormGroup>
                             <Label>Email</Label>
-                            <Input placeholder="Enter your email" {...register("email")} invalid={!!errors.email}/>
+                            <Input
+                                placeholder="Enter your email as username@example.com"
+                                {...register("email")}
+                                value={watch("email") || ""}
+                                onChange={handleChange}
+                                invalid={!!errors.email}
+
+                            />
+
                             <FormFeedback>{errors.email?.message}</FormFeedback>
                         </FormGroup>
                     </Col>
@@ -76,11 +120,18 @@ export default function ReservationsPage() {
                     <Col md={4}>
                         <FormGroup>
                             <Label>Party Size</Label>
-                            <Input type="select" {...register("party")} invalid={!!errors.party}>
+                            <Input
+                                type="select"
+                                {...register("party")}
+                                value={watch("party") || ""}
+                                onChange={handleChange}
+                                invalid={!!errors.party}
+                            >
                                 <option value="">Select</option>
                                 {[1,2,3,4,5,6,7,8].map(n => (
                                     <option key={n}>{n}</option>
                                 ))}
+
                             </Input>
                             <FormFeedback>{errors.party?.message}</FormFeedback>
                         </FormGroup>
@@ -90,7 +141,14 @@ export default function ReservationsPage() {
                     <Col md={4}>
                         <FormGroup>
                             <Label>Date</Label>
-                            <Input type="date" {...register("date")} invalid={!!errors.date}/>
+                            <Input
+                                type="date"
+                                {...register("date")}
+                                value={watch("date") || ""}
+                                onChange={handleChange}
+                                invalid={!!errors.date}
+
+                            />
                             <FormFeedback>{errors.date?.message}</FormFeedback>
                         </FormGroup>
                     </Col>
@@ -99,7 +157,14 @@ export default function ReservationsPage() {
                     <Col md={4}>
                         <FormGroup>
                             <Label>Time</Label>
-                            <Input type="time" {...register("time")} invalid={!!errors.time}/>
+                            <Input
+                                type="time"
+                                {...register("time")}
+                                value={watch("time") || ""}
+                                onChange={handleChange}
+                                invalid={!!errors.time}
+
+                            />
                             <FormFeedback>{errors.time?.message}</FormFeedback>
                         </FormGroup>
                     </Col>
@@ -109,28 +174,60 @@ export default function ReservationsPage() {
                         <Label>Seating Preference</Label>
                         <div className="d-flex gap-3">
                             <FormGroup check>
-                                <Input type="radio" value="Indoor" {...register("seating")} />
+                                <Input
+                                    type="radio"
+                                    value="Indoor"
+                                    {...register("seating")}
+                                    checked={watch("seating") === "Indoor"}
+                                    onChange={handleChange}
+                                    invalid={!!errors.seating}
+                                />
                                 <Label check>Indoor</Label>
+                                <FormFeedback>{errors.seating?.message}</FormFeedback>
                             </FormGroup>
 
                             <FormGroup check>
-                                <Input type="radio" value="Outdoor" {...register("seating")} />
+                                <Input
+                                    type="radio"
+                                    value="Outdoor"
+                                    {...register("seating")}
+                                    checked={watch("seating") === "Outdoor"}
+                                    onChange={handleChange}
+                                    invalid={!!errors.seating}
+                                />
                                 <Label check>Outdoor</Label>
+                                <FormFeedback>{errors.seating?.message}</FormFeedback>
                             </FormGroup>
 
                             <FormGroup check>
-                                <Input type="radio" value="Bar" {...register("seating")} />
+                                <Input
+                                    type="radio"
+                                    value="Bar"
+                                    {...register("seating")}
+                                    checked={watch("seating") === "Bar"}
+                                    onChange={handleChange}
+                                    invalid={!!errors.seating}
+                                />
                                 <Label check>Bar Seating</Label>
+                                <FormFeedback>{errors.seating?.message}</FormFeedback>
                             </FormGroup>
+
+                            {/*<p className="text-danger">{errors.seating?.message}</p>*/}
                         </div>
-                        <p className="text-danger">{errors.seating?.message}</p>
+
                     </Col>
 
                     {/* NOTES */}
                     <Col md={12}>
                         <FormGroup>
                             <Label>Dietary Notes</Label>
-                            <Input type="textarea" placeholder="Any dietary restrictions or special requests..." {...register("notes")} invalid={!!errors.notes}/>
+                            <Input
+                                type="textarea"
+                                placeholder="Any dietary restrictions or special requests...max 30 characters"
+                                {...register("notes")}
+                                value={watch("notes") || ""}
+                                onChange={handleChange}
+                                invalid={!!errors.notes}/>
                             <FormFeedback>{errors.notes?.message}</FormFeedback>
                         </FormGroup>
                     </Col>
@@ -138,26 +235,73 @@ export default function ReservationsPage() {
                     {/* NEWSLETTER */}
                     <Col md={12}>
                         <FormGroup check>
-                            <Input type="checkbox" {...register("newsletter")} />
+                            <Input
+                                type="checkbox"
+                                {...register("newsletter")}
+                                checked={watch("newsletter") || false}
+                                onChange={handleChange}
+                            />
                             <Label check>Subscribe for special offers</Label>
                         </FormGroup>
                     </Col>
 
                     {/* BUTTONS */}
                     <Col md={12} className="text-center mt-3">
-                        <Button color="warning" className="me-2">Submit</Button>
-                        <Button type="reset" color="secondary">Reset</Button>
+                        <Button color="warning" className="me-2"
+                                // onChange={handleChange}
+                                // onClick={() => reset({emptyValues})}
+                        >Submit</Button>
+                        <Button
+                            type="button"
+                            color="secondary"
+                            onChange={handleChange}
+                            onClick={() => reset({emptyValues}, {
+                                keepValues: false,
+                                keepDirty: false,
+                                keepTouched: false,
+                                keepErrors: false,
+                                keepDefaultValues: false
+                            })}
+
+                        >
+                            Reset
+                        </Button>
                     </Col>
 
                 </Row>
+
             </Form>
             {/* SUCCESS MODAL */}
+            {/*<ConfirmModal*/}
+            {/*    isOpen={modal}*/}
+            {/*    toggle={() => setModal(false)}*/}
+            {/*    confirm={() => setModal(false)}*/}
             <ConfirmModal
                 isOpen={modal}
-                toggle={() => setModal(false)}
-                confirm={() => setModal(false)}
+                showActions={false}
+                toggle={() => {
+                    setModal(false);
+                    reset({emptyValues}, {
+                        keepValues: false,
+                        keepDirty: false,
+                        keepTouched: false,
+                        keepErrors: false,
+                        keepDefaultValues: false
+                    });
+                }}
+                confirm={() => {
+                    setModal(false);
+                    reset({emptyValues}, {
+                        keepValues: false,
+                        keepDirty: false,
+                        keepTouched: false,
+                        keepErrors: false,
+                        keepDefaultValues: false
+                    });
+                }}
                 title="Reservation Submitted"
                 message="Your reservation request has been received!"
+
             />
         </Container>
         </>

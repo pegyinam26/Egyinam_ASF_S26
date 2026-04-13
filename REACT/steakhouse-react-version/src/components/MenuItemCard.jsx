@@ -2,17 +2,17 @@ import {Card, CardBody, Button} from "reactstrap";
 import {useState, useRef} from "react";
 
 
-export default function MenuItemCard({ item, cart, setCart,setShowToast, setShowCTA }) {
+export default function MenuItemCard({ item, cart, setCart,triggerUX}) {
     const [qty, setQty] = useState(1);
 
     {/*Fly to cart functionality*/}
     const imgRef = useRef();
     const flyToCart = (imgElement) => {
-        const cart = document.getElementById("cart-badge");
-        if (!cart || !imgElement) return;
+        const cartBadge = document.getElementById("cart-badge");
+        if (!cartBadge || !imgElement) return;
 
         const imgRect = imgElement.getBoundingClientRect();
-        const cartRect = cart.getBoundingClientRect();
+        const cartRect = cartBadge.getBoundingClientRect();
 
         const clone = imgElement.cloneNode(true);
 
@@ -44,24 +44,31 @@ export default function MenuItemCard({ item, cart, setCart,setShowToast, setShow
         setIsAdding(true);
         setTimeout(() => {
         const existing = cart.find(i => i.id === item.id);
-        flyToCart(imgRef.current);
+
+        if (existing && existing.quantity >= 5) {
+            setQty(1);          // reset dropdown
+            setIsAdding(false); // reset button text
+                return; // 🔥 STOP everything (no animation, no UX)
+            }
+
+        let updatedCart;
+
         if (existing) {
             existing.quantity = Math.min(existing.quantity + qty, 5);
-            setCart([...cart]);
+            updatedCart = [...cart];
         } else {
-            setCart([...cart, { ...item, quantity: qty }]);
+            updatedCart = [...cart, { ...item, quantity: qty }];
         }
-        setShowToast(true);
-        setTimeout(() => {
-            setShowToast(false);
-        }, 2000);
+            setCart(updatedCart);
+            flyToCart(imgRef.current);
+            // setAnimateBadge(true);
+            triggerUX(item.name, updatedCart);
 
-        setShowCTA(true);
 
-        setTimeout(() => {
-            setShowCTA(false);
-        }, 3000);
-        setIsAdding(false);
+
+
+            setIsAdding(false);
+            setQty(1);  // reset dropdown after successful add
         }, 400); // short delay for UX
     };
 
@@ -86,10 +93,10 @@ export default function MenuItemCard({ item, cart, setCart,setShowToast, setShow
                         <div className="category mt-4 mb-2">
                             {item.category}
                         </div>
-                        <select onChange={(e) => setQty(Number(e.target.value))}>
+                        <select className="dropdown" onChange={(e) => setQty(Number(e.target.value))}>
                             {[1, 2, 3, 4, 5].map(n => <option key={n}>{n}</option>)}
                         </select>
-                        <Button color="warning" onClick={addToCart} disabled={isAdding}>
+                        <Button className="btn-gold add-cart-btn" color="warning" onClick={addToCart} disabled={isAdding}>
                             {isAdding ? "Adding..." : "Add to Cart"}
                         </Button>
                 </CardBody>

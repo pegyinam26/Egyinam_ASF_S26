@@ -6,7 +6,7 @@ import {
     NavbarToggler,
     Collapse
 } from "reactstrap";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function SiteNavbar({cart, animateBadge}) {
@@ -17,7 +17,7 @@ export default function SiteNavbar({cart, animateBadge}) {
         <Navbar dark color="dark" expand="lg" className="lux-navbar sticky-top">
             <div className="container-fluid d-flex align-items-center">
                 {/* BRAND */}
-                <NavbarBrand className="d-flex align-items-center gap-2 m-0" tag={NavLink} to="/">
+                <NavbarBrand className="d-flex align-items-center gap-2 m-0" tag={Link} to="/">
                     <img src="../.././images/logo-image.png" alt="logo-image" width="40" className="brand-logo me-2"/>
                     <span className="brand-text">G & G's Steakhouse</span>
                 </NavbarBrand>
@@ -26,35 +26,35 @@ export default function SiteNavbar({cart, animateBadge}) {
                 {/*</button>*/}
 
 
-                {/* TOGGLER (mobile) */}
-                <NavbarToggler onClick={toggle} className="custom-toggler" />
+                {/* TOGGLER (mobile) Hamburger */}
+                <NavbarToggler onClick={toggle} className="custom-toggler me-2" />
 
                 {/* COLLAPSE */}
                 <Collapse isOpen={isOpen} navbar>
 
                 {/* NAV LINKS */}
-                    <Nav className="ms-auto d-flex align-items-center nav-links" navbar="navbar-expand-lg navbar-dark bg-dark sticky-top">
-                        <div className="collapse navbar-collapse" id="navMenu">
+                    <Nav className="nav-links w-100" navbar>
+
                                     <NavItem>
-                                        <NavLink to="/" className="nav-link d-flex align-items-center gap-1">
-                                            <i className="fas fa-home"></i>Home</NavLink>
+                                        <Link to="/" className="nav-link d-flex align-items-center gap-1">
+                                            <i className="fas fa-home"></i>Home</Link>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink to="/menu" className="nav-link d-flex align-items-center gap-1">
-                                            <i className="fa fa-bars"></i>Menu</NavLink>
+                                        <Link to="/menu" className="nav-link d-flex align-items-center gap-1">
+                                            <i className="fa fa-bars"></i>Menu</Link>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink to="/reservations" className="nav-link d-flex align-items-center gap-1">
-                                            <i className="fas fa-calendar-check"></i>Reservations</NavLink>
+                                        <Link to="/reservations" className="nav-link d-flex align-items-center gap-1">
+                                            <i className="fas fa-calendar-check"></i>Reservations</Link>
                                     </NavItem>
                                     {/* CART WITH BADGE */}
                                     <NavItem>
-                                        <NavLink to="/cart" className="nav-link d-flex align-items-center gap-2">
+                                        <Link to="/cart" className="nav-link d-flex align-items-center gap-2">
                                             <i className="fas fa-shopping-cart"></i>Cart
                                             <span id="cart-badge" className={`cart-badge ${animateBadge ? "animate" : ""}`}>{cartCount}</span>
-                                        </NavLink>
+                                        </Link>
                                     </NavItem>
-                        </div>
+
                     </Nav>
                 </Collapse>
             </div>
