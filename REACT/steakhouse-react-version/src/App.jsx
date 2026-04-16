@@ -32,7 +32,7 @@ function App() {
 
         ctaTimer = setTimeout(() => {
             setUX(prev => ({ ...prev, cta: false }));
-        }, 2000); // ⏳ longer display time
+        }, 2000); //  longer display time
     };
 
 

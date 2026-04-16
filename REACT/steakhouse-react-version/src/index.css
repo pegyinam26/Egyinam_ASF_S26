@@ -373,6 +373,11 @@ select,
   }
 }
 
+/* MAKE HAMBURGER ICON WHITE */
+.navbar-dark .navbar-toggler-icon {
+  filter: brightness(0) invert(1);
+}
+
 /*-------------------NAV BAR FOR ALL PAGES END-------------------*/
 /*--------------HOME PAGE BEGIN---------------*/
 /* HERO SECTION */
@@ -1012,6 +1017,7 @@ form{
 select option {
   background-color: var(--drkgry);
   color: var(--txtwhite);
+  z-index: 999999999999;
 }
 /* TWO COLUMN LAYOUT */
 .form-grid{

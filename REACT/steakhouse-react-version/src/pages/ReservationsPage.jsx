@@ -37,7 +37,7 @@ export default function ReservationsPage({onReserve}) {
         reset,
         setValue,
         watch,
-        formState: { errors }
+        formState: { errors}
     } = useForm({
         mode: "onBlur",//provides error messaging while form is filled
         resolver: yupResolver(validationSchema),
@@ -45,7 +45,6 @@ export default function ReservationsPage({onReserve}) {
         shouldUnregister: false
     });
     const onSubmit =(data) =>{
-
         onReserve && onReserve(data);
         setModal(true);
         // console.log(data);
@@ -195,7 +194,6 @@ export default function ReservationsPage({onReserve}) {
                                 value={watch("time") ?? ""}
                                 onChange={handleChange}
                                 invalid={!!errors.time}
-
                             />
                             <FormFeedback>{errors.time?.message}</FormFeedback>
                         </FormGroup>
