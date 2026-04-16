@@ -180,7 +180,7 @@ export default function CartPage({ cart, setCart }) {
                                     <tr>
                                         <th>ID</th>
                                         <th>Item</th>
-                                        <th>Menu Item</th>
+                                        <th>Item Description</th>
                                         <th>Qty</th>
                                         <th>Price</th>
                                     </tr>

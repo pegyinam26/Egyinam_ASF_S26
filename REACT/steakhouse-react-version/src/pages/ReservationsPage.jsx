@@ -5,16 +5,17 @@ import PageHero from "../components/PageHero.jsx";
 import ConfirmModal from "../components/ConfirmModal.jsx";
 import {Container, Row, Col, Form, FormGroup,
     Label, Input, Button, FormFeedback} from "reactstrap";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import CustomDropdown from "../components/CustomDropdown.jsx";
 
 export default function ReservationsPage({onReserve}) {
     const emptyValues = {
         name: " ",
         email: " ",
-        party: 0,
+        party: " ",
         date: " ",
         time: " ",
-        seating: "Indoor",
+        seating: " ",
         notes: " ",
         newsletter: false
     };
@@ -48,13 +49,15 @@ export default function ReservationsPage({onReserve}) {
         onReserve && onReserve(data);
         setModal(true);
         // console.log(data);
-        reset({emptyValues}, {
-            keepValues: false,
-            keepDirty: false,
-            keepTouched: false,
-            keepErrors: false,
-            keepDefaultValues: false
-        });
+        // reset({emptyValues}, {
+        // //     keepValues: false,
+        // //     keepDirty: false,
+        // //     keepTouched: false,
+        // //     keepErrors: false,
+        // //     keepDefaultValues: false
+        // });
+        reset(undefined);
+
         // console.log(data);
         // data.preventDefault();
     }
@@ -65,6 +68,18 @@ export default function ReservationsPage({onReserve}) {
             shouldTouch: true
         });
     };
+
+    useEffect(() => {
+        if (modal) {
+            const timer = setTimeout(() => {
+                setModal(false);
+                reset(undefined);  //  reset form
+            }, 1000); // 2.5 seconds
+
+            return () => clearTimeout(timer);
+        }
+    }, [modal]);
+
     return (
         <>
             <PageHero title="Reserve a Table" className="reservation-hero" />
@@ -79,7 +94,7 @@ export default function ReservationsPage({onReserve}) {
                     understanding and look forward to providing you a fine dining experience.
                 </p>
             </div>
-            <Form onSubmit={handleSubmit(onSubmit, () => setModal(false))}>
+            <Form className="reservation-form" onSubmit={handleSubmit(onSubmit, () => setModal(false))}>
 
                 <Row className="g-3">
 
@@ -90,7 +105,7 @@ export default function ReservationsPage({onReserve}) {
                             <Input
                                 placeholder="Enter your name"
                                 {...register("name")}
-                                value={watch("name") || ""}
+                                value={watch("name") ?? ""}
                                 onChange={handleChange}
                                 invalid={!!errors.name}
 
@@ -106,7 +121,7 @@ export default function ReservationsPage({onReserve}) {
                             <Input
                                 placeholder="Enter your email as username@example.com"
                                 {...register("email")}
-                                value={watch("email") || ""}
+                                value={watch("email") ?? ""}
                                 onChange={handleChange}
                                 invalid={!!errors.email}
 
@@ -123,15 +138,32 @@ export default function ReservationsPage({onReserve}) {
                             <Input
                                 type="select"
                                 {...register("party")}
-                                value={watch("party") || ""}
+                                value={watch("party") ?? ""}
                                 onChange={handleChange}
                                 invalid={!!errors.party}
                             >
+                            {/*REPLACING SELECT DROPDOWN WITH CUSTOM DROPDOWN*/}
+                            {/*<CustomDropdown*/}
+                            {/*    value={watch("party") || "Select Party Size"}*/}
+                            {/*    onChange={(val) => {*/}
+                            {/*        setValue("party", val, {*/}
+                            {/*            shouldValidate: true,*/}
+                            {/*            shouldDirty: true,*/}
+                            {/*            shouldTouch: true*/}
+                            {/*        });*/}
+                            {/*    }}*/}
+                            {/*    options={[1, 2, 3, 4, 5, 6, 7, 8]}*/}
+                            {/*/>*/}
+
+                            {/*{errors.party && (*/}
+                            {/*    <div className="text-danger mt-1">*/}
+                            {/*        {errors.party.message}*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
                                 <option value="">Select</option>
                                 {[1,2,3,4,5,6,7,8].map(n => (
                                     <option key={n}>{n}</option>
                                 ))}
-
                             </Input>
                             <FormFeedback>{errors.party?.message}</FormFeedback>
                         </FormGroup>
@@ -144,7 +176,7 @@ export default function ReservationsPage({onReserve}) {
                             <Input
                                 type="date"
                                 {...register("date")}
-                                value={watch("date") || ""}
+                                value={watch("date") ?? ""}
                                 onChange={handleChange}
                                 invalid={!!errors.date}
 
@@ -160,7 +192,7 @@ export default function ReservationsPage({onReserve}) {
                             <Input
                                 type="time"
                                 {...register("time")}
-                                value={watch("time") || ""}
+                                value={watch("time") ?? ""}
                                 onChange={handleChange}
                                 invalid={!!errors.time}
 
@@ -225,7 +257,7 @@ export default function ReservationsPage({onReserve}) {
                                 type="textarea"
                                 placeholder="Any dietary restrictions or special requests...max 30 characters"
                                 {...register("notes")}
-                                value={watch("notes") || ""}
+                                value={watch("notes") ?? ""}
                                 onChange={handleChange}
                                 invalid={!!errors.notes}/>
                             <FormFeedback>{errors.notes?.message}</FormFeedback>
@@ -238,7 +270,7 @@ export default function ReservationsPage({onReserve}) {
                             <Input
                                 type="checkbox"
                                 {...register("newsletter")}
-                                checked={watch("newsletter") || false}
+                                checked={watch("newsletter") ?? false}
                                 onChange={handleChange}
                             />
                             <Label check>Subscribe for special offers</Label>
@@ -255,13 +287,14 @@ export default function ReservationsPage({onReserve}) {
                             type="button"
                             color="secondary"
                             onChange={handleChange}
-                            onClick={() => reset({emptyValues}, {
-                                keepValues: false,
-                                keepDirty: false,
-                                keepTouched: false,
-                                keepErrors: false,
-                                keepDefaultValues: false
-                            })}
+                            onClick={()=>reset(undefined)}
+                            // onClick={() => reset({emptyValues}, {
+                            //     keepValues: false,
+                            //     keepDirty: false,
+                            //     keepTouched: false,
+                            //     keepErrors: false,
+                            //     keepDefaultValues: false
+                            // })}
 
                         >
                             Reset
@@ -281,23 +314,25 @@ export default function ReservationsPage({onReserve}) {
                 showActions={false}
                 toggle={() => {
                     setModal(false);
-                    reset({emptyValues}, {
-                        keepValues: false,
-                        keepDirty: false,
-                        keepTouched: false,
-                        keepErrors: false,
-                        keepDefaultValues: false
-                    });
+                    reset(undefined);
+                    // reset({emptyValues}, {
+                    //     keepValues: false,
+                    //     keepDirty: false,
+                    //     keepTouched: false,
+                    //     keepErrors: false,
+                    //     keepDefaultValues: false
+                    // });
                 }}
                 confirm={() => {
                     setModal(false);
-                    reset({emptyValues}, {
-                        keepValues: false,
-                        keepDirty: false,
-                        keepTouched: false,
-                        keepErrors: false,
-                        keepDefaultValues: false
-                    });
+                    reset(undefined);
+                    // reset({emptyValues}, {
+                    //     keepValues: false,
+                    //     keepDirty: false,
+                    //     keepTouched: false,
+                    //     keepErrors: false,
+                    //     keepDefaultValues: false
+                    // });
                 }}
                 title="Reservation Submitted"
                 message="Your reservation request has been received!"

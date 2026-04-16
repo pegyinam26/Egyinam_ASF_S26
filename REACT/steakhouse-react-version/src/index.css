@@ -27,7 +27,81 @@ html, body{
   /*flex-direction: column;*/
   overscroll-behavior: none;
 }
+/*CUSTOM DROPDOWN STYLING*/
+/* CUSTOM DROPDOWN */
+.custom-dropdown {
+  position: static;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  top: 100%;
+  color: var(--txtwhite);
+}
+.dropdown-list {
+  /*position: relative;*/
+  width: 100%;
+  background-color: var(--drkgry);
+  /*background: red;*/
+  border: 1px solid rgba(212,175,55,0.3);
+  z-index: 99999;
+  margin-top: 4px;
+  top: 100%;
+  left: 0;
+  color: var(--txtwhite);
+  border-radius: 4px;
+}
 
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  align-items: center;
+}
+
+
+/* MOVE ONLY THE TEXT */
+.dropdown-text {
+  margin-left: 10px;
+}
+.dropdown-header {
+  background-color: var(--drkgry);
+  color: var(--txtwhite);
+  height: 38px;
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding: 10px 20px;
+
+}
+
+/* MATCH INPUT FOCUS */
+.dropdown-header:focus,
+.dropdown-header.active {
+  border-color: var(--txtgold);
+  box-shadow: 0 0 8px rgba(212,175,55,0.6);
+}
+.dropdown-header:hover {
+  border-color: var(--txtgold);
+}
+
+
+.dropdown-item:hover {
+  background-color: rgba(212,175,55,0.2);
+}
+.mb-3 {
+  margin-bottom: 12px;
+}
+
+/* CRITICAL: REMOVE CLIPPING FROM CARD SYSTEM */
+.menu-card,
+.card,
+.card-body,
+.card-img-wrapper {
+  overflow: visible;
+}
 
 select,
 .form-select{
@@ -441,7 +515,7 @@ select,
 .menu-card {
   background-color: var(--drkgry); /* dark grey */
   border-radius:10px;
-  overflow: hidden;
+  overflow: visible;
   transition:0.3s;
   color: var(--txtwhite);
   border: 1px solid rgba(212,175,55,0.2);
@@ -521,7 +595,7 @@ select,
 .card{
   background-color: var(--drkgry);
   border-radius:10px;
-  overflow:hidden;
+  overflow: visible;
   transition:0.3s;
   /*color: var(--txtwhite);*/
   border: 1px solid rgba(212,175,55,0.15); /* subtle gold */
@@ -803,6 +877,7 @@ select,
 .fade-in {
   opacity: 0;
   transform: translateY(10px);
+  /*transform: none;*/
   animation: fadeIn 0.5s forwards;
 }
 
@@ -810,6 +885,7 @@ select,
   to {
     opacity: 1;
     transform: translateY(0);
+    /*transform: none;*/
   }
 }
 /*-----------ADDING HOVER EFFECT TO ADD_TO_CART FEATURE------*/
@@ -895,12 +971,32 @@ select,
   justify-self: center;
 }
 
+/* FORCE FULL WIDTH TEXT */
+.reservation-container {
+  width: 100vw;
+
+  padding: 0 20px;
+}
+
 /* RESERVATION FORM */
 form{
   /*background-color: var(--drkgry);*/
   padding:30px;
   border-radius:10px;
   /*border: 1px solid rgba(212,175,55,0.3);*/
+}
+/* tighten spacing ONLY for reservation form */
+.reservation-form .custom-dropdown {
+  margin-bottom: 0;
+}
+
+.reservation-form .form-group {
+  margin-bottom: 12px;
+}
+
+/* REMOVE EXTRA FORM SPACING */
+.reservation-form .mb-3 {
+  margin-bottom: 10px !important;
 }
 
 /* FORCE DARK INPUT FIELDS (OVERRIDE BOOTSTRAP) */
@@ -1389,5 +1485,9 @@ footer{
 
 .cart-content{
   margin-top: 20px; /*moving cart a few pixels below the reservation hero image*/
+}
+/* CART TABLE HEADERS GOLD */
+.table thead th {
+  color: var(--txtgold) !important;
 }
 /*--------------CART HTML PAGE END---------------------*/

@@ -2,6 +2,7 @@ import {Card, CardBody, Button} from "reactstrap";
 import {useState, useRef} from "react";
 
 
+
 export default function MenuItemCard({ item, cart, setCart,triggerUX}) {
     const [qty, setQty] = useState(1);
 
@@ -74,13 +75,13 @@ export default function MenuItemCard({ item, cart, setCart,triggerUX}) {
 
     return (
         <div className="col-md-4 mb-4 fade-in shadow">
-            <Card className="menu-card h-100">
+            <Card className="menu-card h-100 position-relative">
                 {item.image && (
                     <div className="card-img-wrapper">
                         <img ref={imgRef} src={item.image} alt={item.name} />
                     </div>
                 )}
-                    <CardBody className="d-flex flex-column">
+                    <CardBody className="d-flex flex-column position-relative">
                         <h5 className="menu-title mt-3">
                             {item.name}
                         </h5>
@@ -96,6 +97,12 @@ export default function MenuItemCard({ item, cart, setCart,triggerUX}) {
                         <select className="dropdown" onChange={(e) => setQty(Number(e.target.value))}>
                             {[1, 2, 3, 4, 5].map(n => <option key={n}>{n}</option>)}
                         </select>
+                        {/*SELECT WITH CUSTOM DROPDOWN*/}
+                        {/*<CustomDropdown className="dropdown-item position-absolute"*/}
+                        {/*    value={qty}*/}
+                        {/*    onChange={(val) => setQty(val)}*/}
+                        {/*    options={[1, 2, 3, 4, 5]}*/}
+                        {/*/>*/}
                         <Button className="btn-gold add-cart-btn" color="warning" onClick={addToCart} disabled={isAdding}>
                             {isAdding ? "Adding..." : "Add to Cart"}
                         </Button>
