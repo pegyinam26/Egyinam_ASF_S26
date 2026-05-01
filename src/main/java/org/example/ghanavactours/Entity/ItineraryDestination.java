@@ -1,4 +1,4 @@
-package org.example.ghanavactours.entity;
+package org.example.ghanavactours.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
