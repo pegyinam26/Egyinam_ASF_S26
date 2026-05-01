@@ -8,7 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.time.LocalDate;
 import java.util.Date;
 
-@Data
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,19 +21,13 @@ public class Booking {
     private long id;
 
     @Column(nullable = false)
-    private long user_id;
-
-    @Column(nullable = false)
-    private long itinerary_id;
-
-    @Column(nullable = false)
     private LocalDate booking_date;
 
     @Column(nullable = false)
     private Date travel_start_date;
 
     @Column(nullable = false, length = 50)
-    private String status = "PENDING";
+    private String status;
 
     //User FK,  one user has many bookings
     @ManyToOne(optional = false)

@@ -6,7 +6,6 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,11 +15,6 @@ public class ItineraryDestination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 5)
-    private long itinerary_id;
-
-    @Column(nullable = false, length = 5)
-    private long destination_id;
 
     @Column(length = 5)
     private long day_number;

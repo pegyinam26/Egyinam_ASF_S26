@@ -8,7 +8,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +19,7 @@ public class Itinerary {
     @Column(nullable = false, length = 150)
     private String title;
 
-    @Column(nullable = false, length = 5)
+    @Column(nullable = false)
     private long duration_days;
 
     @OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL, orphanRemoval = true)
