@@ -1,18 +1,25 @@
-import {useNavigate} from "react-router";
-import {useState} from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+import promoVideo from "../assets/promo.mp4";
 
-export default function LoginPage(){
+export default function LoginPage() {
     const navigate = useNavigate();
-    const [form, setform] = useState({
+
+    const [form, setForm] = useState({
         username: "",
         password: "",
     });
 
     const [error, setError] = useState("");
 
+    useEffect(() => {
+        document.body.style.overflowX = "hidden";
+        document.body.style.margin = "0";
+    }, []);
+
     const handleChange = (e: any) => {
-        setform({ ...form,[e.target.name]: e.target.value});
+        setForm({ ...form, [e.target.name]: e.target.value });
     };
 
     const handleLogin = async () => {
@@ -24,50 +31,111 @@ export default function LoginPage(){
                 },
                 body: JSON.stringify(form),
             });
-            if(!res.ok) throw new Error();
+
+            if (!res.ok) throw new Error();
+
             const data = await res.json();
 
-            //store user/admin role
             localStorage.setItem("role", data.role);
+            navigate(data.role === "ADMIN" ? "/admin" : "/booking");
 
-            //redirect based on role
-            if (data.role ==="ADMIN"){
-                navigate("/admin");
-            } else {
-                navigate("/booking");
-            }
-        }catch{
+        } catch {
             setError("Invalid username or password");
         }
     };
 
-    return(
-        <div className="h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-6 rounded shadow w-80">
-                <h2 className="text-xl font-bold mb-4 text-center">Login</h2>
-                {error &&  (
-                    <div className="text-red-500 text-sm mb-3">{error}</div>
-                )}
+    return (
+        <div className="w-full min-h-screen overflow-x-hidden">
 
-                <input
-                    name="username"
-                    placeholder="Username"
-                    className="border p-2 w-full mb-3"
-                    onChange={handleChange}
+            {/* 🔝 STICKY NAVBAR */}
+            {/*<div className="fixed top-0 left-0 w-full z-50 bg-black/60 text-white px-6 md:px-16 py-4 flex justify-between items-center">*/}
+            {/*    <h1 className="font-bold text-lg md:text-xl">*/}
+            {/*        🇬🇭 Ghana Tours*/}
+            {/*    </h1>*/}
+            {/*    <span className="text-sm opacity-80">*/}
+            {/*        Discover • Explore • Experience*/}
+            {/*    </span>*/}
+            {/*</div>*/}
+
+            {/* 🎥 HERO VIDEO SECTION */}
+            <div className="relative w-full min-h-screen overflow-hidden">
+
+                {/* VIDEO BACKGROUND */}
+                <video
+                    src={promoVideo}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover -translate-y-6"
                 />
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    className="border p-2 w-full mb-3"
-                    onChange={handleChange}
-                />
-                <button
-                    onClick={handleLogin}
-                    className="bg-blue-500 text-white w-full py-2"
-                > Login </button>
+
+                {/* 🌈 GRADIENT OVERLAY */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+
+                {/* 🧠 CENTERED TEXT */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-16 pt-16">
+
+                    {/* H1 */}
+                    <h1 className="text-4xl md:text-6xl font-black mb-8 text-[#f5e6c8] leading-tight tracking-wide"
+                        style={{ textShadow: "0 4px 20px rgba(0,0,0,0.85)" }}>
+                        Discover and Explore Ghana
+                    </h1>
+
+                    {/* H2 */}
+                    <h2 className="text-lg md:text-2xl font-semibold mb-6 text-white tracking-wide">
+                        Adventure • Culture • History
+                    </h2>
+
+                    {/* PARAGRAPH */}
+                    <p className="w-full px-4 md:px-24 lg:px-40 text-lg md:text-xl leading-relaxed text-white drop-shadow-md">
+                        Ghana offers a powerful mix of history, culture, and natural beauty in one unforgettable trip. From the vibrant energy of Accra to the historic Cape Coast Castle, every destination tells a story. Explore rainforest canopy walks in Kakum National Park, relax on scenic beaches, and experience wildlife in Mole National Park. Known for its safety and warm hospitality, Ghana is the perfect introduction to West Africa.
+                    </p>
+
+                </div>
+
+                {/* 🔐 LOGIN BOX */}
+                <div className="absolute top-24 right-6 md:right-16 z-40">
+
+                    <div className="bg-white p-4 rounded-lg shadow-md w-[250px]">
+
+                        <h2 className="text-sm font-semibold mb-2 text-center">
+                            Login
+                        </h2>
+
+                        {error && (
+                            <p className="text-red-500 text-xs mb-2 text-center">
+                                {error}
+                            </p>
+                        )}
+
+                        <input
+                            name="username"
+                            placeholder="Username"
+                            className="border p-1.5 w-full mb-2 rounded text-sm"
+                            onChange={handleChange}
+                        />
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            className="border p-1.5 w-full mb-2 rounded text-sm"
+                            onChange={handleChange}
+                        />
+
+                        <button
+                            onClick={handleLogin}
+                            className="bg-blue-600 hover:bg-blue-700 text-white w-full py-1.5 rounded text-sm"
+                        >
+                            Login
+                        </button>
+
+                    </div>
+                </div>
 
             </div>
+
         </div>
     );
 }

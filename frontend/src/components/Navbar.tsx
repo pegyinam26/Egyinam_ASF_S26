@@ -16,14 +16,15 @@ export default function Navbar() {
             : "text-gray-300 hover:text-white";
 
     return (
-        <nav className="bg-gray-900 text-white shadow-md">
-            <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+        <nav className="bg-gray-900 text-white shadow-md w-full">
+            <div className="w-full px-2 md:px-6 py-6 flex items-center justify-between">
 
-                {/* LEFT SIDE */}
+                {/* LEFT SIDE — pushed fully left */}
                 <div className="flex items-center gap-6">
+
                     <Link
                         to="/"
-                        className="text-xl font-bold tracking-wide hover:text-yellow-400 transition"
+                        className="text-xl md:text-2xl font-bold tracking-wide hover:text-yellow-400 transition"
                     >
                         🇬🇭 Ghana Vacation Tours
                     </Link>
@@ -48,16 +49,14 @@ export default function Navbar() {
                 </div>
 
                 {/* RIGHT SIDE */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 pr-2 md:pr-6">
 
-                    {/* ROLE BADGE */}
                     {role && (
                         <span className="bg-gray-700 px-3 py-1 rounded-full text-sm font-medium">
                             Welcome, {role === "ADMIN" ? "Admin" : "User"}
                         </span>
                     )}
 
-                    {/* LOGOUT BUTTON */}
                     {role && (
                         <button
                             onClick={handleLogout}
