@@ -4,24 +4,33 @@ import org.example.ghanavactours.Entity.Booking;
 import org.example.ghanavactours.Service.BookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/bookings")
+@CrossOrigin(origins = "http://localhost:5173")
 public class BookingController {
 
     private final BookingService bookingService;
 
+    //Constructor injection for the BookingService in BookingController
     public BookingController(BookingService service) {
         this.bookingService = service;
     }
     //fulfilling CRUD - C- create
     @ResponseStatus(HttpStatus.CREATED)//ensures 201 response when created
     @PostMapping
-    public Booking create(@RequestBody Booking booking) {
-        return bookingService.createBooking(booking);
+//    public Booking create(@RequestBody Booking booking) {
+//        return bookingService.createBooking(booking);
+//    }
+    public Booking create(@RequestBody Map<String, Object> request) {
+        return bookingService.createBooking(request);
     }
+
+
     //fulfilling CRUD - R - read
     @GetMapping
     public List<Booking> getAllBookings() {

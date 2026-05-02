@@ -6,7 +6,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 
 @Getter
@@ -24,13 +23,13 @@ public class Booking {
     private LocalDate booking_date;
 
     @Column(nullable = false)
-    private Date travel_start_date;
+    private LocalDate travel_start_date;
 
     @Column(nullable = false, length = 50)
     private String status;
 
     //User FK,  one user has many bookings
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(
             name = "user_id",
             nullable = false,
