@@ -1,4 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import adinkra1 from "../assets/adinkra1.jpg";
+import adinkra2 from "../assets/adinkra2.jpg";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -15,52 +17,83 @@ export default function Navbar() {
             ? "text-yellow-400"
             : "text-gray-300 hover:text-white";
 
+    const isItinerary = location.pathname === "/itinerary";
+    const centerImage = isItinerary ? adinkra2 : adinkra1;
+
     return (
-        <nav className="bg-gray-900 text-white shadow-md w-full">
-            <div className="w-full px-2 md:px-6 py-6 flex items-center justify-between">
+        <nav className="bg-gray-900 text-white shadow-md w-full relative">
 
-                {/* LEFT SIDE — pushed fully left */}
+            <div className="grid grid-cols-3 items-center px-4 md:px-6 py-6">
+
+                {/* LEFT */}
                 <div className="flex items-center gap-6">
-
                     <Link
                         to="/"
-                        className="text-xl md:text-2xl font-bold tracking-wide hover:text-yellow-400 transition"
+                        className="flex items-center gap-2 font-bold tracking-wide hover:text-yellow-400 transition"
                     >
-                        🇬🇭 Ghana Vacation Tours
+                        <span className="text-4xl">🇬🇭</span>
+                        <span className="text-xl md:text-2xl">
+                            Ghana Vacation Tours
+                        </span>
                     </Link>
 
+                    {role && (
+                        <Link to="/itinerary" className={isActive("/itinerary")}>
+                            Itinerary
+                        </Link>
+                    )}
+
                     {role === "USER" && (
-                        <Link
-                            to="/booking"
-                            className={`transition ${isActive("/booking")}`}
-                        >
+                        <Link to="/booking" className={isActive("/booking")}>
                             Book a Trip
                         </Link>
                     )}
 
                     {role === "ADMIN" && (
-                        <Link
-                            to="/admin"
-                            className={`transition ${isActive("/admin")}`}
-                        >
+                        <Link to="/admin" className={isActive("/admin")}>
                             Admin Panel
                         </Link>
                     )}
                 </div>
 
-                {/* RIGHT SIDE */}
-                <div className="flex items-center gap-4 pr-2 md:pr-6">
+                {/* CENTER — ELITE ADINKRA */}
+                <div className="flex justify-center relative group">
+
+                    {/* Glow background */}
+                    <div className="absolute w-24 h-24 bg-yellow-400/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-500"></div>
+
+                    {/* Image */}
+                    <img
+                        src={centerImage}
+                        alt="Adinkra Symbol"
+                        className="h-12 md:h-16 object-contain
+                                   transition-all duration-500
+                                   group-hover:scale-110
+                                   group-hover:rotate-3
+                                   drop-shadow-[0_4px_15px_rgba(255,215,0,0.5)]"
+                    />
+
+                    {/* Tooltip */}
+                    <div className="absolute top-full mt-2 opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div className="bg-black text-white text-xs px-3 py-1 rounded shadow-md whitespace-nowrap">
+                            Adinkra Symbol — Wisdom & Heritage
+                        </div>
+                    </div>
+                </div>
+
+                {/* RIGHT */}
+                <div className="flex justify-end items-center gap-4">
 
                     {role && (
                         <span className="bg-gray-700 px-3 py-1 rounded-full text-sm font-medium">
-                            Welcome, {role === "ADMIN" ? "Admin" : "User"}
+                            {role === "ADMIN" ? "Admin" : "User"}
                         </span>
                     )}
 
                     {role && (
                         <button
                             onClick={handleLogout}
-                            className="bg-red-500 hover:bg-red-600 transition px-4 py-1.5 rounded-md text-sm font-medium shadow-sm"
+                            className="bg-red-500 hover:bg-red-600 px-4 py-1.5 rounded-md text-sm font-medium shadow-sm"
                         >
                             Logout
                         </button>

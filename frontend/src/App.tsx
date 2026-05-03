@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import BookingPage from "./pages/BookingPage";
 import BookingsList from "./pages/BookingsList";
-
+import ItineraryPage from "./pages/ItineraryPage";
 import Navbar from "./components/Navbar";
 
 import ProtectedRoute from "./components/routes/ProtectedRoute";
@@ -30,6 +30,12 @@ function App() {
                     }
                 />
 
+                {/*<Route path="/booking" element={*/}
+                {/*    <ProtectedRoute>*/}
+                {/*        <BookingPage />*/}
+                {/*    </ProtectedRoute>*/}
+                {/*} />*/}
+
                 <Route
                     path="/admin"
                     element={
@@ -40,6 +46,17 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+                {/*<Route path="/admin" element={*/}
+                {/*    <AdminRoute>*/}
+                {/*        <AdminPage />*/}
+                {/*    </AdminRoute>*/}
+                {/*} />*/}
+                <Route path="/itinerary" element={
+                    <ProtectedRoute>
+                        <ItineraryPage />
+                    </ProtectedRoute>
+                } />
+
             </Routes>
             <Footer />
         </>
