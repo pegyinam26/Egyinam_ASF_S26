@@ -7,13 +7,29 @@ export const createBooking = async (data: any) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     });
-    return res.json();
+    if (!res.ok) throw new Error("Request failed");
+        return res.json();
 };
 
 // READ
 export const getBookings = async () => {
     const res = await fetch(`${BASE_URL}/bookings`);
-    return res.json();
+    if (!res.ok) throw new Error("Request failed");
+        return res.json();
+};
+
+/* ================= ITINERARIES ================= */
+
+export const getItineraries = async () => {
+    const res = await fetch(`${BASE_URL}/itineraries`);
+    if (!res.ok) throw new Error("Failed to fetch itineraries");
+        return res.json();
+};
+
+export const getItineraryById = async (id: number) => {
+    const res = await fetch(`${BASE_URL}/itineraries/${id}`);
+    if (!res.ok) throw new Error("Failed to fetch itinerary");
+        return res.json();
 };
 
 // UPDATE
@@ -23,7 +39,8 @@ export const updateBooking = async (id: any, data: any) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     });
-    return res.json();
+    if (!res.ok) throw new Error("Request failed");
+        return res.json();
 };
 
 // DELETE

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { bookingSchema } from "../validation/bookingSchema";
 
+import PageBackground from "../components/PageBackground.tsx";
+
 export default function BookingPage() {
     const [form, setForm] = useState({
         itineraryTitle: "",
@@ -102,9 +104,10 @@ export default function BookingPage() {
     };
 
     return (
-        <div className="max-w-3xl mx-auto p-6">
+        <PageBackground>
+        <div className="max-w-3xl mx-auto p-6 ">
 
-            <h1 className="text-2xl font-bold mb-6">Book Your Trip</h1>
+            <h1 className="text-2xl font-bold text-center mb-6">Book Your Trip</h1>
 
             {message && (
                 <div className="mb-4 text-center text-sm text-blue-600">
@@ -289,5 +292,6 @@ export default function BookingPage() {
             </button>
 
         </div>
+        </PageBackground>
     );
 }

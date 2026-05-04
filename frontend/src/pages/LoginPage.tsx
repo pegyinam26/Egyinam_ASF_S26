@@ -90,7 +90,7 @@ export default function LoginPage() {
                     </div>
 
                     {/* PARAGRAPH */}
-                    <p className="w-full px-4 md:px-24 lg:px-40 text-6xl font-bold md:text-xl leading-relaxed text-white drop-shadow-md mt-20" style={{fontFamily: "cursive" }}>
+                    <p className="w-full px-4 md:px-24 lg:px-40 text-6xl font-bold md:text-xl leading-relaxed text-amber-100 drop-shadow-md mt-20" style={{fontFamily: "cursive" }}>
                         Ghana offers a powerful mix of history, culture, and natural beauty in one unforgettable trip. From the vibrant energy of Accra to the historic Cape Coast Castle, every destination tells a story. Explore rainforest canopy walks in Kakum National Park, relax on scenic beaches, and experience wildlife in Mole National Park. Known for its safety and warm hospitality, Ghana is the perfect introduction to West Africa.
                     </p>
 

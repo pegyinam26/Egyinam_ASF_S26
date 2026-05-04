@@ -11,25 +11,7 @@ export default function DayCarousel({ day }: any) {
         <div className="text-center">
 
             {/* IMAGE */}
-            <div className="relative mb-4 flex justify-center bg-gray-100 p-4 rounded-xl">
-                {/*<img*/}
-                {/*    src={`/img/${day.images[index]}`}*/}
-                {/*    className="w-full h-[350px] object-cover rounded-lg shadow"*/}
-                {/*/>*/}
-                {/*<div className="relative mb-4 flex justify-center">*/}
-
-
-
-                {/*<div className="relative mb-4 flex justify-center bg-gray-100 p-4 rounded-xl">*/}
-
-                {/*    <img*/}
-                {/*        key={index}*/}
-                {/*        src={`/img/${day.images[index]}`}*/}
-                {/*        className="max-h-[500px] w-auto object-contain rounded-lg shadow transition-all duration-500"*/}
-                {/*    />*/}
-
-                {/*</div>*/}
-
+            <div className="relative mb-4 flex justify-center bg-amber-20 p-4 rounded-xl">
                     <img
                         key={index}
                         src={`/img/${day.images[index]}`}
@@ -41,14 +23,14 @@ export default function DayCarousel({ day }: any) {
 
                 <button
                     onClick={prev}
-                    className="absolute left-2 top-1/2 bg-black/50 text-white px-2 py-1 rounded"
+                    className="absolute left-40 h-[120px] top-1/2 bg-black/50 text-white px-2 py-1 rounded"
                 >
                     ◀
                 </button>
 
                 <button
                     onClick={next}
-                    className="absolute right-2 top-1/2 bg-black/50 text-white px-2 py-1 rounded"
+                    className="absolute right-40 h-[120px] top-1/2 bg-black/50 text-white px-2 py-1 rounded"
                 >
                     ▶
                 </button>

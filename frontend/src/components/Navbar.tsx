@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import adinkra1 from "../assets/adinkra1.jpg";
-import adinkra2 from "../assets/adinkra2.jpg";
+import adinkra1 from "../assets/adinkra4_11.jpg";
+import adinkra2 from "../assets/adinkra4_22.jpg";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -27,31 +27,40 @@ export default function Navbar() {
 
                 {/* LEFT */}
                 <div className="flex items-center gap-6">
+
                     <Link
                         to="/"
                         className="flex items-center gap-2 font-bold tracking-wide hover:text-yellow-400 transition"
                     >
                         <span className="text-4xl">🇬🇭</span>
-                        <span className="text-xl md:text-2xl">
+                        <span className="text-lg md:text-xl whitespace-nowrap">
                             Ghana Vacation Tours
                         </span>
                     </Link>
 
                     {role && (
-                        <Link to="/itinerary" className={isActive("/itinerary")}>
+                        <Link to="/itinerary" className={`whitespace-nowrap transition ${isActive("/itinerary")}`}>
                             Itinerary
                         </Link>
                     )}
 
                     {role === "USER" && (
-                        <Link to="/booking" className={isActive("/booking")}>
+                        <Link to="/booking" className={`whitespace-nowrap transition ${isActive("/booking")}`}>
                             Book a Trip
                         </Link>
                     )}
 
                     {role === "ADMIN" && (
-                        <Link to="/admin" className={isActive("/admin")}>
+                        <Link to="/admin" className={`whitespace-nowrap transition ${isActive("/admin")}`}>
                             Admin Panel
+                        </Link>
+                    )}
+                    {role && (
+                        <Link
+                            to="/gallery"
+                            className={`whitespace-nowrap transition ${isActive("/gallery")}`}
+                        >
+                            Gallery
                         </Link>
                     )}
                 </div>
@@ -66,7 +75,7 @@ export default function Navbar() {
                     <img
                         src={centerImage}
                         alt="Adinkra Symbol"
-                        className="h-12 md:h-16 object-contain
+                        className="h-12 md:h-10 object-contain
                                    transition-all duration-500
                                    group-hover:scale-110
                                    group-hover:rotate-3

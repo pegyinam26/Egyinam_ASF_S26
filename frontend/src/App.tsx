@@ -5,7 +5,7 @@ import BookingPage from "./pages/BookingPage";
 import BookingsList from "./pages/BookingsList";
 import ItineraryPage from "./pages/ItineraryPage";
 import Navbar from "./components/Navbar";
-
+import GalleryPage from "./pages/GalleryPage";
 import ProtectedRoute from "./components/routes/ProtectedRoute";
 import UserRoute from "./components/routes/UserRoute";
 import AdminRoute from "./components/routes/AdminRoute";
@@ -56,6 +56,9 @@ function App() {
                         <ItineraryPage />
                     </ProtectedRoute>
                 } />
+
+
+                <Route path="/gallery" element={<GalleryPage />} />
 
             </Routes>
             <Footer />
