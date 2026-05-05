@@ -62,11 +62,11 @@ export default function LoginPage() {
                     muted
                     loop
                     playsInline
-                    className="absolute inset-0 w-full h-full object-cover -translate-y-6"
+                    className="absolute inset-0 w-full h-full brightness-60 contrast-60 object-cover -translate-y-7"
                 />
 
                 {/* GRADIENT OVERLAY */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
+                <div className="bg-gradient-to-b from-black/40 via-black/20 to-black/60 backdrop-brightness-100" />
 
                 {/* CENTERED TEXT */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-16 pt-16">
@@ -77,7 +77,9 @@ export default function LoginPage() {
                         {/* H1 */}
                         <h1
                             className="text-5xl md:text-7xl font-black mb-4 text-[#f5e6c8] tracking-wide"
-                            style={{ textShadow: "0 6px 25px rgba(0,0,0,0.9)" }}
+                            style={{
+                                textShadow: "0 0 60px rgba(255,215,150,0.2), 0 6px 25px rgba(0,0,0,0.9)"
+                            }}
                         >
                             Discover and Explore Ghana
                         </h1>
@@ -89,16 +91,38 @@ export default function LoginPage() {
 
                     </div>
 
-                    <div className="text-5xl md:text-4xl font-black mb-4 text-amber-100 tracking-wide"
+                    <div className="text-5xl md:text-4xl font-black mb-4 text-[#f5e6c8] tracking-wide"
                          style={{ textShadow: "0 6px 25px rgba(0,0,0,0.9)" }}
                     >
                         <h3>Why should you visit?</h3>
                     </div>
 
                     {/* PARAGRAPH */}
-                    <p className="w-full px-4 md:px-24 lg:px-40 text-8xl font-bold md:text-3xl leading-relaxed text-amber-100 drop-shadow-md mt-5" style={{fontFamily: "cursive" }}>
-                        Ghana offers a powerful mix of history, culture, and natural beauty in one unforgettable trip. From the vibrant energy of Accra to the historic Cape Coast Castle, every destination tells a story. Explore rainforest canopy walks in Kakum National Park, relax on scenic beaches, and experience wildlife in Mole National Park. Known for its safety and warm hospitality, Ghana is the perfect introduction to West Africa.
-                    </p>
+                    <div className="w-full flex justify-center mt-6 px-4 md:px-10">
+                        <div className="
+                            w-full max-w-8xl
+                            px-6 md:px-12 py-6 md:py-8
+                            rounded-2xl
+                            backdrop-blur-md
+                            border border-white/20
+                            shadow-2xl
+                            bg-gradient-to-r from-black/30 via-black/10 to-black/20
+                        ">
+                            <p className="
+                                        text-lg md:text-2xl
+                                        leading-relaxed
+                                        font-bold text-[#f5e6c8]
+
+                                        drop-shadow-md
+
+                                    " style={{ fontFamily: "cursive" }}>
+
+                                Ghana offers a powerful mix of history, culture, and natural beauty in one unforgettable trip. From the vibrant energy of Accra to the historic Cape Coast Castle, every destination tells a story. Explore rainforest canopy walks in Kakum National Park, relax on scenic beaches, and experience wildlife in Mole National Park. Known for its safety and warm hospitality, Ghana is the perfect introduction to West Africa.
+
+                            </p>
+
+                        </div>
+                    </div>
 
                 </div>
                 {/* LEFT IMAGE (mirrors login box) */}
@@ -117,7 +141,7 @@ export default function LoginPage() {
                 {/* LOGIN BOX */}
                 <div className="absolute top-28 right-2 md:right-2 z-20">
 
-                    <div className="bg-white p-4 rounded-lg shadow-md w-[250px]">
+                        <div className="bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-xl w-[260px] border border-white/30">
 
                         <h2 className="text-sm font-semibold mb-2 text-center">
                             Login

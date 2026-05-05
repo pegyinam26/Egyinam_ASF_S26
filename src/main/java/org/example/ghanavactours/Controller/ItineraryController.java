@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/itineraries")
-@CrossOrigin(originPatterns = "http://localhost:*")
 public class ItineraryController {
 
     private final ItineraryRepository itineraryRepository;

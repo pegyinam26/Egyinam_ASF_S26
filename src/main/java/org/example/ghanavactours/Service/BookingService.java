@@ -6,6 +6,7 @@ import org.example.ghanavactours.Entity.Itinerary;
 import org.example.ghanavactours.Entity.User;
 import org.example.ghanavactours.Repository.BookingRepository;
 import org.example.ghanavactours.Repository.ItineraryRepository;
+import org.example.ghanavactours.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,14 @@ import java.util.Map;
 public class BookingService {
 
     private final ItineraryRepository itineraryRepository;
-
+    private final UserRepository userRepository;
     private final BookingRepository bookingRepository;
 
 
-    public BookingService(BookingRepository bookingRepository, ItineraryRepository itineraryRepository  ) {
+    public BookingService(BookingRepository bookingRepository, ItineraryRepository itineraryRepository, UserRepository userRepository  ) {
         this.bookingRepository = bookingRepository;
         this.itineraryRepository = itineraryRepository;
+        this.userRepository = userRepository;
     }
    //fulfilling CRUD - C- create
 //    public Booking createBooking(Booking booking) {
@@ -34,8 +36,9 @@ public class BookingService {
 //    }
 
     public Booking createBooking(Booking booking) {
-
-
+        //save user first
+        User savedUser = userRepository.save(booking.getUser());
+        //fetch itinerary
         Long id = booking.getItinerary().getId();
 
         Itinerary itinerary = itineraryRepository
@@ -43,6 +46,7 @@ public class BookingService {
                 .orElseThrow(() -> new RuntimeException("Itinerary not found"));
 
         booking.setItinerary(itinerary);
+        booking.setUser(savedUser);
 
         return bookingRepository.save(booking);
     }
@@ -73,6 +77,14 @@ public class BookingService {
         }
 
         return bookingRepository.save(existing);
+    }
+
+    //fulfilling CRUD - D - delete
+    public void deleteBooking(Long id) {
+        Booking existing = bookingRepository.findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Booking not found"));
+        //delete booking
+        bookingRepository.deleteById(existing.getId());
     }
 
 }

@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/destinations")
-@CrossOrigin(originPatterns = "http://localhost:*")
 public class DestinationController {
     //injecting Destination Constructor repository
     private final DestinationRepository destinationRepository;

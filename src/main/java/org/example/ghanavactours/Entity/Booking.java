@@ -29,13 +29,12 @@ public class Booking {
     private String status;
 
     //User FK,  one user has many bookings
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(
             name = "user_id",
             nullable = false,
             foreignKey = @ForeignKey(name = "fk_user")
     )
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     //Itinerary FK, one itinerary has many bookings

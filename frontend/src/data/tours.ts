@@ -302,7 +302,8 @@ export const tours = [
                 description:
                     "Start your day at Golden Tulip Kumasi City before heading out for a guided cultural tour. Begin at Manhyia Palace, the historic seat of the\n" +
                     "Ashanti Kingdom, where you’ll learn about royal traditions and Ghana’s rich cultural history. Continue to Bonwire Kente Village, famous\n" +
-                    "for traditional Kente cloth. Watch skilled artisans weave intricate patterns and learn about the meaning behind the designs. Return to Kumasi\n" +
+                    "for traditional Kente cloth. Watch skilled artisans weave intricate patterns and learn about the meaning behind the designs. Move on to the famous Kwame \n" +
+                    "Nkrumah University of Science and Technology, a top-tier institution and academia of excellence. Return to your hotel\n" +
                     "in the afternoon, with the evening free to relax or explore locally at your own pace.",
                 images: ["14/day11-1.jpg","14/day11-2.jpg","14/day11-3.jpg","14/day11-4.jpg","14/day11-5.jpg"]
             },

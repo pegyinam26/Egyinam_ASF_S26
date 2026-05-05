@@ -8,6 +8,9 @@ export default function BookingsList() {
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editForm, setEditForm] = useState<any>({});
 
+    const [page, setPage] = useState(1);
+    const perPage = 10;
+
     const fetchBookings = () => {
         fetch("http://localhost:8080/api/bookings")
             .then(res => res.json())
@@ -18,16 +21,31 @@ export default function BookingsList() {
         fetchBookings();
     }, []);
 
-    // FILTER LOGIC
+    // FILTER
     const filteredBookings = bookings.filter((b) => {
         const name = `${b.user?.fname || ""} ${b.user?.lname || ""}`.toLowerCase();
         return name.includes(search.toLowerCase());
     });
 
-    // ✏START EDIT
+    // PAGINATION
+    const totalPages = Math.ceil(filteredBookings.length / perPage);
+
+    const paginatedBookings = filteredBookings.slice(
+        (page - 1) * perPage,
+        page * perPage
+    );
+
+    // SIMPLE CHART DATA
+    const stats = {
+        CONFIRMED: bookings.filter(b => b.status === "CONFIRMED").length,
+        PENDING: bookings.filter(b => b.status === "PENDING").length,
+        CANCELLED: bookings.filter(b => b.status === "CANCELLED").length,
+    };
+
+    // START EDIT
     const handleEdit = (b: any) => {
         setEditingId(b.id);
-        setEditForm(JSON.parse(JSON.stringify(b))); // deep copy
+        setEditForm(JSON.parse(JSON.stringify(b)));
     };
 
     // SAVE UPDATE
@@ -44,32 +62,68 @@ export default function BookingsList() {
 
             if (!res.ok) throw new Error();
 
-            alert("✅ Booking updated!");
+            alert("Booking updated!");
             setEditingId(null);
             fetchBookings();
 
         } catch (err) {
-            console.error(err);
-            alert(" Failed to update booking");
+            alert("Failed to update booking");
+        }
+    };
+
+    // DELETE
+    const handleDelete = async (id: number) => {
+        const confirmDelete = confirm("Are you sure you want to delete this booking?");
+        if (!confirmDelete) return;
+
+        try {
+            await fetch(`http://localhost:8080/api/bookings/${id}`, {
+                method: "DELETE",
+            });
+
+            alert("Booking deleted!");
+            fetchBookings();
+        } catch (err) {
+            alert("Delete failed!");
         }
     };
 
     return (
         <PageBackground>
 
-            <h1 className="text-2xl font-bold text-center mb-4">
-                All Bookings
+            <h1 className="text-4xl font-bold text-center text-amber-700 mb-4">
+                Booking Dashboard
             </h1>
+
+            {/* CHARTS */}
+            <div className="grid grid-cols-3 gap-4 mb-6">
+                {Object.entries(stats).map(([key, value]) => (
+                    <div key={key} className="bg-white p-4 rounded shadow text-center">
+                        <p className="text-sm">{key}</p>
+                        <div className="h-2 bg-gray-200 mt-2">
+                            <div
+                                className="h-2 bg-blue-500"
+                                style={{ width: `${value * 20}px` }}
+                            />
+                        </div>
+                        <p className="mt-2 font-bold">{value}</p>
+                    </div>
+                ))}
+            </div>
 
             {/* SEARCH */}
             <input
                 type="text"
                 placeholder="Search by first or last name..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="border p-2 rounded w-full mb-4"
+                onChange={(e) => {
+                    setSearch(e.target.value);
+                    setPage(1);
+                }}
+                className="border p-2 rounded w-1/3 mb-4"
             />
 
+            {/* TABLE */}
             <table className="w-full border">
                 <thead className="bg-gray-200">
                 <tr>
@@ -84,10 +138,9 @@ export default function BookingsList() {
                 </thead>
 
                 <tbody>
-                {filteredBookings.map((b) => (
+                {paginatedBookings.map((b) => (
                     <tr key={b.id} className="border text-center">
 
-                        {/* FIRST NAME */}
                         <td className="p-2">
                             {editingId === b.id ? (
                                 <input
@@ -95,19 +148,13 @@ export default function BookingsList() {
                                     onChange={(e) =>
                                         setEditForm({
                                             ...editForm,
-                                            user: {
-                                                ...editForm.user,
-                                                fname: e.target.value
-                                            }
+                                            user: { ...editForm.user, fname: e.target.value }
                                         })
                                     }
                                 />
-                            ) : (
-                                b.user?.fname
-                            )}
+                            ) : b.user?.fname}
                         </td>
 
-                        {/* LAST NAME */}
                         <td className="p-2">
                             {editingId === b.id ? (
                                 <input
@@ -115,26 +162,17 @@ export default function BookingsList() {
                                     onChange={(e) =>
                                         setEditForm({
                                             ...editForm,
-                                            user: {
-                                                ...editForm.user,
-                                                lname: e.target.value
-                                            }
+                                            user: { ...editForm.user, lname: e.target.value }
                                         })
                                     }
                                 />
-                            ) : (
-                                b.user?.lname
-                            )}
+                            ) : b.user?.lname}
                         </td>
 
-                        {/* ITINERARY */}
-                        <td className="p-2">{b.itinerary?.title}</td>
+                        <td>{b.itinerary?.title}</td>
+                        <td>{b.booking_date}</td>
 
-                        {/* BOOKING DATE */}
-                        <td className="p-2">{b.booking_date}</td>
-
-                        {/* TRAVEL DATE */}
-                        <td className="p-2">
+                        <td>
                             {editingId === b.id ? (
                                 <input
                                     type="date"
@@ -146,13 +184,10 @@ export default function BookingsList() {
                                         })
                                     }
                                 />
-                            ) : (
-                                b.travel_start_date
-                            )}
+                            ) : b.travel_start_date}
                         </td>
 
-                        {/* STATUS */}
-                        <td className="p-2">
+                        <td>
                             {editingId === b.id ? (
                                 <select
                                     value={editForm.status}
@@ -163,39 +198,24 @@ export default function BookingsList() {
                                         })
                                     }
                                 >
-                                    <option value="PENDING">PENDING</option>
-                                    <option value="CONFIRMED">CONFIRMED</option>
-                                    <option value="CANCELLED">CANCELLED</option>
+                                    <option>PENDING</option>
+                                    <option>CONFIRMED</option>
+                                    <option>CANCELLED</option>
                                 </select>
-                            ) : (
-                                b.status
-                            )}
+                            ) : b.status}
                         </td>
 
-                        {/* ACTIONS */}
-                        <td className="p-2 space-x-2">
+                        <td className="space-x-2">
                             {editingId === b.id ? (
                                 <>
-                                    <button
-                                        onClick={handleUpdate}
-                                        className="text-green-600"
-                                    >
-                                        💾
-                                    </button>
-                                    <button
-                                        onClick={() => setEditingId(null)}
-                                        className="text-red-600"
-                                    >
-                                        ❌
-                                    </button>
+                                    <button onClick={handleUpdate} className="text-green-600">💾</button>
+                                    <button onClick={() => setEditingId(null)} className="text-red-600">❌</button>
                                 </>
                             ) : (
-                                <button
-                                    onClick={() => handleEdit(b)}
-                                    className="text-blue-600"
-                                >
-                                    ✏️
-                                </button>
+                                <>
+                                    <button onClick={() => handleEdit(b)} className="text-blue-600">✏️</button>
+                                    <button onClick={() => handleDelete(b.id)} className="text-red-600">🗑</button>
+                                </>
                             )}
                         </td>
 
@@ -203,6 +223,27 @@ export default function BookingsList() {
                 ))}
                 </tbody>
             </table>
+
+            {/* PAGINATION */}
+            <div className="flex justify-center mt-4 space-x-4">
+                <button
+                    disabled={page === 1}
+                    onClick={() => setPage(page - 1)}
+                    className="px-3 py-1 bg-gray-200 rounded"
+                >
+                    Prev
+                </button>
+
+                <span>{page} / {totalPages}</span>
+
+                <button
+                    disabled={page === totalPages}
+                    onClick={() => setPage(page + 1)}
+                    className="px-3 py-1 bg-gray-200 rounded"
+                >
+                    Next
+                </button>
+            </div>
 
         </PageBackground>
     );

@@ -4,14 +4,12 @@ import org.example.ghanavactours.Entity.Booking;
 import org.example.ghanavactours.Service.BookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/bookings")
-@CrossOrigin(originPatterns = "http://localhost:*")//ensures all port numbers are applicable for the API url - CORS policuy
 public class BookingController {
 
     private final BookingService bookingService;
@@ -48,5 +46,11 @@ public class BookingController {
     @PutMapping("/{id}")
     public Booking update(@PathVariable Long id, @RequestBody Booking booking) {
         return bookingService.updateBooking(id, booking);
+    }
+
+    //fulfilling CRUD - D - delete
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        bookingService.deleteBooking(id);
     }
 }
