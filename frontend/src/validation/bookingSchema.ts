@@ -1,7 +1,8 @@
 import * as yup from "yup";
 
 export const bookingSchema = yup.object({
-    itineraryTitle: yup.string().required("Select an itinerary"),
+    // itineraryTitle: yup.string().required("Select an itinerary"),
+    itineraryId: yup.string().required("Select an itinerary"),
     travelDate: yup
         .date()
         .required("Travel date is required")

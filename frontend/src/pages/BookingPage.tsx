@@ -5,7 +5,7 @@ import PageBackground from "../components/PageBackground.tsx";
 
 export default function BookingPage() {
     const [form, setForm] = useState({
-        itineraryTitle: "",
+        itineraryId: "",
         travelDate: "",
         firstName: "",
         lastName: "",
@@ -58,24 +58,57 @@ export default function BookingPage() {
             setMessage("");
             setLoading(true);
 
-            // Validate
+            if (!form.itineraryId) {
+                setMessage("Please select an itinerary");
+                setLoading(false);
+                return;
+            }
+
             await bookingSchema.validate(form, { abortEarly: false });
+
+            const payload = {
+                booking_date: new Date().toISOString().split("T")[0],
+                travel_start_date: form.travelDate,
+                status: "PENDING",
+                itinerary: { id: Number(form.itineraryId) },
+                user: {
+                    fname: form.firstName,
+                    lname: form.lastName,
+                    email: form.email,
+                    phoneNumber: form.phoneNumber,
+                    createdAt: new Date().toISOString(),
+                    address: {
+                        street: form.street,
+                        city: form.city,
+                        state: form.state,
+                        zip: form.zip,
+                        country: "USA"
+                    }
+                }
+            };
 
             const res = await fetch("http://localhost:8080/api/bookings", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(form),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
             });
 
-            if (!res.ok) throw new Error();
+            if (!res.ok) {
+                const err = await res.text();
+                throw new Error(err);
+            }
+
+            const savedBooking = await res.json(); //  IMPORTANT
+
+            alert(
+                `Booking Confirmed!\n\nRecord the following for your records.\n\nBooking ID: ${savedBooking.id}\nName: ${savedBooking.user.fname} ${savedBooking.user.lname}`
+            );
 
             setMessage("Booking created successfully!");
 
-            // Reset form
+            // reset form
             setForm({
-                itineraryTitle: "",
+                itineraryId: "",
                 travelDate: "",
                 firstName: "",
                 lastName: "",
@@ -89,15 +122,8 @@ export default function BookingPage() {
             });
 
         } catch (err: any) {
-            if (err.inner) {
-                const newErrors: any = {};
-                err.inner.forEach((e: any) => {
-                    newErrors[e.path] = e.message;
-                });
-                setErrors(newErrors);
-            } else {
-                setMessage("Failed to create booking");
-            }
+            console.error(err);
+            setMessage("Failed to create booking");
         }
 
         setLoading(false);
@@ -120,14 +146,14 @@ export default function BookingPage() {
                     {/* ITINERARY */}
                     <div>
                         <select
-                            name="itineraryTitle"
-                            value={form.itineraryTitle}
+                            name="itineraryId"
+                            value={form.itineraryId}
                             onChange={handleChange}
                             className="border p-2 rounded w-full"
                         >
                             <option value="">Select Itinerary</option>
                             {itineraries.map((i) => (
-                                <option key={i.id} value={i.title}>
+                                <option key={i.id} value={i.id}>
                                     {i.title}
                                 </option>
                             ))}

@@ -20,13 +20,18 @@ public class BookingController {
     public BookingController(BookingService service) {
         this.bookingService = service;
     }
+
     //fulfilling CRUD - C- create
     @ResponseStatus(HttpStatus.CREATED)//ensures 201 response when created
-    @PostMapping
-    public Booking create(@RequestBody Map<String, Object> request) {
-        return bookingService.createBooking(request);
-    }
+//    @PostMapping
+//    public Booking create(@RequestBody Map<String, Object> request) {
+//        return bookingService.createBooking(request);
+//    }
 
+    @PostMapping
+    public Booking create(@RequestBody Booking booking) {
+        return bookingService.createBooking(booking);
+    }
 
     //fulfilling CRUD - R - read
     @GetMapping
@@ -37,5 +42,11 @@ public class BookingController {
     @GetMapping("/{id}")
     public Booking getBookingById(@PathVariable Long id) {
         return bookingService.getBookingById(id);
+    }
+
+    //fulfilling CRUD - U - update
+    @PutMapping("/{id}")
+    public Booking update(@PathVariable Long id, @RequestBody Booking booking) {
+        return bookingService.updateBooking(id, booking);
     }
 }

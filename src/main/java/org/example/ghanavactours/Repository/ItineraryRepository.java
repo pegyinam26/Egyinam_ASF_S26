@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface ItineraryRepository extends JpaRepository<Itinerary, Long> {
 
-    Optional<Itinerary> findByTitle(String title);
+//    Optional<Itinerary> findByTitle(String title);
 
 }

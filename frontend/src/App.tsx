@@ -59,11 +59,7 @@ function App() {
 
 
                 <Route path="/gallery" element={
-                    <ProtectedRoute>
-                        <UserRoute>
                             <GalleryPage />
-                        </UserRoute>
-                    </ProtectedRoute>
                 } />
 
             </Routes>

@@ -6,6 +6,7 @@ import org.example.ghanavactours.Entity.Itinerary;
 import org.example.ghanavactours.Entity.User;
 import org.example.ghanavactours.Repository.BookingRepository;
 import org.example.ghanavactours.Repository.ItineraryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,69 +19,30 @@ import java.util.Map;
 @Service
 public class BookingService {
 
-    private final BookingRepository bookingRepository;
-    private ItineraryRepository itineraryRepository;
+    private final ItineraryRepository itineraryRepository;
 
-    public BookingService(BookingRepository bookingRepository) {
+    private final BookingRepository bookingRepository;
+
+
+    public BookingService(BookingRepository bookingRepository, ItineraryRepository itineraryRepository  ) {
         this.bookingRepository = bookingRepository;
+        this.itineraryRepository = itineraryRepository;
     }
    //fulfilling CRUD - C- create
 //    public Booking createBooking(Booking booking) {
 //        return bookingRepository.save(booking);
 //    }
 
-    public Booking createBooking(Map<String, Object> request) {
+    public Booking createBooking(Booking booking) {
 
-        // Extract values
-        String itineraryTitle = (String) request.get("itineraryTitle");
-        String firstName = (String) request.get("firstName");
-        String lastName = (String) request.get("lastName");
-        String email = (String) request.get("email");
-        String phone = (String) request.get("phoneNumber");
 
-        String street = (String) request.get("street");
-        String city = (String) request.get("city");
-        String state = (String) request.get("state");
-        String zip = (String) request.get("zip");
-        String country = (String) request.get("country");
+        Long id = booking.getItinerary().getId();
 
-        String travelDateStr = (String) request.get("travelDate");
-
-        // Convert date
-        LocalDate travelDate = LocalDate.parse(travelDateStr);
-
-        // Find itinerary
         Itinerary itinerary = itineraryRepository
-                .findByTitle(itineraryTitle)
+                .findById(id)
                 .orElseThrow(() -> new RuntimeException("Itinerary not found"));
 
-        // Create Address
-        Address address = Address.builder()
-                .street(street)
-                .city(city)
-                .state(state)
-                .zip(zip)
-                .country(country)
-                .build();
-
-        // Create User
-        User user = User.builder()
-                .fname(firstName)
-                .lname(lastName)
-                .email(email)
-                .phoneNumber(phone)
-                .createdAt(LocalDateTime.now())
-                .address(address)
-                .build();
-
-        // Create Booking
-        Booking booking = Booking.builder()
-                .user(user)
-                .itinerary(itinerary)
-                .booking_date(LocalDate.now())
-                .travel_start_date(travelDate)
-                .status("PENDING")
-                .build();
+        booking.setItinerary(itinerary);
 
         return bookingRepository.save(booking);
     }
@@ -92,6 +54,25 @@ public class BookingService {
     public Booking getBookingById(Long id) {
         return bookingRepository.findById(id)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Booking not found"));
+    }
+
+    //fulfilling CRUD - U - update
+    public Booking updateBooking(Long id, Booking updatedBooking) {
+
+        Booking existing = bookingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        // Update only editable fields
+        existing.setTravel_start_date(updatedBooking.getTravel_start_date());
+        existing.setStatus(updatedBooking.getStatus());
+
+        // Update user fields
+        if (existing.getUser() != null && updatedBooking.getUser() != null) {
+            existing.getUser().setFname(updatedBooking.getUser().getFname());
+            existing.getUser().setLname(updatedBooking.getUser().getLname());
+        }
+
+        return bookingRepository.save(existing);
     }
 
 }
