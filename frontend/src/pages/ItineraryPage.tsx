@@ -3,9 +3,6 @@ import { tours } from "../data/tours";
 import PageBackground from "../components/PageBackground";
 
 
-
-
-
 export default function ItineraryPage() {
     return (
         <PageBackground>

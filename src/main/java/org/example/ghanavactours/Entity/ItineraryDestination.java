@@ -1,5 +1,7 @@
 package org.example.ghanavactours.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +22,7 @@ public class ItineraryDestination {
     private long day_number;
 
     @ManyToOne
+    @JsonBackReference //fixes JSON recursion which might cause stack overflow and 500 error
     @JoinColumn(
             name = "itinerary_id",
             nullable = false,

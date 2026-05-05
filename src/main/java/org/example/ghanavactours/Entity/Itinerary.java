@@ -1,5 +1,6 @@
 package org.example.ghanavactours.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference; //fixes JSON recursion
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,5 +24,6 @@ public class Itinerary {
     private long duration_days;
 
     @OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference //fixes JSON recursion which might cause stack overflow and 500 error
     private List<ItineraryDestination> itineraryDestinations;
 }

@@ -15,7 +15,7 @@ export default function TourSection({ tour }: any) {
                 <h2 className="text-3xl font-bold">
                     {tour.title}
                 </h2>
-
+                {/* Book Now CTA*/}
                 <button
                     onClick={() => navigate("/booking")}
                     className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg shadow-md text-sm md:text-base transition"

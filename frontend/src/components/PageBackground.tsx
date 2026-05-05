@@ -1,6 +1,6 @@
 import bgImage from "../assets/background2.jpg";
 
-export default function PageBackground({ children }: any) {
+export default function PageBackground({children }: any) {
     return (
         <div
             className="min-h-screen bg-cover bg-center relative"

@@ -92,7 +92,7 @@ export default function GalleryPage() {
         flipBookRef.current?.pageFlip().flipPrev();
     };
 
-    // @ts-ignore
+
     return (
         <PageBackground>
 

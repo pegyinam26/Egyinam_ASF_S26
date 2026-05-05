@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/bookings")
-@CrossOrigin(originPatterns = "http://localhost:*")
+@CrossOrigin(originPatterns = "http://localhost:*")//ensures all port numbers are applicable for the API url - CORS policuy
 public class BookingController {
 
     private final BookingService bookingService;
@@ -23,9 +23,6 @@ public class BookingController {
     //fulfilling CRUD - C- create
     @ResponseStatus(HttpStatus.CREATED)//ensures 201 response when created
     @PostMapping
-//    public Booking create(@RequestBody Booking booking) {
-//        return bookingService.createBooking(booking);
-//    }
     public Booking create(@RequestBody Map<String, Object> request) {
         return bookingService.createBooking(request);
     }

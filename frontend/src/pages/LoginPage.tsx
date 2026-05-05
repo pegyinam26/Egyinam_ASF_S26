@@ -72,7 +72,7 @@ export default function LoginPage() {
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-16 pt-16">
 
                     {/* TEXT CONTENT (aligned with login box center) */}
-                    <div className="absolute w-full top-[18%] text-center px-6 md:px-16">
+                    <div className="absolute w-full top-[12%] text-center px-6 md:px-16">
 
                         {/* H1 */}
                         <h1
@@ -89,8 +89,14 @@ export default function LoginPage() {
 
                     </div>
 
+                    <div className="text-5xl md:text-4xl font-black mb-4 text-amber-100 tracking-wide"
+                         style={{ textShadow: "0 6px 25px rgba(0,0,0,0.9)" }}
+                    >
+                        <h3>Why should you visit?</h3>
+                    </div>
+
                     {/* PARAGRAPH */}
-                    <p className="w-full px-4 md:px-24 lg:px-40 text-6xl font-bold md:text-xl leading-relaxed text-amber-100 drop-shadow-md mt-20" style={{fontFamily: "cursive" }}>
+                    <p className="w-full px-4 md:px-24 lg:px-40 text-8xl font-bold md:text-3xl leading-relaxed text-amber-100 drop-shadow-md mt-5" style={{fontFamily: "cursive" }}>
                         Ghana offers a powerful mix of history, culture, and natural beauty in one unforgettable trip. From the vibrant energy of Accra to the historic Cape Coast Castle, every destination tells a story. Explore rainforest canopy walks in Kakum National Park, relax on scenic beaches, and experience wildlife in Mole National Park. Known for its safety and warm hospitality, Ghana is the perfect introduction to West Africa.
                     </p>
 

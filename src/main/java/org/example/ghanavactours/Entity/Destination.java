@@ -1,5 +1,6 @@
 package org.example.ghanavactours.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,5 +24,6 @@ public class Destination {
     private String region;
 
     @OneToMany(mappedBy = "destination")
+    @JsonIgnore //helps prevent JSON recursion errors for unwanted reverse mappings
     private List<ItineraryDestination> itineraryDestinations;
 }

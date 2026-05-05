@@ -7,14 +7,14 @@ export const createBooking = async (data: any) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Request failed");
+    if (!res.ok) throw new Error("Failed to create booking");
         return res.json();
 };
 
 // READ
 export const getBookings = async () => {
     const res = await fetch(`${BASE_URL}/bookings`);
-    if (!res.ok) throw new Error("Request failed");
+    if (!res.ok) throw new Error("Failed to get bookings");
         return res.json();
 };
 
@@ -39,7 +39,7 @@ export const updateBooking = async (id: any, data: any) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     });
-    if (!res.ok) throw new Error("Request failed");
+    if (!res.ok) throw new Error("Failed to update booking");
         return res.json();
 };
 

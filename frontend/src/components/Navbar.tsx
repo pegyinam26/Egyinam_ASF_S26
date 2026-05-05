@@ -32,8 +32,8 @@ export default function Navbar() {
                         to="/"
                         className="flex items-center gap-2 font-bold tracking-wide hover:text-yellow-400 transition"
                     >
-                        <span className="text-4xl">🇬🇭</span>
-                        <span className="text-lg md:text-xl whitespace-nowrap">
+                        <span className="text-6xl">🇬🇭</span>
+                        <span className="text-lg md:text-2xl whitespace-nowrap">
                             Ghana Vacation Tours
                         </span>
                     </Link>

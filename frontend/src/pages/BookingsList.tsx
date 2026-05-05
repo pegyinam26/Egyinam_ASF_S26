@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PageBackground from "../components/PageBackground.tsx";
+import PageBackground from "../components/PageBackground";
 
 export default function BookingsList() {
     const [bookings, setBookings] = useState<any[]>([]);
