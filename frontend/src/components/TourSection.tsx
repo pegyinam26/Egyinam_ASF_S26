@@ -7,19 +7,31 @@ export default function TourSection({ tour }: any) {
     const navigate = useNavigate();
 
     return (
-        <div className="mb-20">
+        <div className=" mb-28 bg-black/15 backdrop-blur-sm border border-white/10 rounded-[40px] p-8 md:p-12 shadow-2xl">
 
             {/* TITLE + CTA (centered together) */}
             <div className="flex justify-center items-center gap-4 mb-6">
 
-                <h2 className="text-3xl font-bold">
+                <h2 className=" text-4xl md:text-5xl font-black text-amber-700 tracking-wide ">
                     {tour.title}
                 </h2>
                 {/* Book Now CTA*/}
                 <button
                     onClick={() => navigate("/booking")}
-                    className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg shadow-md text-sm md:text-base transition"
-                >
+                    className="
+                            bg-gradient-to-r
+                            from-green-500
+                            to-emerald-600
+                            hover:scale-105
+                            hover:shadow-green-500/30
+                            text-white
+                            px-6 py-3
+                            rounded-2xl
+                            shadow-xl
+                            text-sm md:text-base
+                            transition-all
+                            duration-300
+                            font-bold">
                     Book Now
                 </button>
 
@@ -31,10 +43,10 @@ export default function TourSection({ tour }: any) {
                     <button
                         key={i}
                         onClick={() => setSelected(i)}
-                        className={`px-3 py-1 rounded transition ${
+                        className={`px-5 py-2 rounded-full transition-all duration-300 font-semibold ${
                             selected === i
-                                ? "bg-blue-600 text-white"
-                                : "bg-gray-200 hover:bg-gray-300"
+                                ? "bg-yellow-500 text-black shadow-lg scale-105"
+                                : "bg-white/10 text-amber-700 hover:bg-white/20"
                         }`}
                     >
                         Day {d.day}

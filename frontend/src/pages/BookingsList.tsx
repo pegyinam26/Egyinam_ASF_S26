@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
 import PageBackground from "../components/PageBackground";
+import {
+    Pencil,
+    Trash2,
+    Save,
+    X,
+    Search,
+    CalendarDays,
+    BadgeCheck,
+    Clock3,
+    Ban
+} from "lucide-react";
 
 export default function BookingsList() {
     const [bookings, setBookings] = useState<any[]>([]);
@@ -43,9 +54,23 @@ export default function BookingsList() {
     };
 
     // START EDIT
-    const handleEdit = (b: any) => {
-        setEditingId(b.id);
-        setEditForm(JSON.parse(JSON.stringify(b)));
+    const handleEdit = (booking: any) => {
+
+        setEditingId(booking.id);
+
+        setEditForm({
+
+            ...booking,
+
+            user: {
+                ...booking.user
+            },
+
+            itinerary: {
+                ...booking.itinerary
+            }
+
+        });
     };
 
     // SAVE UPDATE
@@ -55,7 +80,7 @@ export default function BookingsList() {
                 `http://localhost:8080/api/bookings/${editForm.id}`,
                 {
                     method: "PUT",
-                    headers: { "Content-Type": "application/json" },
+                    headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(editForm),
                 }
             );
@@ -91,158 +116,572 @@ export default function BookingsList() {
     return (
         <PageBackground>
 
-            <h1 className="text-4xl font-bold text-center text-amber-700 mb-4">
-                Booking Dashboard
-            </h1>
+            <div className="max-w-7xl mx-auto px-6 py-10">
 
-            {/* CHARTS */}
-            <div className="grid grid-cols-3 gap-4 mb-6">
-                {Object.entries(stats).map(([key, value]) => (
-                    <div key={key} className="bg-white p-4 rounded shadow text-center">
-                        <p className="text-sm">{key}</p>
-                        <div className="h-2 bg-gray-200 mt-2">
-                            <div
-                                className="h-2 bg-blue-500"
-                                style={{ width: `${value * 20}px` }}
+                {/* HEADER */}
+                <div className="mb-10 text-center">
+
+                    <h1 className="
+                    text-5xl md:text-6xl
+                    font-black
+                    text-amber-900
+                    mb-4
+                ">
+                        Booking Dashboard
+                    </h1>
+
+                    <p className="
+                    text-amber-20/80
+                    text-lg
+                ">
+                        Manage reservations, traveler experiences,
+                        and booking activity.
+                    </p>
+
+                </div>
+
+                {/* STATS CARDS */}
+                <div className="
+                grid
+                grid-cols-1
+                md:grid-cols-3
+                gap-6
+                mb-10
+            ">
+
+                    {/* CONFIRMED */}
+                    <div className="
+                    bg-gradient-to-br
+                    from-emerald-900/40
+                    to-black/50
+                    border border-emerald-500/20
+                    backdrop-blur-xl
+                    rounded-3xl
+                    p-6
+                    shadow-2xl
+                ">
+
+                        <div className="flex justify-between items-center">
+
+                            <div>
+
+                                <p className="text-amber-900 text-sm mb-2">
+                                    Confirmed
+                                </p>
+
+                                <h2 className="
+                                text-4xl
+                                font-black
+                                text-white
+                            ">
+                                    {stats.CONFIRMED}
+                                </h2>
+
+                            </div>
+
+                            <BadgeCheck
+                                size={42}
+                                className="text-emerald-300"
                             />
+
                         </div>
-                        <p className="mt-2 font-bold">{value}</p>
+
                     </div>
-                ))}
-            </div>
 
-            {/* SEARCH */}
-            <input
-                type="text"
-                placeholder="Search by first or last name..."
-                value={search}
-                onChange={(e) => {
-                    setSearch(e.target.value);
-                    setPage(1);
-                }}
-                className="border p-2 rounded w-1/3 mb-4"
-            />
+                    {/* PENDING */}
+                    <div className="
+                    bg-gradient-to-br
+                    from-amber-900/40
+                    to-black/50
+                    border border-amber-500/20
+                    backdrop-blur-xl
+                    rounded-3xl
+                    p-6
+                    shadow-2xl
+                ">
 
-            {/* TABLE */}
-            <table className="w-full border">
-                <thead className="bg-gray-200">
-                <tr>
-                    <th className="p-2">First Name</th>
-                    <th className="p-2">Last Name</th>
-                    <th className="p-2">Itinerary</th>
-                    <th className="p-2">Booking Date</th>
-                    <th className="p-2">Travel Date</th>
-                    <th className="p-2">Status</th>
-                    <th className="p-2">Actions</th>
-                </tr>
-                </thead>
+                        <div className="flex justify-between items-center">
 
-                <tbody>
-                {paginatedBookings.map((b) => (
-                    <tr key={b.id} className="border text-center">
+                            <div>
 
-                        <td className="p-2">
-                            {editingId === b.id ? (
-                                <input
-                                    value={editForm.user?.fname}
-                                    onChange={(e) =>
-                                        setEditForm({
-                                            ...editForm,
-                                            user: { ...editForm.user, fname: e.target.value }
-                                        })
-                                    }
-                                />
-                            ) : b.user?.fname}
-                        </td>
+                                <p className="text-amber-900 text-sm mb-2">
+                                    Pending
+                                </p>
 
-                        <td className="p-2">
-                            {editingId === b.id ? (
-                                <input
-                                    value={editForm.user?.lname}
-                                    onChange={(e) =>
-                                        setEditForm({
-                                            ...editForm,
-                                            user: { ...editForm.user, lname: e.target.value }
-                                        })
-                                    }
-                                />
-                            ) : b.user?.lname}
-                        </td>
+                                <h2 className="
+                                text-4xl
+                                font-black
+                                text-white
+                            ">
+                                    {stats.PENDING}
+                                </h2>
 
-                        <td>{b.itinerary?.title}</td>
-                        <td>{b.booking_date}</td>
+                            </div>
 
-                        <td>
-                            {editingId === b.id ? (
-                                <input
-                                    type="date"
-                                    value={editForm.travel_start_date}
-                                    onChange={(e) =>
-                                        setEditForm({
-                                            ...editForm,
-                                            travel_start_date: e.target.value
-                                        })
-                                    }
-                                />
-                            ) : b.travel_start_date}
-                        </td>
+                            <Clock3
+                                size={42}
+                                className="text-amber-300"
+                            />
 
-                        <td>
-                            {editingId === b.id ? (
-                                <select
-                                    value={editForm.status}
-                                    onChange={(e) =>
-                                        setEditForm({
-                                            ...editForm,
-                                            status: e.target.value
-                                        })
-                                    }
+                        </div>
+
+                    </div>
+
+                    {/* CANCELLED */}
+                    <div className="
+                    bg-gradient-to-br
+                    from-red-900/40
+                    to-black/50
+                    border border-red-500/20
+                    backdrop-blur-xl
+                    rounded-3xl
+                    p-6
+                    shadow-2xl
+                ">
+
+                        <div className="flex justify-between items-center">
+
+                            <div>
+
+                                <p className="text-amber-900 text-sm mb-2">
+                                    Cancelled
+                                </p>
+
+                                <h2 className="
+                                text-4xl
+                                font-black
+                                text-white
+                            ">
+                                    {stats.CANCELLED}
+                                </h2>
+
+                            </div>
+
+                            <Ban
+                                size={42}
+                                className="text-red-300"
+                            />
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {/* SEARCH */}
+                <div className="
+                relative
+                max-w-md
+                mb-8
+            ">
+
+                    <Search
+                        className="
+                        absolute
+                        left-4
+                        top-1/2
+                        -translate-y-1/2
+                        text-amber-200
+                    "
+                        size={18}
+                    />
+
+                    <input
+                        type="text"
+                        placeholder="Search traveler..."
+                        value={search}
+                        onChange={(e) => {
+                            setSearch(e.target.value);
+                            setPage(1);
+                        }}
+                        className="
+                        w-full
+                        bg-white/10
+                        border border-black/40
+                        text-amber-900
+                        placeholder-amber-900/90
+                        rounded-2xl
+                        pl-12
+                        pr-4
+                        py-3
+                        backdrop-blur-md
+                        shadow-inner
+                        focus:outline-none
+                        focus:ring-2
+                        focus:ring-amber-400
+                    "
+                    />
+
+                </div>
+
+                {/* TABLE CARD */}
+                <div className="
+                bg-gradient-to-br
+                from-black/60
+                via-gray-900/50
+                to-amber-950/20
+                backdrop-blur-xl
+                border border-white/10
+                rounded-[32px]
+                shadow-2xl
+                overflow-hidden
+            ">
+
+                    <div className="overflow-x-auto">
+
+                        <table className="w-full">
+
+                            {/* HEADER */}
+                            <thead className="
+                            bg-black/40
+                            border-b border-white/10
+                        ">
+
+                            <tr className="text-amber-200 text-sm uppercase tracking-wider">
+
+                                <th className="p-5 text-left">Traveler</th>
+                                <th className="p-5 text-left">Itinerary</th>
+                                <th className="p-5 text-left">Booking Date</th>
+                                <th className="p-5 text-left">Travel Date</th>
+                                <th className="p-5 text-left">Status</th>
+                                <th className="p-5 text-center">Actions</th>
+
+                            </tr>
+
+                            </thead>
+
+                            {/* BODY */}
+                            <tbody>
+
+                            {paginatedBookings.map((b, idx) => (
+
+                                <tr
+                                    key={b.id}
+                                    className={`
+                                    border-b border-white/5
+                                    hover:bg-white/5
+                                    transition-all
+                                    duration-200
+                                    ${idx % 2 === 0
+                                        ? "bg-black/10"
+                                        : "bg-transparent"}
+                                `}
                                 >
-                                    <option>PENDING</option>
-                                    <option>CONFIRMED</option>
-                                    <option>CANCELLED</option>
-                                </select>
-                            ) : b.status}
-                        </td>
 
-                        <td className="space-x-2">
-                            {editingId === b.id ? (
-                                <>
-                                    <button onClick={handleUpdate} className="text-green-600">💾</button>
-                                    <button onClick={() => setEditingId(null)} className="text-red-600">❌</button>
-                                </>
-                            ) : (
-                                <>
-                                    <button onClick={() => handleEdit(b)} className="text-blue-600">✏️</button>
-                                    <button onClick={() => handleDelete(b.id)} className="text-red-600">🗑</button>
-                                </>
-                            )}
-                        </td>
+                                    {/* NAME */}
+                                    <td className="p-5 text-amber-50">
 
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+                                        {editingId === b.id ? (
 
-            {/* PAGINATION */}
-            <div className="flex justify-center mt-4 space-x-4">
-                <button
-                    disabled={page === 1}
-                    onClick={() => setPage(page - 1)}
-                    className="px-3 py-1 bg-gray-200 rounded"
-                >
-                    Prev
-                </button>
+                                            <div className="space-y-2">
 
-                <span>{page} / {totalPages}</span>
+                                                <input
+                                                    value={editForm.user?.fname}
+                                                    onChange={(e) =>
+                                                        setEditForm({
+                                                            ...editForm,
+                                                            user: {
+                                                                ...editForm.user,
+                                                                fname: e.target.value
+                                                            }
+                                                        })
+                                                    }
+                                                    className="
+                                                    w-full
+                                                    bg-black/30
+                                                    border border-white/10
+                                                    rounded-xl
+                                                    px-3 py-2
+                                                    text-white
+                                                "
+                                                />
 
-                <button
-                    disabled={page === totalPages}
-                    onClick={() => setPage(page + 1)}
-                    className="px-3 py-1 bg-gray-200 rounded"
-                >
-                    Next
-                </button>
+                                                <input
+                                                    value={editForm.user?.lname}
+                                                    onChange={(e) =>
+                                                        setEditForm({
+                                                            ...editForm,
+                                                            user: {
+                                                                ...editForm.user,
+                                                                lname: e.target.value
+                                                            }
+                                                        })
+                                                    }
+                                                    className="
+                                                    w-full
+                                                    bg-black/30
+                                                    border border-white/10
+                                                    rounded-xl
+                                                    px-3 py-2
+                                                    text-white
+                                                "
+                                                />
+
+                                            </div>
+
+                                        ) : (
+
+                                            <div>
+
+                                                <p className="font-semibold">
+                                                    {b.user?.fname} {b.user?.lname}
+                                                </p>
+
+                                                <p className="
+                                                text-xs
+                                                text-gray-100
+                                            ">
+                                                    Booking #{b.id}
+                                                </p>
+
+                                            </div>
+
+                                        )}
+
+                                    </td>
+
+                                    {/* ITINERARY */}
+                                    <td className="
+                                    p-5
+                                    text-gray-200
+                                    font-medium
+                                ">
+                                        {b.itinerary?.title}
+                                    </td>
+
+                                    {/* BOOKING DATE */}
+                                    <td className="
+                                    p-5
+                                    text-gray-100
+                                ">
+                                        <div className="
+                                        flex items-center gap-2
+                                    ">
+                                            <CalendarDays size={16}/>
+                                            {b.booking_date}
+                                        </div>
+                                    </td>
+
+                                    {/* TRAVEL DATE */}
+                                    <td className="p-5 text-gray-100">
+
+                                        {editingId === b.id ? (
+
+                                            <input
+                                                type="date"
+                                                value={editForm.travel_start_date}
+                                                onChange={(e) =>
+                                                    setEditForm({
+                                                        ...editForm,
+                                                        travel_start_date:
+                                                        e.target.value
+                                                    })
+                                                }
+                                                className="
+                                                bg-black/30
+                                                border border-white/10
+                                                rounded-xl
+                                                px-3 py-2
+                                                text-white
+                                            "
+                                            />
+
+                                        ) : (
+                                            b.travel_start_date
+                                        )}
+
+                                    </td>
+
+                                    {/* STATUS */}
+                                    <td className="p-5">
+
+                                        {editingId === b.id ? (
+
+                                            <select
+                                                value={editForm.status}
+                                                onChange={(e) =>
+                                                    setEditForm({
+                                                        ...editForm,
+                                                        status: e.target.value
+                                                    })
+                                                }
+                                                className="
+                                                bg-black/30
+                                                border border-white/10
+                                                rounded-xl
+                                                px-3 py-2
+                                                text-white
+                                            "
+                                            >
+                                                <option>PENDING</option>
+                                                <option>CONFIRMED</option>
+                                                <option>CANCELLED</option>
+                                            </select>
+
+                                        ) : (
+
+                                            <span className={`
+                                            px-4 py-2
+                                            rounded-full
+                                            text-xs
+                                            font-bold
+                                            ${
+                                                b.status === "CONFIRMED"
+                                                    ? "bg-emerald-500/20 text-emerald-100"
+                                                    : b.status === "PENDING"
+                                                        ? "bg-amber-500/20 text-amber-900"
+                                                        : "bg-red-500/20 text-amber-900"
+                                            }
+                                        `}>
+                                            {b.status}
+                                        </span>
+
+                                        )}
+
+                                    </td>
+
+                                    {/* ACTIONS */}
+                                    <td className="
+                                    p-5
+                                    text-center
+                                ">
+
+                                        <div className="
+                                        flex
+                                        justify-center
+                                        gap-4
+                                    ">
+
+                                            {editingId === b.id ? (
+
+                                                <>
+
+                                                    <button
+                                                        onClick={handleUpdate}
+                                                        className="
+                                                        text-emerald-100
+                                                        hover:scale-110
+                                                        transition
+                                                    "
+                                                    >
+                                                        <Save size={20}/>
+                                                    </button>
+
+                                                    <button
+                                                        onClick={() =>
+                                                            setEditingId(null)
+                                                        }
+                                                        className="
+                                                        text-red-800
+                                                        hover:scale-110
+                                                        transition
+                                                    "
+                                                    >
+                                                        <X size={20}/>
+                                                    </button>
+
+                                                </>
+
+                                            ) : (
+
+                                                <>
+
+                                                    <button
+                                                        onClick={() =>
+                                                            handleEdit(b)
+                                                        }
+                                                        className="
+                                                        text-amber-300
+                                                        hover:scale-110
+                                                        transition
+                                                    "
+                                                    >
+                                                        <Pencil size={20}/>
+                                                    </button>
+
+                                                    <button
+                                                        onClick={() =>
+                                                            handleDelete(b.id)
+                                                        }
+                                                        className="
+                                                        text-red-800
+                                                        hover:scale-110
+                                                        transition
+                                                    "
+                                                    >
+                                                        <Trash2 size={20}/>
+                                                    </button>
+
+                                                </>
+
+                                            )}
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            ))}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                {/* PAGINATION */}
+                <div className="
+                flex
+                justify-center
+                items-center
+                gap-6
+                mt-8
+            ">
+
+                    <button
+                        disabled={page === 1}
+                        onClick={() => setPage(page - 1)}
+                        className="
+                        px-5 py-2
+                        rounded-xl
+                        bg-white/10
+                        text-amber-900
+                        hover:bg-white/20
+                        disabled:opacity-40
+                        transition
+                    "
+                    >
+                        Prev
+                    </button>
+
+                    <span className="
+                    text-amber-900
+                    font-semibold
+                ">
+                    Page {page} of {totalPages}
+                </span>
+
+                    <button
+                        disabled={page === totalPages}
+                        onClick={() => setPage(page + 1)}
+                        className="
+                        px-5 py-2
+                        rounded-xl
+                        bg-white/10
+                        text-amber-900
+                        hover:bg-white/20
+                        disabled:opacity-40
+                        transition
+                    "
+                    >
+                        Next
+                    </button>
+
+                </div>
+
             </div>
 
         </PageBackground>

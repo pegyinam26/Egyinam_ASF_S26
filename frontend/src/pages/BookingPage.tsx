@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { bookingSchema } from "../validation/bookingSchema";
-
 import PageBackground from "../components/PageBackground.tsx";
 
 export default function BookingPage() {
+
     const [form, setForm] = useState({
         itineraryId: "",
         travelDate: "",
@@ -23,90 +23,119 @@ export default function BookingPage() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
 
-    // State → City mapping
+    // STATE → CITY MAP
     const stateCityMap: Record<string, string[]> = {
         TX: ["Houston", "Dallas", "Austin"],
         CA: ["Los Angeles", "San Diego", "San Francisco"],
         NY: ["New York City", "Buffalo", "Albany"],
         FL: ["Miami", "Orlando", "Tampa"],
-        GA: ["Atlanta", "Columbus","Savannah"]
+        GA: ["Atlanta", "Columbus", "Savannah"],
     };
 
-    // Fetch itineraries
+    // FETCH ITINERARIES
     useEffect(() => {
+
         fetch("http://localhost:8080/api/itineraries")
             .then((res) => res.json())
             .then(setItineraries)
-            .catch(() => setMessage("Failed to load itineraries"));
+            .catch(() =>
+                setMessage("Failed to load itineraries")
+            );
+
     }, []);
 
-    // Handle input change
+    // HANDLE INPUT CHANGE
     const handleChange = (e: any) => {
+
         const { name, value } = e.target;
 
         if (name === "state") {
-            setForm({ ...form, state: value, city: "" });
+
+            setForm({
+                ...form,
+                state: value,
+                city: "",
+            });
+
         } else {
-            setForm({ ...form, [name]: value });
+
+            setForm({
+                ...form,
+                [name]: value,
+            });
         }
+
+        // CLEAR FIELD ERROR LIVE
+        setErrors((prev: any) => ({
+            ...prev,
+            [name]: "",
+        }));
     };
 
-    // Submit form
+    // HANDLE SUBMIT
     const handleSubmit = async () => {
+
         try {
+
             setErrors({});
             setMessage("");
             setLoading(true);
 
-            if (!form.itineraryId) {
-                setMessage("Please select an itinerary");
-                setLoading(false);
-                return;
-            }
-
-            await bookingSchema.validate(form, { abortEarly: false });
-
-            const payload = {
-                booking_date: new Date().toISOString().split("T")[0],
-                travel_start_date: form.travelDate,
-                status: "PENDING",
-                itinerary: { id: Number(form.itineraryId) },
-                user: {
-                    fname: form.firstName,
-                    lname: form.lastName,
-                    email: form.email,
-                    phoneNumber: form.phoneNumber,
-                    createdAt: new Date().toISOString(),
-                    address: {
-                        street: form.street,
-                        city: form.city,
-                        state: form.state,
-                        zip: form.zip,
-                        country: "USA"
-                    }
-                }
-            };
-
-            const res = await fetch("http://localhost:8080/api/bookings", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
+            // VALIDATE
+            await bookingSchema.validate(form, {
+                abortEarly: false,
             });
 
+            const loggedInUser = JSON.parse(
+                localStorage.getItem("user") || "null"
+            );
+
+            const payload = {
+
+                booking_date: new Date()
+                    .toISOString()
+                    .split("T")[0],
+
+                travel_start_date: form.travelDate,
+
+                status: "PENDING",
+
+                itinerary: {
+                    id: Number(form.itineraryId),
+                },
+
+                user: {
+                    id: loggedInUser.id,
+                },
+            };
+
+            const res = await fetch(
+                "http://localhost:8080/api/bookings",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                }
+            );
+
             if (!res.ok) {
+
                 const err = await res.text();
+
                 throw new Error(err);
             }
 
-            const savedBooking = await res.json(); //  IMPORTANT
+            const savedBooking = await res.json();
 
             alert(
-                `Booking Confirmed!\n\nRecord the following for your records.\n\nBooking ID: ${savedBooking.id}\nName: ${savedBooking.user.fname} ${savedBooking.user.lname}`
+                `Booking Confirmed!\n\nBooking ID: ${savedBooking.id}\n\nThank you for booking your Ghana experience with us.`
             );
 
             setMessage("Booking created successfully!");
 
-            // reset form
+            // RESET FORM
             setForm({
                 itineraryId: "",
                 travelDate: "",
@@ -122,202 +151,718 @@ export default function BookingPage() {
             });
 
         } catch (err: any) {
-            console.error(err);
-            setMessage("Failed to create booking");
-        }
 
-        setLoading(false);
+            console.error(err);
+
+            // YUP VALIDATION ERRORS
+            if (err.inner) {
+
+                const validationErrors: any = {};
+
+                err.inner.forEach((e: any) => {
+                    validationErrors[e.path] = e.message;
+                });
+
+                setErrors(validationErrors);
+
+            } else {
+
+                setMessage(
+                    "Unable to create booking at this time."
+                );
+            }
+
+        } finally {
+
+            setLoading(false);
+        }
     };
 
     return (
+
         <PageBackground>
-            <div className="max-w-3xl mx-auto p-6 ">
 
-                <h1 className="text-2xl font-bold text-center mb-6">Book Your Trip</h1>
+            <div className="
+                max-w-5xl
+                mx-auto
+                px-6 md:px-10
+                py-10
+            ">
 
-                {message && (
-                    <div className="mb-4 text-center text-sm text-blue-600">
-                        {message}
-                    </div>
-                )}
+                {/* MAIN CARD */}
+                <div className="
+                    relative
+                    overflow-hidden
+                    bg-gradient-to-br
+                    from-amber-800/30
+                    via-black/10
+                    to-emerald-700/10
+                    backdrop-blur-xl
+                    border border-amber-400/20
+                    rounded-[40px]
+                    shadow-2xl
+                    p-8 md:p-12
+                ">
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="
+                        absolute
+                        -top-32
+                        -right-24
+                        w-72
+                        h-72
+                        bg-amber-400/10
+                        blur-3xl
+                        rounded-full
+                    " />
 
-                    {/* ITINERARY */}
-                    <div>
-                        <select
-                            name="itineraryId"
-                            value={form.itineraryId}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        >
-                            <option value="">Select Itinerary</option>
-                            {itineraries.map((i) => (
-                                <option key={i.id} value={i.id}>
-                                    {i.title}
+                    <div className="
+                        absolute
+                        -bottom-32
+                        -left-24
+                        w-72
+                        h-72
+                        bg-emerald-500/10
+                        blur-3xl
+                        rounded-full
+                    " />
+
+                    {/* TITLE */}
+                    <h1 className="
+                        text-5xl md:text-6xl
+                        font-black
+                        text-center
+                        text-amber-900
+                        mb-4
+                    ">
+                        Book Your Journey
+                    </h1>
+
+                    {/* SUBTITLE */}
+                    <p className="
+                        text-center
+                        text-amber-900
+                        text-lg md:text-xl
+                        mb-12
+                        mx-auto
+                        whitespace-nowrap
+                    ">
+                        Reserve your personalized Ghana experience by
+                        completing the booking form below.
+                    </p>
+
+                    {/* SUCCESS / ERROR MESSAGE */}
+                    {message && (
+                        <div className="
+                            mb-8
+                            text-center
+                            text-sm
+                            text-amber-700
+                            bg-black/20
+                            rounded-xl
+                            py-3
+                        ">
+                            {message}
+                        </div>
+                    )}
+
+                    {/* FORM GRID */}
+                    <div className="
+                    shadow-inner
+                        grid
+                        grid-cols-1
+                        md:grid-cols-2
+                        gap-6
+
+                    ">
+
+                        {/* ITINERARY */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                Start Your Adventure
+                            </label>
+
+                            <select
+                                name="itineraryId"
+                                value={form.itineraryId}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            >
+
+                                <option value="" className="text-amber-900">
+                                    Select Itinerary
                                 </option>
-                            ))}
-                        </select>
-                        {errors.itineraryTitle && (
-                            <p className="text-red-500 text-sm">{errors.itineraryTitle}</p>
-                        )}
-                    </div>
 
-                    {/* TRAVEL DATE */}
-                    <div>
-                        <input
-                            type="date"
-                            name="travelDate"
-                            value={form.travelDate}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        />
-                        {errors.travelDate && (
-                            <p className="text-red-500 text-sm">{errors.travelDate}</p>
-                        )}
-                    </div>
-
-                    {/* FIRST / LAST NAME */}
-                    <div>
-                        <input
-                            name="firstName"
-                            placeholder="First Name"
-                            value={form.firstName}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        />
-                        {errors.firstName && (
-                            <p className="text-red-500 text-sm">{errors.firstName}</p>
-                        )}
-                    </div>
-
-                    <div>
-                        <input
-                            name="lastName"
-                            placeholder="Last Name"
-                            value={form.lastName}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        />
-                        {errors.lastName && (
-                            <p className="text-red-500 text-sm">{errors.lastName}</p>
-                        )}
-                    </div>
-
-                    {/* EMAIL / PHONE */}
-                    <div>
-                        <input
-                            name="email"
-                            placeholder="Email"
-                            value={form.email}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        />
-                        {errors.email && (
-                            <p className="text-red-500 text-sm">{errors.email}</p>
-                        )}
-                    </div>
-
-                    <div>
-                        <input
-                            name="phoneNumber"
-                            placeholder="Phone Number"
-                            value={form.phoneNumber}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        />
-                        {errors.phoneNumber && (
-                            <p className="text-red-500 text-sm">{errors.phoneNumber}</p>
-                        )}
-                    </div>
-
-                    {/* STREET */}
-                    <div className="md:col-span-2">
-                        <input
-                            name="street"
-                            placeholder="Street Address"
-                            value={form.street}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        />
-                        {errors.street && (
-                            <p className="text-red-500 text-sm">{errors.street}</p>
-                        )}
-                    </div>
-
-                    {/* STATE */}
-                    <div>
-                        <select
-                            name="state"
-                            value={form.state}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        >
-                            <option value="">State</option>
-                            <option value="TX">Texas</option>
-                            <option value="CA">California</option>
-                            <option value="NY">New York</option>
-                            <option value="FL">Florida</option>
-                        </select>
-                        {errors.state && (
-                            <p className="text-red-500 text-sm">{errors.state}</p>
-                        )}
-                    </div>
-
-                    {/* CITY (smart dropdown) */}
-                    <div>
-                        <select
-                            name="city"
-                            value={form.city}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        >
-                            <option value="">City</option>
-                            {form.state &&
-                                stateCityMap[form.state]?.map((city) => (
-                                    <option key={city}>{city}</option>
+                                {itineraries.map((i) => (
+                                    <option
+                                        key={i.id}
+                                        value={i.id}
+                                        className="text-amber-900"
+                                    >
+                                        {i.title}
+                                    </option>
                                 ))}
-                        </select>
-                        {errors.city && (
-                            <p className="text-red-500 text-sm">{errors.city}</p>
-                        )}
+
+                            </select>
+                            <p className="
+                                text-xs
+                                text-gray-700
+                                mt-2
+                            ">
+                                Itineraries are curated to give you the most memorable experiences.
+                            </p>
+                            {errors.itineraryId && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.itineraryId}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* TRAVEL DATE */}
+                        <div>
+
+                            <label
+                                htmlFor="travelDate"
+                                className="
+                                    block
+                                    text-sm
+                                    text-gray-700
+                                    mb-2
+                                "
+                            >
+                                Preferred Travel Start Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="travelDate"
+                                name="travelDate"
+                                value={form.travelDate}
+                                min={new Date().toISOString().split("T")[0]}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            />
+
+                            <p className="
+                                text-xs
+                                text-gray-700
+                                mt-2
+                            ">
+                                Select the date you would like your Ghana
+                                tour experience to begin.
+                            </p>
+
+                            {errors.travelDate && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.travelDate}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* FIRST NAME */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                First Name
+                            </label>
+
+                            <input
+                                name="firstName"
+                                value={form.firstName}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/20
+                                    border border-black/40
+                                    text-amber-900
+                                    placeholder-gray-100/60
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            />
+
+                            {errors.firstName && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.firstName}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* LAST NAME */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                Last Name
+                            </label>
+
+                            <input
+                                name="lastName"
+                                value={form.lastName}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    placeholder-gray-100/60
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            />
+
+                            {errors.lastName && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.lastName}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* EMAIL */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                Email Address
+                            </label>
+
+                            <input
+                                name="email"
+                                value={form.email}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    placeholder-gray-100/60
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            />
+
+                            {errors.email && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.email}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* PHONE */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                Phone Number
+                            </label>
+
+                            <input
+                                name="phoneNumber"
+                                value={form.phoneNumber}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    placeholder-gray-100/60
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            />
+
+                            {errors.phoneNumber && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.phoneNumber}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* STREET */}
+                        <div className="md:col-span-2">
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                Street Address
+                            </label>
+
+                            <input
+                                name="street"
+                                value={form.street}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    placeholder-gray-100/60
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            />
+
+                            {errors.street && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.street}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* STATE */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                State
+                            </label>
+
+                            <select
+                                name="state"
+                                value={form.state}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            >
+
+                                <option value="" className="text-amber-900">
+                                    Select State
+                                </option>
+
+                                <option value="TX" className="text-amber-900">
+                                    Texas
+                                </option>
+
+                                <option value="CA" className="text-amber-900">
+                                    California
+                                </option>
+
+                                <option value="NY" className="text-amber-900">
+                                    New York
+                                </option>
+
+                                <option value="FL" className="text-amber-900">
+                                    Florida
+                                </option>
+
+                                <option value="GA" className="text-amber-900">
+                                    Georgia
+                                </option>
+
+                            </select>
+
+                            {errors.state && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.state}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* CITY */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                City
+                            </label>
+
+                            <select
+                                name="city"
+                                value={form.city}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            >
+
+                                <option value="" className="text-black">
+                                    Select City
+                                </option>
+
+                                {form.state &&
+                                    stateCityMap[form.state]?.map((city) => (
+                                        <option
+                                            key={city}
+                                            value={city}
+                                            className="text-black"
+                                        >
+                                            {city}
+                                        </option>
+                                    ))}
+
+                            </select>
+
+                            {errors.city && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.city}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* ZIP */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                ZIP Code
+                            </label>
+
+                            <input
+                                name="zip"
+                                value={form.zip}
+                                onChange={handleChange}
+                                className="
+                                    w-full
+                                    bg-white/10
+                                    border border-black/40
+                                    text-amber-900
+                                    placeholder-gray-100/60
+                                    rounded-2xl
+                                    px-4 py-3
+                                    backdrop-blur-md
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-yellow-400
+                                    transition-all
+                                "
+                            />
+
+                            {errors.zip && (
+                                <p className="
+                                    text-blue-800
+                                    text-sm
+                                    mt-2
+                                    ml-1
+                                ">
+                                    {errors.zip}
+                                </p>
+                            )}
+
+                        </div>
+
+                        {/* COUNTRY */}
+                        <div>
+
+                            <label className="
+                                block
+                                text-sm
+                                text-gray-700
+                                mb-2
+                            ">
+                                Country
+                            </label>
+
+                            <input
+                                value="United States"
+                                disabled
+                                className="
+                                            w-full
+                                            bg-white-500/5
+                                            border border-black/40
+                                            text-amber-900
+                                            rounded-2xl
+                                            px-4 py-3
+                                            backdrop-blur-md
+                                            shadow-inner
+                                            cursor-not-allowed
+                                        "
+                            />
+
+                        </div>
+
                     </div>
 
-                    {/* ZIP */}
-                    <div>
-                        <input
-                            name="zip"
-                            placeholder="ZIP Code"
-                            value={form.zip}
-                            onChange={handleChange}
-                            className="border p-2 rounded w-full"
-                        />
-                        {errors.zip && (
-                            <p className="text-red-500 text-sm">{errors.zip}</p>
-                        )}
-                    </div>
-
-                    {/* COUNTRY */}
-                    <div>
-                        <input
-                            value="United States"
-                            disabled
-                            className="border p-2 rounded w-full bg-gray-100"
-                        />
-                    </div>
+                    {/* SUBMIT */}
+                    <button
+                        onClick={handleSubmit}
+                        disabled={loading}
+                        className="
+                            mt-10
+                            w-full
+                            bg-gradient-to-r
+                            from-yellow-500
+                            to-amber-600
+                            hover:scale-[1.02]
+                            hover:shadow-yellow-500/30
+                            text-black
+                            font-bold
+                            py-4
+                            rounded-2xl
+                            transition-all
+                            duration-300
+                            shadow-xl
+                        "
+                    >
+                        {loading
+                            ? "Processing Reservation..."
+                            : "Reserve My Ghana Experience"}
+                    </button>
 
                 </div>
 
-                {/* SUBMIT */}
-                <button
-                    onClick={handleSubmit}
-                    disabled={loading}
-                    className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition"
-                >
-                    {loading ? "Submitting..." : "Submit Booking"}
-                </button>
-
             </div>
+
         </PageBackground>
     );
 }

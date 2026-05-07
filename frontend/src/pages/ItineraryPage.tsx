@@ -8,15 +8,20 @@ export default function ItineraryPage() {
         <PageBackground>
 
             {/* CONTENT */}
-            <div className="relative z-10 p-6 md:p-12">
+            <div className="text-center mb-20">
 
-                <h1 className="text-4xl font-bold text-center mb-6">
-                    Ghana Tour Itineraries
+                <h1 className="
+                    text-5xl md:text-7xl font-black text-emerald-900 mb-6 tracking-wide
+                ">
+                    Tour Itineraries
                 </h1>
 
-                <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-                    Choose your perfect experience—from a quick cultural escape to a full
-                    journey across Ghana’s beaches, mountains, and wildlife.
+                <p className="
+                    text-gray-900 text-lg md:text-2xl max-w-4xl pb-10 mx-auto leading-relaxed
+                ">
+                    Discover curated luxury experiences across Ghana —
+                    from vibrant cities and coastal history to rainforest
+                    adventures and unforgettable safari journeys.
                 </p>
 
                 {tours.map((tour, index) => (

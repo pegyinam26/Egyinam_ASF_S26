@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import HTMLFlipBook from "react-pageflip";
 import PageBackground from "../components/PageBackground";
+import ReviewCarousel from "../components/ReviewCarousel";
 
 /* ===================== IMAGE GROUPS ===================== */
 
@@ -98,13 +99,13 @@ export default function GalleryPage() {
 
             {/* TITLE */}
             <h1
-                className="text-4xl md:text-5xl font-extrabold text-center mb-6"
+                className="text-5xl md:text-6xl font-extrabold text-center mb-6"
                 style={{
-                    color: "#f5d27a",
+                    color: "#e4cb89",
                     textShadow: "0 6px 25px rgba(0,0,0,1)"
                 }}
             >
-                Ghana Tour Gallery
+                Tour Gallery
             </h1>
 
             {/* TOUR SELECTOR */}
@@ -184,6 +185,7 @@ export default function GalleryPage() {
 
             </div>
 
+            <ReviewCarousel/>
         </PageBackground>
     );
 }

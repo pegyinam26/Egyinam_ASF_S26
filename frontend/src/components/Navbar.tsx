@@ -5,10 +5,11 @@ import adinkra2 from "../assets/adinkra4_22.jpg";
 export default function Navbar() {
     const navigate = useNavigate();
     const location = useLocation();
-    const role = localStorage.getItem("role");
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+    const role = user?.role;
 
     const handleLogout = () => {
-        localStorage.removeItem("role");
+        localStorage.removeItem("user");
         navigate("/");
     };
 
@@ -60,13 +61,13 @@ export default function Navbar() {
                             to="/gallery"
                             className={`whitespace-nowrap transition ${isActive("/gallery")}`}
                         >
-                            Gallery
+                            Gallery & Reviews
                         </Link>
                     )}
                 </div>
 
                 {/* CENTER — ELITE ADINKRA */}
-                <div className="flex justify-center relative group">
+                <div className="flex justify-center relative group ml-10 md:ml-16">
 
                     {/* Glow background */}
                     <div className="absolute w-24 h-24 bg-yellow-400/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-500"></div>
