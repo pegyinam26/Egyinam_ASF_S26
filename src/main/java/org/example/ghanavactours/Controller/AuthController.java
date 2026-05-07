@@ -1,11 +1,8 @@
 package org.example.ghanavactours.Controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-
+import org.example.ghanavactours.Entity.User;
+import org.example.ghanavactours.Service.AuthService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -13,21 +10,21 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    // REGISTER
+    @PostMapping("/register")
+    public User register(@RequestBody Map<String, String> request) {
+        return authService.register(request);
+    }
+
+    // LOGIN
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody Map<String, Object> request) {
-        String username = (String) request.get("username");
-        String password = (String) request.get("password");
-
-        if("admin".equals(username) && "admin123".equals(password)) {
-            System.out.println(request);
-            return Map.of("role", "ADMIN");
-        }
-
-        if("user".equals(username) && "user123".equals(password)) {
-            System.out.println(request);
-            return Map.of("role", "USER");
-        }
-        throw new RuntimeException("Invalid username or password");
-
+    public Map<String, Object> login(@RequestBody Map<String, String> request) {
+        return authService.login(request);
     }
 }

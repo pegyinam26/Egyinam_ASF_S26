@@ -3,9 +3,7 @@ package org.example.ghanavactours.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 import java.time.LocalDateTime;
-
 
 @Getter
 @Setter
@@ -26,19 +24,22 @@ public class User {
     @Column(length = 50)
     private String lname;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false)
+    private String role;
+
+    @Column(length = 20)
     private String phoneNumber;
-
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", nullable=false)
+    @OneToOne(cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "address_id", nullable = true)
     private Address address;
-
 }

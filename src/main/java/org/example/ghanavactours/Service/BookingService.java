@@ -36,17 +36,32 @@ public class BookingService {
 //    }
 
     public Booking createBooking(Booking booking) {
-        //save user first
-        User savedUser = userRepository.save(booking.getUser());
-        //fetch itinerary
-        Long id = booking.getItinerary().getId();
+
+        // ===== EXISTING ITINERARY =====
+
+        Long itineraryId = booking.getItinerary().getId();
 
         Itinerary itinerary = itineraryRepository
-                .findById(id)
-                .orElseThrow(() -> new RuntimeException("Itinerary not found"));
+                .findById(itineraryId)
+                .orElseThrow(() ->
+                        new RuntimeException("Itinerary not found"));
+
+        // ===== EXISTING USER =====
+
+        Long userId = booking.getUser().getId();
+
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+
+        // ===== ATTACH PERSISTED ENTITIES =====
 
         booking.setItinerary(itinerary);
-        booking.setUser(savedUser);
+
+        booking.setUser(user);
+
+        // ===== SAVE =====
 
         return bookingRepository.save(booking);
     }
@@ -61,22 +76,37 @@ public class BookingService {
     }
 
     //fulfilling CRUD - U - update
-    public Booking updateBooking(Long id, Booking updatedBooking) {
+    public Booking updateBooking(
+            Long id,
+            Booking updatedBooking
+    ) {
 
-        Booking existing = bookingRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+        Booking existingBooking = bookingRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Booking not found"));
 
-        // Update only editable fields
-        existing.setTravel_start_date(updatedBooking.getTravel_start_date());
-        existing.setStatus(updatedBooking.getStatus());
+        // ===== BOOKING FIELDS =====
 
-        // Update user fields
-        if (existing.getUser() != null && updatedBooking.getUser() != null) {
-            existing.getUser().setFname(updatedBooking.getUser().getFname());
-            existing.getUser().setLname(updatedBooking.getUser().getLname());
-        }
+        existingBooking.setStatus(
+                updatedBooking.getStatus()
+        );
 
-        return bookingRepository.save(existing);
+        existingBooking.setTravel_start_date(
+                updatedBooking.getTravel_start_date()
+        );
+
+        // ===== USER FIELDS =====
+
+        existingBooking.getUser().setFname(
+                updatedBooking.getUser().getFname()
+        );
+
+        existingBooking.getUser().setLname(
+                updatedBooking.getUser().getLname()
+        );
+
+        return bookingRepository.save(existingBooking);
     }
 
     //fulfilling CRUD - D - delete
