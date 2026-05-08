@@ -21,6 +21,9 @@ export default function Navbar() {
     const isItinerary = location.pathname === "/itinerary";
     const centerImage = isItinerary ? adinkra2 : adinkra1;
 
+    const shouldShiftAdinkra =
+        location.pathname !== "/";
+
     return (
         <nav className="bg-gray-900 text-white shadow-md w-full relative">
 
@@ -64,10 +67,19 @@ export default function Navbar() {
                             Gallery & Reviews
                         </Link>
                     )}
+                    <Link
+                        to="/about"
+                        className={`whitespace-nowrap transition ${isActive("/about")}`}
+                    >
+                        About Us
+                    </Link>
                 </div>
 
                 {/* CENTER — ELITE ADINKRA */}
-                <div className="flex justify-center relative group ml-10 md:ml-16">
+                {/*<div className="flex justify-center relative group ml-10 md:ml-16">*/}
+                <div
+                    className={`flex justify-center relative group pointer-events-none ${shouldShiftAdinkra ? "ml-24 md:ml-40 lg:ml-56" : ""}`}
+                >
 
                     {/* Glow background */}
                     <div className="absolute w-24 h-24 bg-yellow-400/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-500"></div>

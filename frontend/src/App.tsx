@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import "leaflet/dist/leaflet.css";
 import LoginPage from "./pages/LoginPage";
 import BookingPage from "./pages/BookingPage";
 import BookingsList from "./pages/BookingsList";
@@ -10,15 +10,14 @@ import ProtectedRoute from "./components/routes/ProtectedRoute";
 import UserRoute from "./components/routes/UserRoute";
 import AdminRoute from "./components/routes/AdminRoute";
 import Footer from "./components/Footer.tsx";
+import AboutUsPage from "./pages/AboutUsPage.tsx";
 
 function App() {
     return (
         <>
             <Navbar />
-
             <Routes>
                 <Route path="/" element={<LoginPage />} />
-
                 <Route
                     path="/booking"
                     element={
@@ -29,13 +28,6 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
-
-                {/*<Route path="/booking" element={*/}
-                {/*    <ProtectedRoute>*/}
-                {/*        <BookingPage />*/}
-                {/*    </ProtectedRoute>*/}
-                {/*} />*/}
-
                 <Route
                     path="/admin"
                     element={
@@ -46,21 +38,13 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
-                {/*<Route path="/admin" element={*/}
-                {/*    <AdminRoute>*/}
-                {/*        <AdminPage />*/}
-                {/*    </AdminRoute>*/}
-                {/*} />*/}
                 <Route path="/itinerary" element={
                     <ProtectedRoute>
                         <ItineraryPage />
                     </ProtectedRoute>
                 } />
-
-
-                <Route path="/gallery" element={
-                            <GalleryPage />
-                } />
+                <Route path="/gallery" element={<GalleryPage />} />
+                <Route path="/about" element={<AboutUsPage />} />
 
             </Routes>
             <Footer />

@@ -27,7 +27,7 @@ export const tours = [
             },
             {
                 day: 3,
-                title: "Aburi Mountains & Waterfalls Adventure",
+                title: "Aburi Gardens & Boti Falls Adventure",
                 description:
                     "Depart Accra for the cooler, scenic Aburi Mountains. Begin your day at Aburi Botanical Gardens, where towering palms and lush landscapes " +
                     "create a peaceful setting for a guided walk. Continue to Tetteh Quarshie Cocoa Farm to learn about the origins of Ghana’s cocoa industry and " +
@@ -110,7 +110,7 @@ export const tours = [
             },
             {
                 day: 4,
-                title: "Aburi Mountains & Waterfalls",
+                title: "Aburi Mountains & Boti Falls",
                 description:
                     "Leave the city behind as you travel into the cooler Aburi Mountains. Begin at Aburi Botanical Gardens, where a guided walk introduces you to " +
                     "tropical plant species and colonial-era landscaping. Continue to Tetteh Quarshie Cocoa Farm to learn about the origins of Ghana’s cocoa " +

@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import HTMLFlipBook from "react-pageflip";
 import PageBackground from "../components/PageBackground";
 import ReviewCarousel from "../components/ReviewCarousel";
+import adinkraAll from "../assets/adinkra_all.jpg";
 
 /* ===================== IMAGE GROUPS ===================== */
 
@@ -55,24 +56,171 @@ function Page({ img, index, total }: any) {
 /* ===================== COVER ===================== */
 
 function Cover({ title }: any) {
+
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center bg-gray-900 text-white rounded-lg shadow-2xl">
 
-            <h2
-                className="text-3xl md:text-4xl font-extrabold text-center px-6"
-                style={{
-                    color: "#f5d27a",
-                    textShadow: "0 6px 25px rgba(0,0,0,1)"
-                }}
-            >
-                {title}
-            </h2>
+        <div className="
+            w-full
+            h-full
+            overflow-hidden
+            rounded-lg
+            shadow-2xl
+            relative
+            bg-gradient-to-br
+            from-black
+            via-gray-900
+            to-amber-950
+        ">
 
-            <p className="mt-4 text-md opacity-80" style={{fontFamily: "cursive" }}>
-                Exciting travel adventures for your viewing pleasure...
-            </p>
+            {/* GOLDEN OVERLAY GLOW */}
+            <div className="
+                absolute
+                inset-0
+                bg-[radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_35%)]
+                pointer-events-none
+            " />
+
+            {/* MAIN CONTENT */}
+            <div className="
+                relative
+                z-10
+                h-full
+                flex
+                items-center
+                justify-between
+                px-8
+                py-10
+                gap-8
+            ">
+
+                {/* LEFT SIDE IMAGE */}
+                <div className="
+                    w-[42%]
+                    h-full
+                    flex
+                    items-center
+                    justify-center
+                ">
+
+                    <div className="
+                        relative
+                        overflow-hidden
+                        rounded-[28px]
+                        border
+                        border-amber-300/30
+                        bg-white/5
+                        backdrop-blur-md
+                        shadow-[0_0_35px_rgba(251,191,36,0.18)]
+                        p-3
+                    ">
+
+                        <img
+                            src={adinkraAll}
+                            alt="Adinkra Symbols"
+                            className="
+                                w-full
+                                h-[320px]
+                                object-contain
+                                rounded-2xl
+                                transition-all
+                                duration-700
+                                hover:scale-105
+                            "
+                        />
+
+                    </div>
+
+                </div>
+
+                {/* RIGHT SIDE CONTENT */}
+                <div className="
+                    w-[58%]
+                    flex
+                    flex-col
+                    justify-center
+                    items-center
+                    text-center
+                ">
+
+                    {/* SMALL LABEL */}
+                    <p className="
+                        text-xs
+                        uppercase
+                        tracking-[0.35em]
+                        text-amber-300
+                        mb-4
+                    ">
+                        Ghana Vacation Tours LLC
+                    </p>
+
+                    {/* TITLE */}
+                    <h2
+                        className="
+                            text-3xl
+                            md:text-4xl
+                            font-black
+                            leading-tight
+                            px-2
+                        "
+                        style={{
+                            color: "#f5d27a",
+                            textShadow: "0 6px 25px rgba(0,0,0,1)"
+                        }}
+                    >
+                        {title}
+                    </h2>
+
+                    {/* DIVIDER */}
+                    <div className="
+                        w-28
+                        h-[2px]
+                        bg-gradient-to-r
+                        from-transparent
+                        via-amber-400
+                        to-transparent
+                        my-6
+                    " />
+
+                    {/* SUBTEXT */}
+                    <p
+                        className="
+                            text-base
+                            text-amber-50/80
+                            leading-8
+                            max-w-sm
+                        "
+                        style={{
+                            fontFamily: "cursive"
+                        }}
+                    >
+                        Explore unforgettable cultural journeys,
+                        awe-inspiring experiences, breathtaking landscapes,
+                        and immersive adventures across Ghana.
+                    </p>
+
+                    {/* BOTTOM BADGE */}
+                    <div className="
+                        mt-8
+                        px-5
+                        py-2
+                        rounded-full
+                        border
+                        border-amber-300/30
+                        bg-white/5
+                        text-amber-200
+                        text-sm
+                        tracking-wide
+                        shadow-lg
+                    ">
+                        Culture • Heritage • Adventure
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
+
     );
 }
 
@@ -138,6 +286,7 @@ export default function GalleryPage() {
                     ◀
                 </button>
 
+
                 {/* BOOK */}
                 <HTMLFlipBook
                     ref={flipBookRef}
@@ -157,7 +306,7 @@ export default function GalleryPage() {
 
                     {/* COVER */}
                     <div>
-                        <Cover title={`${selectedTour}-Day Tour Ghanaian Experience`} />
+                        <Cover title={`${selectedTour}-Day Tour Experience`} />
                     </div>
 
                     {/* PAGES */}

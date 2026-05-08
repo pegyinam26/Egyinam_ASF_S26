@@ -1,6 +1,8 @@
 import { useState } from "react";
 import DayCarousel from "./DayCarousel";
 import { useNavigate } from "react-router-dom";
+// import GhanaItineraryMap from "./GhanaItineraryMap";
+import GhanaLeafletMap from "./GhanaLeafletMap.tsx";
 
 export default function TourSection({ tour }: any) {
     const [selected, setSelected] = useState(0);
@@ -55,7 +57,13 @@ export default function TourSection({ tour }: any) {
             </div>
 
             {/* ACTIVE DAY */}
-            <DayCarousel day={tour.days[selected]} />
+            {/*<DayCarousel day={tour.days[selected]} />*/}
+
+            {/*/!* ACTIVE DAY *!/*/}
+                <div className="grid xl:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
+                    <DayCarousel day={tour.days[selected]} />
+                    <GhanaLeafletMap day={tour.days[selected]} />
+                </div>
 
         </div>
     );

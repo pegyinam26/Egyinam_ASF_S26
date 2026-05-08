@@ -35,7 +35,7 @@ export default function ReviewCarousel() {
                 </h2>
 
                 <p className="
-                    text-amber-50/80
+                    text-amber-90/80
                     text-lg
                 ">
                     Hear what our guests have to say about their
