@@ -247,7 +247,8 @@ export default function GalleryPage() {
 
             {/* TITLE */}
             <h1
-                className="text-5xl md:text-6xl font-extrabold text-center mb-6"
+                // className="text-5xl md:text-6xl font-extrabold text-center mb-6"
+                className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-center mb-6"
                 style={{
                     color: "#e4cb89",
                     textShadow: "0 6px 25px rgba(0,0,0,1)"
@@ -257,7 +258,8 @@ export default function GalleryPage() {
             </h1>
 
             {/* TOUR SELECTOR */}
-            <div className="flex justify-center gap-4 mb-8">
+            {/*<div className="flex justify-center gap-4 mb-8">*/}
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
                 {["7", "11", "14"].map((t) => (
                     <button
                         key={t}
@@ -274,12 +276,13 @@ export default function GalleryPage() {
             </div>
 
             {/* BOOK WITH ARROWS */}
-            <div className="flex justify-center items-center gap-4 min-h-[70vh]">
+            {/*<div className="flex justify-center items-center gap-4 min-h-[70vh]">*/}
+            <div className="flex justify-center items-center gap-2 sm:gap-4 min-h-[60vh] overflow-x-hidden">
 
                 {/* LEFT ARROW */}
                 <button
                     onClick={prevPage}
-                    className="h-[260px] w-10 self-center flex items-center justify-center
+                    className="h-[180px] sm:h-[260px] w-8 sm:w-10 self-center flex items-center justify-center
                      bg-black/40 hover:bg-black/70 text-white text-2xl
                      rounded-l-lg transition hover:shadow-[0_0_20px_rgba(255,215,0,0.6)]"
                 >
@@ -291,12 +294,17 @@ export default function GalleryPage() {
                 <HTMLFlipBook
                     ref={flipBookRef}
                     key={selectedTour} // resets on tour change
-                    width={420}
-                    height={520}
+                    // width={420}
+                    // height={520}
+                    width={320}
+                    height={440}
                     size="stretch"
-                    minWidth={300}
+                    // minWidth={300}
+                    // maxWidth={600}
+                    // minHeight={400}
+                    minWidth={280}
                     maxWidth={600}
-                    minHeight={400}
+                    minHeight={360}
                     maxHeight={650}
                     showCover={true}
                     flippingTime={800}
@@ -325,7 +333,7 @@ export default function GalleryPage() {
                 {/* RIGHT ARROW */}
                 <button
                     onClick={nextPage}
-                    className="h-[260px] w-10 self-center flex items-center justify-center
+                    className="h-[180px] sm:h-[260px] w-8 sm:w-10 self-center flex items-center justify-center
                      bg-black/40 hover:bg-black/70 text-white text-2xl
                      rounded-r-lg transition hover:shadow-[0_0_20px_rgba(255,215,0,0.6)]"
                 >

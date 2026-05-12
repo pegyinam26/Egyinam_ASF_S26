@@ -11,6 +11,7 @@ import UserRoute from "./components/routes/UserRoute";
 import AdminRoute from "./components/routes/AdminRoute";
 import Footer from "./components/Footer.tsx";
 import AboutUsPage from "./pages/AboutUsPage.tsx";
+import UsersList from "./pages/UsersList.tsx";
 
 function App() {
     return (
@@ -29,11 +30,21 @@ function App() {
                     }
                 />
                 <Route
-                    path="/admin"
+                    path="/admin/bookings"
                     element={
                         <ProtectedRoute>
                             <AdminRoute>
                                 <BookingsList />
+                            </AdminRoute>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/users"
+                    element={
+                        <ProtectedRoute>
+                            <AdminRoute>
+                                <UsersList />
                             </AdminRoute>
                         </ProtectedRoute>
                     }

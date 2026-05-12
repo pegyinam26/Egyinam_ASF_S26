@@ -9,17 +9,28 @@ export default function TourSection({ tour }: any) {
     const navigate = useNavigate();
 
     return (
-        <div className=" mb-28 bg-black/15 backdrop-blur-sm border border-white/10 rounded-[40px] p-8 md:p-12 shadow-2xl">
-
+        // <div className=" mb-28 bg-black/15 backdrop-blur-sm border border-white/10 rounded-[40px] p-8 md:p-12 shadow-2xl">
+        <div className="mb-16 md:mb-28 bg-black/15 backdrop-blur-sm border border-white/10 rounded-[28px] md:rounded-[40px] p-5 sm:p-8 md:p-12 shadow-2xl">
             {/* TITLE + CTA (centered together) */}
-            <div className="flex justify-center items-center gap-4 mb-6">
+            {/*<div className="flex justify-center items-center gap-4 mb-6">*/}
 
-                <h2 className=" text-4xl md:text-5xl font-black text-amber-700 tracking-wide ">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
+                {/*<h2 className=" text-4xl md:text-5xl font-black text-amber-700 tracking-wide ">*/}
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-amber-700 tracking-wide text-center">
                     {tour.title}
                 </h2>
                 {/* Book Now CTA*/}
                 <button
-                    onClick={() => navigate("/booking")}
+
+                    onClick={() =>
+                        navigate("/booking", {
+                            state: {
+                                itineraryId: tour.duration,
+                                itineraryTitle: tour.title,
+                            },
+                        })
+                    }
+
                     className="
                             bg-gradient-to-r
                             from-green-500
@@ -40,7 +51,8 @@ export default function TourSection({ tour }: any) {
             </div>
 
             {/* DAY SELECTOR */}
-            <div className="flex gap-2 overflow-x-auto mb-6 justify-center">
+            {/*<div className="flex gap-2 overflow-x-auto mb-6 justify-center">*/}
+            <div className="flex gap-2 overflow-x-auto mb-6 justify-start sm:justify-center pb-2">
                 {tour.days.map((d: any, i: number) => (
                     <button
                         key={i}

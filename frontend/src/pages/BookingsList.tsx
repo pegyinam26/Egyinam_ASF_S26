@@ -116,13 +116,15 @@ export default function BookingsList() {
     return (
         <PageBackground>
 
-            <div className="max-w-7xl mx-auto px-6 py-10">
+            {/*<div className="max-w-7xl mx-auto px-6 py-10">*/}
+            <div className="w-full max-w-7xl mx-auto px-0 sm:px-4 lg:px-6 py-6 md:py-10">
 
                 {/* HEADER */}
                 <div className="mb-10 text-center">
 
                     <h1 className="
-                    text-5xl md:text-6xl
+                    {/*text-5xl md:text-6xl*/}
+                    text-3xl sm:text-4xl md:text-6xl
                     font-black
                     text-amber-900
                     mb-4
@@ -329,7 +331,8 @@ export default function BookingsList() {
 
                     <div className="overflow-x-auto">
 
-                        <table className="w-full">
+                        {/*<table className="w-full">*/}
+                        <table className="min-w-[950px] w-full">
 
                             {/* HEADER */}
                             <thead className="
@@ -633,13 +636,14 @@ export default function BookingsList() {
                 </div>
 
                 {/* PAGINATION */}
-                <div className="
-                flex
-                justify-center
-                items-center
-                gap-6
-                mt-8
-            ">
+            {/*    <div className="*/}
+            {/*    flex*/}
+            {/*    justify-center*/}
+            {/*    items-center*/}
+            {/*    gap-6*/}
+            {/*    mt-8*/}
+            {/*">*/}
+                <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 mt-8">
 
                     <button
                         disabled={page === 1}

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { bookingSchema } from "../validation/bookingSchema";
 import PageBackground from "../components/PageBackground.tsx";
+import {useLocation} from "react-router-dom";
 
 export default function BookingPage() {
-
+    const location = useLocation();
+    const bookingState = location.state as any;
     const [form, setForm] = useState({
         itineraryId: "",
         travelDate: "",
@@ -34,14 +36,38 @@ export default function BookingPage() {
 
     // FETCH ITINERARIES
     useEffect(() => {
-
+        const loggedInUser = JSON.parse(
+            localStorage.getItem("user") || "null"
+        );
+        console.log("LOGGED IN USER:", loggedInUser);
         fetch("http://localhost:8080/api/itineraries")
             .then((res) => res.json())
-            .then(setItineraries)
-            .catch(() =>
-                setMessage("Failed to load itineraries")
-            );
+            .then((data) => {
+                setItineraries(data);
 
+                const matchedItinerary = bookingState?.itineraryDuration
+                    ? data.find((i: any) =>
+                        Number(i.duration) === Number(bookingState.itineraryDuration)
+                    )
+                    : bookingState?.itineraryTitle
+                        ? data.find((i: any) =>
+                            i.title?.toLowerCase().includes(
+                                bookingState.itineraryTitle.toLowerCase().split(" ")[0]
+                            )
+                        )
+                        : null;
+
+                setForm((prev) => ({
+                    ...prev,
+                    firstName: loggedInUser?.fname || "",
+                    lastName: loggedInUser?.lname || "",
+                    email: loggedInUser?.email || "",
+                    itineraryId: matchedItinerary
+                        ? String(matchedItinerary.id)
+                        : prev.itineraryId,
+                }));
+            })
+            .catch(() => setMessage("Failed to load itineraries"));
     }, []);
 
     // HANDLE INPUT CHANGE
@@ -106,6 +132,14 @@ export default function BookingPage() {
 
                 user: {
                     id: loggedInUser.id,
+                    phoneNumber: form.phoneNumber,
+                    address: {
+                        street: form.street,
+                        city: form.city,
+                        state: form.state,
+                        zip: form.zip,
+                        country: form.country
+                    },
                 },
             };
 
@@ -182,12 +216,13 @@ export default function BookingPage() {
 
         <PageBackground>
 
-            <div className="
-                max-w-5xl
-                mx-auto
-                px-6 md:px-10
-                py-10
-            ">
+            {/*<div className="*/}
+            {/*    max-w-5xl*/}
+            {/*    mx-auto*/}
+            {/*    px-6 md:px-10*/}
+            {/*    py-10*/}
+            {/*">*/}
+            <div className="w-full max-w-5xl mx-auto px-0 sm:px-4 md:px-8 py-6 md:py-10">
 
                 {/* MAIN CARD */}
                 <div className="
@@ -201,7 +236,8 @@ export default function BookingPage() {
                     border border-amber-400/20
                     rounded-[40px]
                     shadow-2xl
-                    p-8 md:p-12
+                    {/*p-8 md:p-12*/}
+                    p-5 sm:p-8 md:p-12
                 ">
 
                     <div className="
@@ -228,7 +264,8 @@ export default function BookingPage() {
 
                     {/* TITLE */}
                     <h1 className="
-                        text-5xl md:text-6xl
+                        {/*text-5xl md:text-6xl*/}
+                        text-3xl sm:text-4xl md:text-6xl
                         font-black
                         text-center
                         text-amber-900
@@ -239,12 +276,13 @@ export default function BookingPage() {
 
                     {/* SUBTITLE */}
                     <p className="
-                        text-center
-                        text-amber-900
-                        text-lg md:text-xl
-                        mb-12
-                        mx-auto
-                        whitespace-nowrap
+                        {/*text-center*/}
+                        {/*text-amber-900*/}
+                        {/*text-lg md:text-xl*/}
+                        {/*mb-12*/}
+                        {/*mx-auto*/}
+                        {/*whitespace-nowrap*/}
+                        text-center text-amber-900 text-sm sm:text-base md:text-xl mb-8 md:mb-12 mx-auto md:whitespace-nowrap
                     ">
                         Reserve your personalized Ghana experience by
                         completing the booking form below.
@@ -818,7 +856,7 @@ export default function BookingPage() {
                                 disabled
                                 className="
                                             w-full
-                                            bg-white-500/5
+                                            bg-white/10
                                             border border-black/40
                                             text-amber-900
                                             rounded-2xl

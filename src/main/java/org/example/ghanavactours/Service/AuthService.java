@@ -16,7 +16,7 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    // REGISTER
+    // REGISTER - CRUD - C - creating a user
     public User register(Map<String, String> request) {
 
         String fname = request.get("fname");
@@ -42,7 +42,7 @@ public class AuthService {
         return userRepository.save(user);
     }
 
-    // LOGIN
+    // BACKEND LOGIN
     public Map<String, Object> login(Map<String, String> request) {
 
         String email = request.get("email");
@@ -57,6 +57,8 @@ public class AuthService {
 
         return Map.of(
                 "id", user.getId(),
+                "fname", user.getFname(),
+                "lname", user.getLname(),
                 "email", user.getEmail(),
                 "role", user.getRole()
         );

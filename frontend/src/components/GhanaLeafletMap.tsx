@@ -16,7 +16,7 @@ const markerIcon = new L.Icon({
 const locations: Record<string, any> = {
     Accra: {
         position: [5.6037, -0.1870],
-        note: "Arrival, culture, rooftop dining, nightlife",
+        note: "Arrival, culture, rooftop dining, nightlife, departure",
     },
     Aburi: {
         position: [5.8480, -0.1745],
@@ -188,24 +188,37 @@ export default function GhanaLeafletMap({ day }: any) {
     const routePositions = activeLocations.map((location) => location.position);
 
     return (
+        // <div className="
+        //     bg-gradient-to-br
+        //     from-black/80
+        //     via-emerald-950/80
+        //     to-amber-950/60
+        //     border border-amber-400/20
+        //     rounded-[32px]
+        //     overflow-hidden
+        //     shadow-2xl
+        //     backdrop-blur-xl
+        //     p-6
+        // ">
         <div className="
             bg-gradient-to-br
             from-black/80
             via-emerald-950/80
             to-amber-950/60
             border border-amber-400/20
-            rounded-[32px]
+            rounded-[24px] md:rounded-[32px]
             overflow-hidden
             shadow-2xl
             backdrop-blur-xl
-            p-6
+            p-4 sm:p-6
         ">
             <div className="mb-4">
                 <p className="text-xs uppercase tracking-[0.3em] text-amber-300">
                     Interactive Ghana Map
                 </p>
 
-                <h3 className="text-2xl font-black text-amber-100 mt-2">
+                {/*<h3 className="text-2xl font-black text-amber-100 mt-2">*/}
+                <h3 className="text-xl sm:text-2xl font-black text-amber-100 mt-2">
                     Day {day.day}: {day.title}
                 </h3>
             </div>
@@ -215,7 +228,8 @@ export default function GhanaLeafletMap({ day }: any) {
                     center={[7.9465, -1.0232]}
                     zoom={6}
                     scrollWheelZoom={false}
-                    className="h-[520px] w-full z-0"
+                    // className="h-[520px] w-full z-0"
+                    className="h-[320px] sm:h-[420px] lg:h-[520px] w-full z-0"
                 >
                     {/*<TileLayer*/}
                     {/*    attribution='&copy; OpenStreetMap contributors'*/}

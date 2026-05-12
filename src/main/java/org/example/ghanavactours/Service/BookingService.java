@@ -31,10 +31,6 @@ public class BookingService {
         this.userRepository = userRepository;
     }
    //fulfilling CRUD - C- create
-//    public Booking createBooking(Booking booking) {
-//        return bookingRepository.save(booking);
-//    }
-
     public Booking createBooking(Booking booking) {
 
         // ===== EXISTING ITINERARY =====
@@ -54,6 +50,29 @@ public class BookingService {
                 .findById(userId)
                 .orElseThrow(() ->
                         new RuntimeException("User not found"));
+
+        // update phone number
+        user.setPhoneNumber(booking.getUser().getPhoneNumber());
+
+        // update/create address
+        if (booking.getUser().getAddress() != null) {
+
+            Address incomingAddress = booking.getUser().getAddress();
+
+            Address address = user.getAddress();
+
+            if (address == null) {
+                address = new Address();
+            }
+
+            address.setStreet(incomingAddress.getStreet());
+            address.setCity(incomingAddress.getCity());
+            address.setState(incomingAddress.getState());
+            address.setZip(incomingAddress.getZip());
+            address.setCountry(incomingAddress.getCountry());
+
+            user.setAddress(address);
+        }
 
         // ===== ATTACH PERSISTED ENTITIES =====
 

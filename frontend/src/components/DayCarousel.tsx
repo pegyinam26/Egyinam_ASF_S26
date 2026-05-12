@@ -14,7 +14,8 @@ export default function DayCarousel({ day }: any) {
 
     return (
 
-        <div className="grid lg:grid-cols-2 gap-10 items-center mb-16">
+        // <div className="grid lg:grid-cols-2 gap-10 items-center mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center mb-10 md:mb-16">
 
             {/* IMAGE SECTION */}
             <div className="relative group">
@@ -26,9 +27,18 @@ export default function DayCarousel({ day }: any) {
                         key={index}
                         src={`/img/${day.images[index]}`}
                         alt={day.title}
+                        // className="
+                        //     w-full
+                        //     h-[520px]
+                        //     object-contain
+                        //     bg-blend-darken
+                        //     transition-all
+                        //     duration-700
+                        //     group-hover:scale-105
+                        // "
                         className="
                             w-full
-                            h-[520px]
+                            h-[280px] sm:h-[360px] lg:h-[520px]
                             object-contain
                             bg-blend-darken
                             transition-all
@@ -83,7 +93,8 @@ export default function DayCarousel({ day }: any) {
                         absolute left-4 top-1/2 -translate-y-1/2
                         bg-black/50 hover:bg-black/70
                         text-white
-                        w-12 h-12
+                        {/*w-12 h-12*/}
+                        w-9 h-9 sm:w-12 sm:h-12
                         rounded-full
                         backdrop-blur-md
                         transition
@@ -98,7 +109,8 @@ export default function DayCarousel({ day }: any) {
                         absolute right-4 top-1/2 -translate-y-1/2
                         bg-black/50 hover:bg-black/70
                         text-white
-                        w-12 h-12
+                        {/*w-12 h-12*/}
+                        w-9 h-9 sm:w-12 sm:h-12
                         rounded-full
                         backdrop-blur-md
                         transition
@@ -115,7 +127,8 @@ export default function DayCarousel({ day }: any) {
                 backdrop-blur-xl
                 border border-white/20
                 rounded-3xl
-                p-8 md:p-10
+                {/*p-8 md:p-10*/}
+                p-5 sm:p-8 md:p-10
                 shadow-2xl
                 relative
                 overflow-hidden
@@ -132,7 +145,8 @@ export default function DayCarousel({ day }: any) {
 
                 {/* TITLE */}
                 <h2 className="
-                    text-3xl md:text-4xl
+                    {/*text-3xl md:text-4xl*/}
+                    text-2xl sm:text-3xl md:text-4xl
                     font-black
                     text-amber-700
                     mb-6

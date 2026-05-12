@@ -68,14 +68,14 @@ export default function LoginPage() {
             localStorage.setItem("user", JSON.stringify(data));
 
             // REDIRECT
-            navigate(data.role === "ADMIN" ? "/admin" : "/itinerary");
+            navigate(data.role === "ADMIN" ? "/admin/bookings" : "/itinerary");
 
         } catch (err: any) {
             setError("Invalid email or password");
         }
     };
 
-    // 🆕 REGISTER
+    // REGISTER
     const handleRegister = async () => {
 
         try {
@@ -103,7 +103,9 @@ export default function LoginPage() {
 
             // CLEAR PASSWORDS
             setForm({
-                ...form,
+                fname: "",
+                lname: "",
+                email: form.email,
                 password: "",
                 confirmPassword: "",
             });
@@ -117,7 +119,9 @@ export default function LoginPage() {
         <div className="w-full min-h-screen overflow-x-hidden">
 
             {/* HERO VIDEO */}
-            <div className="relative w-full min-h-screen overflow-hidden">
+            {/*<div className="relative w-full min-h-screen overflow-hidden">*/}
+            {/*<div className="relative w-full min-h-[140vh] lg:min-h-screen overflow-hidden">*/}
+            <div className={`relative w-full ${isRegister ? "min-h-[150vh]" : "min-h-[140vh]"} lg:min-h-screen overflow-hidden`}>
 
                 {/* VIDEO */}
                 <video
@@ -134,9 +138,12 @@ export default function LoginPage() {
 
                 {/* CENTER CONTENT */}
                 {/*<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-16 pt-16">*/}
-                <div className="absolute inset-0 flex flex-col items-center justify-start pt-[50vh] text-center px-6 md:px-16">
+                {/*<div className="absolute inset-0 flex flex-col items-center justify-start pt-[50vh] text-center px-6 md:px-16">*/}
+                {/*<div className="absolute inset-0 flex flex-col items-center justify-start pt-[62vh] lg:pt-[50vh] text-center px-6 md:px-16">*/}
+                <div className={`absolute inset-0 flex flex-col items-center justify-start text-center px-6 md:px-16 ${isRegister ? "pt-[86vh]" : "pt-[62vh]"} lg:pt-[50vh] `}>
                     {/* TITLE */}
-                    <div className="absolute w-full top-[12%] text-center px-6 md:px-16">
+                    {/*<div className="absolute w-full top-[12%] text-center px-6 md:px-16">*/}
+                    <div className="absolute w-full top-[7%] lg:top-[12%] text-center px-6 md:px-16">
 
                         <h1
                             className="text-5xl md:text-7xl font-black mb-4 text-[#f5e6c8] tracking-wide"
@@ -175,11 +182,16 @@ export default function LoginPage() {
                                 bg-gradient-to-r from-black/10 via-black/10 to-black/20"
                         >
                             <p
+                                // className="
+                                //     text-base md:text-xl
+                                //     leading-8 md:leading-9
+                                //     font-bold text-[#f5e6c8]
+                                //     drop-shadow-md"
                                 className="
-                                    text-base md:text-xl
-                                    leading-8 md:leading-9
-                                    font-bold text-[#f5e6c8]
-                                    drop-shadow-md"
+                                        text-sm sm:text-base md:text-xl
+                                        leading-7 sm:leading-8 md:leading-9
+                                        font-bold text-[#f5e6c8]
+                                        drop-shadow-md"
                                 style={{ fontFamily: "cursive" }}
                             >
                                 Ghana offers a powerful mix of history, culture,
@@ -198,7 +210,8 @@ export default function LoginPage() {
                 </div>
 
                 {/* LEFT IMAGE */}
-                <div className="absolute top-8 left-6 md:left-22 z-40">
+                {/*<div className="absolute top-8 left-6 md:left-22 z-40">*/}
+                <div className="hidden lg:block absolute top-8 left-6 md:left-22 z-40">
 
                     <div className="w-[220px] h-[310px] bg-white rounded-lg shadow-md overflow-hidden">
 
@@ -212,16 +225,27 @@ export default function LoginPage() {
                 </div>
 
                 {/* AUTH BOX */}
-                <div className="absolute top-6 md:top-10 right-2 md:right-4 z-40">
+                {/*<div className="absolute top-6 md:top-10 right-2 md:right-4 z-40">*/}
+                <div className="
+                    absolute
+                    top-[20%]
+                    left-1/2
+                    -translate-x-1/2
+                    lg:top-10
+                    lg:left-auto
+                    lg:translate-x-0
+                    lg:right-4
+                    z-40
+                ">
 
-                    <div className="bg-white/80 backdrop-blur-md p-5 rounded-xl shadow-xl w-[250px] ">
+                    <div className="bg-white/80 backdrop-blur-md p-5 rounded-xl shadow-xl w-[90vw] max-w-[280px] lg:w-[250px] ">
                         <div className="text-center mb-4">
 
-                            <h3 className="text-lg font-bold text-gray-800">
+                            <h3 className="text-4xl sm:text-5xl md:text-3xl font-bold text-gray-800">
                                 {isRegister ? "Create Your Account" : "Welcome"}
                             </h3>
 
-                            <p className="text-sm text-gray-600 mt-1">
+                            <p className="text-sm sm:text-base md:text-xl text-gray-600 mt-1">
                                 {isRegister
                                     ? "Register to get started with your Ghana adventure."
                                     : "Already a member? Login below."
@@ -300,6 +324,7 @@ export default function LoginPage() {
                         {/* EMAIL */}
                         <input
                             name="email"
+                            value={form.email}
                             placeholder="Email"
                             className="border p-2 w-full mb-2 rounded text-sm"
                             onChange={handleChange}
@@ -309,6 +334,7 @@ export default function LoginPage() {
                         <input
                             type="password"
                             name="password"
+                            value={form.password}
                             placeholder="Password"
                             className="border p-2 w-full mb-2 rounded text-sm"
                             onChange={handleChange}
@@ -319,6 +345,7 @@ export default function LoginPage() {
                             <input
                                 type="password"
                                 name="confirmPassword"
+                                value={form.confirmPassword}
                                 placeholder="Confirm Password"
                                 className="border p-2 w-full mb-2 rounded text-sm"
                                 onChange={handleChange}

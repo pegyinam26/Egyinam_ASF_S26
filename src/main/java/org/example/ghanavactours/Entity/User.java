@@ -1,9 +1,12 @@
 package org.example.ghanavactours.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,4 +45,12 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL,optional = true)
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
+
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Booking> bookings = new ArrayList<>();
 }
