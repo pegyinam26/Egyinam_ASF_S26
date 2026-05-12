@@ -13,7 +13,7 @@ export const bookingSchema = yup.object({
         .min(new Date(), "Date must be in the future"),
 
     firstName: yup.string().required("First name required"),
-    lastName: yup.string().required("Last name required"),
+    // lastName: yup.string().required("Last name required"),
 
     email: yup.string()
         .email("Invalid email")

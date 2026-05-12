@@ -46,6 +46,9 @@ public class User {
     @JoinColumn(name = "address_id", nullable = true)
     private Address address;
 
+    //added this JSONIGNORE to prevent infinite JSON loop. it tells JSON to skip a field when converting to JSON
+    //this prevents endless loop when returning userRepository.findAll() which results in
+    //user-> bookings -> booking -> user -> bookings -> booking... causing 500 error or stack overflow
     @JsonIgnore
     @OneToMany(
             mappedBy = "user",

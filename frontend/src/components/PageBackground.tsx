@@ -3,7 +3,7 @@ import bgImage from "../assets/background2.jpg";
 export default function PageBackground({children }: any) {
     return (
         <div
-            className="min-h-screen bg-cover bg-center relative"
+            className="min-h-screen bg-cover bg-center relative overflow-x-hidden"
             style={{ backgroundImage: `url(${bgImage})` }}
         >
             {/* DARK OVERLAY */}

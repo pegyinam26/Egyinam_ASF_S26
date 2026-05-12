@@ -22,14 +22,21 @@ export default function TourSection({ tour }: any) {
                 {/* Book Now CTA*/}
                 <button
 
-                    onClick={() =>
+                    onClick={() =>{
+                        const user = JSON.parse(localStorage.getItem("user") || "null");
+
+                        if(user?.role === "ADMIN"){
+                            navigate("/admin/bookings");
+                            return;
+                        }
+
                         navigate("/booking", {
                             state: {
                                 itineraryId: tour.duration,
                                 itineraryTitle: tour.title,
                             },
                         })
-                    }
+                    }}
 
                     className="
                             bg-gradient-to-r

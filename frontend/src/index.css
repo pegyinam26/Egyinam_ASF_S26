@@ -34,7 +34,23 @@
   }
 }
 
+/* PREVENTING OVERSCROLL*/
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
+html{
+  overscroll-behavior-y: none;
+}
+
+body {
+  overflow-y: auto;
+}
 
 
 @keyframes fadeIn {
