@@ -140,7 +140,7 @@ export default function LoginPage() {
                 {/*<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-16 pt-16">*/}
                 {/*<div className="absolute inset-0 flex flex-col items-center justify-start pt-[50vh] text-center px-6 md:px-16">*/}
                 {/*<div className="absolute inset-0 flex flex-col items-center justify-start pt-[62vh] lg:pt-[50vh] text-center px-6 md:px-16">*/}
-                <div className={`absolute inset-0 flex flex-col items-center justify-start text-center px-6 md:px-16 ${isRegister ? "pt-[86vh]" : "pt-[62vh]"} lg:pt-[50vh] `}>
+                <div className={`absolute inset-0 flex flex-col items-center justify-start text-center px-6 md:px-16 ${isRegister ? "pt-[92vh]" : "pt-[62vh]"} lg:pt-[50vh] `}>
                     {/* TITLE */}
                     {/*<div className="absolute w-full top-[12%] text-center px-6 md:px-16">*/}
                     <div className="absolute w-full top-[7%] lg:top-[12%] text-center px-6 md:px-16">
@@ -162,14 +162,14 @@ export default function LoginPage() {
 
                     {/* WHY VISIT */}
                     <div
-                        className="text-4xl md:text-5xl font-black mb-6 text-[#f5e6c8] tracking-wide"
+                        className="text-4xl md:text-5xl font-black mt-20 text-[#f5e6c8] tracking-wide"
                         style={{ textShadow: "0 6px 25px rgba(0,0,0,0.9)" }}
                     >
                         <h3>Why should you visit?</h3>
                     </div>
 
                     {/* INFO CARD */}
-                    <div className="w-full flex justify-center mt-10 px-4 md:px-10">
+                    <div className="w-full flex justify-center mt-20 px-4 md:px-10">
 
                         <div
                             className="
