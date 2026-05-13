@@ -23,7 +23,9 @@ public class Destination {
     @Column(length = 100)
     private String region;
 
+    //JsonIgnore helps prevent JSON recursion errors for unwanted reverse mappings
+    //without this it would cause destination -> activities -> activity -> destination -> activities
     @OneToMany(mappedBy = "destination")
-    @JsonIgnore //helps prevent JSON recursion errors for unwanted reverse mappings
+    @JsonIgnore
     private List<ItineraryDestination> itineraryDestinations;
 }

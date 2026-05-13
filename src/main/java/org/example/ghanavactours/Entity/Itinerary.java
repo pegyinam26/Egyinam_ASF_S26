@@ -23,7 +23,9 @@ public class Itinerary {
     @Column(nullable = false)
     private long duration_days;
 
+    //JsonManagedReference fixes JSON recursion which might cause stack overflow and 500 error
+    //used to handle bidirectional relationships from Itinerary -> ItineraryDestination (JsonManagedReference)
     @OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference //fixes JSON recursion which might cause stack overflow and 500 error
+    @JsonManagedReference
     private List<ItineraryDestination> itineraryDestinations;
 }

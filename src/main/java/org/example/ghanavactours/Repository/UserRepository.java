@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-
+    //created this to be used in the AuthService to enable user's email to be checked if existing before authenticating user
     Optional<User> findByEmail(String email);
 
 }

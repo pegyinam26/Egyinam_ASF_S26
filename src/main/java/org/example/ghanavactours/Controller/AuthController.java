@@ -16,13 +16,13 @@ public class AuthController {
         this.authService = authService;
     }
 
-    // REGISTER
+    // REGISTER - used to create a new USER account from the business logic in the AuthService layer
     @PostMapping("/register")
     public User register(@RequestBody Map<String, String> request) {
         return authService.register(request);
     }
 
-    // LOGIN
+    // LOGIN - used to login a USER based on the business logic for this in the AuthService layer
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody Map<String, String> request) {
         return authService.login(request);

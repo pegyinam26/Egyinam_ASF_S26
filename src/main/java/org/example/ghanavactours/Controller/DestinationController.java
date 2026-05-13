@@ -16,7 +16,7 @@ public class DestinationController {
         this.destinationRepository = destinationRepository;
     }
 
-    //CRUD - reading or retrieving all destinations from database
+    //CRUD - reading or retrieving all destinations from database and reading a single destination by Id
     @GetMapping
     public List<Destination> getDestinations() {
         return destinationRepository.findAll();

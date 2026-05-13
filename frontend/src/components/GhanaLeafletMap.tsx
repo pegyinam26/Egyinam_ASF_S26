@@ -13,6 +13,7 @@ const markerIcon = new L.Icon({
     shadowSize: [41, 41],
 });
 
+//destination marker notes with x and y coordinates
 const locations: Record<string, any> = {
     Accra: {
         position: [5.6037, -0.1870],
@@ -80,6 +81,7 @@ const locations: Record<string, any> = {
     },
 };
 
+//creating a matches string array to hold all the location strings triggered with search strings
 function getLocations(dayTitle: string) {
     const title = dayTitle.toLowerCase();
     const matches: string[] = [];
@@ -163,12 +165,10 @@ function getLocations(dayTitle: string) {
         : ["Accra"];
 }
 
+//creating interactive Leaflet Map
 export default function GhanaLeafletMap({ day }: any) {
     const activeLocationNames = getLocations(day.title);
-    // const activeLocations = activeLocationNames.map((name) => ({
-    //     name,
-    //     ...locations[name],
-    // }));
+
     const activeLocations = activeLocationNames
         .map((name) => {
             const location = locations[name];
@@ -188,18 +188,7 @@ export default function GhanaLeafletMap({ day }: any) {
     const routePositions = activeLocations.map((location) => location.position);
 
     return (
-        // <div className="
-        //     bg-gradient-to-br
-        //     from-black/80
-        //     via-emerald-950/80
-        //     to-amber-950/60
-        //     border border-amber-400/20
-        //     rounded-[32px]
-        //     overflow-hidden
-        //     shadow-2xl
-        //     backdrop-blur-xl
-        //     p-6
-        // ">
+
         <div className="
             bg-gradient-to-br
             from-black/80
@@ -231,14 +220,7 @@ export default function GhanaLeafletMap({ day }: any) {
                     // className="h-[520px] w-full z-0"
                     className="h-[320px] sm:h-[420px] lg:h-[520px] w-full z-0"
                 >
-                    {/*<TileLayer*/}
-                    {/*    attribution='&copy; OpenStreetMap contributors'*/}
-                    {/*    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/}
-                    {/*/>*/}
-                    {/*<TileLayer*/}
-                    {/*    attribution='&copy; Esri'*/}
-                    {/*    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"*/}
-                    {/*/>*/}
+
                     {/* SATELLITE BASE MAP */}
                     <TileLayer
                         attribution='Tiles &copy; Esri'

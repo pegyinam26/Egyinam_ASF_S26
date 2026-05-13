@@ -636,13 +636,7 @@ export default function BookingsList() {
                 </div>
 
                 {/* PAGINATION */}
-            {/*    <div className="*/}
-            {/*    flex*/}
-            {/*    justify-center*/}
-            {/*    items-center*/}
-            {/*    gap-6*/}
-            {/*    mt-8*/}
-            {/*">*/}
+
                 <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 mt-8">
 
                     <button

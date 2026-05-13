@@ -20,6 +20,7 @@ import java.util.Map;
 @Service
 public class BookingService {
 
+    //Injecting these repositories for use in the booking service
     private final ItineraryRepository itineraryRepository;
     private final UserRepository userRepository;
     private final BookingRepository bookingRepository;
@@ -34,7 +35,7 @@ public class BookingService {
     public Booking createBooking(Booking booking) {
 
         // ===== EXISTING ITINERARY =====
-
+        //this is used on the book a trip form where a user selects and itinerary from the dropdown
         Long itineraryId = booking.getItinerary().getId();
 
         Itinerary itinerary = itineraryRepository
@@ -43,7 +44,7 @@ public class BookingService {
                         new RuntimeException("Itinerary not found"));
 
         // ===== EXISTING USER =====
-
+        //checks to see if user exists when filling out the booking form: names and email are prepopulated
         Long userId = booking.getUser().getId();
 
         User user = userRepository
@@ -75,7 +76,7 @@ public class BookingService {
         }
 
         // ===== ATTACH PERSISTED ENTITIES =====
-
+        //this is where itinerary and user information created so far are attached to the booking being created
         booking.setItinerary(itinerary);
 
         booking.setUser(user);
@@ -100,32 +101,32 @@ public class BookingService {
             Booking updatedBooking
     ) {
 
-        Booking existingBooking = bookingRepository
+        Booking currentBooking = bookingRepository
                 .findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Booking not found"));
 
         // ===== BOOKING FIELDS =====
 
-        existingBooking.setStatus(
+        currentBooking.setStatus(
                 updatedBooking.getStatus()
         );
 
-        existingBooking.setTravel_start_date(
+        currentBooking.setTravel_start_date(
                 updatedBooking.getTravel_start_date()
         );
 
         // ===== USER FIELDS =====
 
-        existingBooking.getUser().setFname(
+        currentBooking.getUser().setFname(
                 updatedBooking.getUser().getFname()
         );
 
-        existingBooking.getUser().setLname(
+        currentBooking.getUser().setLname(
                 updatedBooking.getUser().getLname()
         );
 
-        return bookingRepository.save(existingBooking);
+        return bookingRepository.save(currentBooking);
     }
 
     //fulfilling CRUD - D - delete

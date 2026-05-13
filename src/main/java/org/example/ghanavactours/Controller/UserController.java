@@ -16,7 +16,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    //fulfilling CRUD - R - read
+    //fulfilling CRUD - R - read to get a single user by Id or get all users
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();

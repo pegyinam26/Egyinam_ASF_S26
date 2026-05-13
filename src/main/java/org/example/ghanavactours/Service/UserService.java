@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class UserService {
-
+   //injecting userRepository constructor in the service
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -27,41 +27,41 @@ public class UserService {
     }
 
     //CRUD - U - update
-    public User updateUser(Long id, User updatedUser) {
+    public User updateUser(Long id, User modifiedUser) {
 
-        User existingUser = userRepository.findById(id)
+        User currentUser = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+        //using the setter and getter methods from the JPA in the userRepository to updateUser with existing/current user information
+        currentUser.setFname(modifiedUser.getFname());
+        currentUser.setLname(modifiedUser.getLname());
+        currentUser.setEmail(modifiedUser.getEmail());
+        currentUser.setPhoneNumber(modifiedUser.getPhoneNumber());
 
-        existingUser.setFname(updatedUser.getFname());
-        existingUser.setLname(updatedUser.getLname());
-        existingUser.setEmail(updatedUser.getEmail());
-        existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
+        if (modifiedUser.getAddress() != null) {
 
-        if (updatedUser.getAddress() != null) {
-
-            Address address = existingUser.getAddress();
+            Address address = currentUser.getAddress();
 
             if (address == null) {
                 address = new Address();
             }
 
-            address.setStreet(updatedUser.getAddress().getStreet());
-            address.setCity(updatedUser.getAddress().getCity());
-            address.setState(updatedUser.getAddress().getState());
-            address.setZip(updatedUser.getAddress().getZip());
-            address.setCountry(updatedUser.getAddress().getCountry());
+            address.setStreet(modifiedUser.getAddress().getStreet());
+            address.setCity(modifiedUser.getAddress().getCity());
+            address.setState(modifiedUser.getAddress().getState());
+            address.setZip(modifiedUser.getAddress().getZip());
+            address.setCountry(modifiedUser.getAddress().getCountry());
 
-            existingUser.setAddress(address);
+            currentUser.setAddress(address);
         }
 
-        return userRepository.save(existingUser);
+        return userRepository.save(currentUser);
     }
 
         //fulfilling CRUD - D - delete
     public void deleteUser(Long id) {
-        User existingUser = userRepository.findById(id)
+        User currentUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         //delete user
-        userRepository.deleteById(existingUser.getId());
+        userRepository.deleteById(currentUser.getId());
     }
 }

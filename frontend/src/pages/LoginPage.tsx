@@ -28,14 +28,7 @@ export default function LoginPage() {
     // SUCCESS
     const [success, setSuccess] = useState("");
 
-    // AUTO REDIRECT IF LOGGED IN
-    // useEffect(() => {
-    //     const user = localStorage.getItem("user");
-    //
-    //     if (user) {
-    //         navigate("/itinerary");
-    //     }
-    // }, []);
+
 
     // PAGE STYLING
     useEffect(() => {
@@ -43,7 +36,7 @@ export default function LoginPage() {
         document.body.style.margin = "0";
     }, []);
 
-    // ✏HANDLE INPUT
+    // HANDLE INPUT
     const handleChange = (e: any) => {
         setForm({
             ...form,

@@ -15,7 +15,7 @@ public class ItineraryController {
         this.itineraryRepository = itineraryRepository;
     }
 
-    //CRUD - reading or getting all Itineraries
+    //CRUD - reading or getting all Itineraries and reading a single itinerary by Id
     @GetMapping
     public List<Itinerary> getItineraries() {
         return itineraryRepository.findAll();

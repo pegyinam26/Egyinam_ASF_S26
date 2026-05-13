@@ -3,6 +3,8 @@ package org.example.ghanavactours.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+//one user has one address for a one-to-one mapping
+
 @Entity
 @Getter
 @Setter
