@@ -2,6 +2,7 @@ import { useState } from "react";
 import { reviews } from "../data/reviews";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+//displays all the reviews hard-coded in the reviews.ts data file and displays and paginates through them
 export default function ReviewCarousel() {
 
     const [index, setIndex] = useState(0);
@@ -62,7 +63,7 @@ export default function ReviewCarousel() {
                     text-center
                 ">
 
-                    {/* QUOTE */}
+                    {/* QUOTE-shows each individual review on the review card */}
                     <p className="
                         text-xl md:text-2xl
                         text-amber-50
@@ -73,7 +74,7 @@ export default function ReviewCarousel() {
                         “{review.text}”
                     </p>
 
-                    {/* STARS */}
+                    {/* STARS - displaying review rating from 1-5 stars */}
                     <div className="
                         flex
                         justify-center

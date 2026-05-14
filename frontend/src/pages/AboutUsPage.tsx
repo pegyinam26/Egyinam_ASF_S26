@@ -1,6 +1,7 @@
 import aboutImage from "../assets/About_Us.jpg";
 import PageBackground from "../components/PageBackground";
 
+//simple page to display the "our story" from the Ghana Vacation Tours LLC creators
 export default function AboutUsPage() {
     return (
         <PageBackground>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PageBackground from "../components/PageBackground";
 import { Pencil, Save, X, CalendarDays } from "lucide-react";
 
+//displays current bookings for a logged in regular user.
 export default function MyBookings() {
     const user = JSON.parse(localStorage.getItem("user") || "null");
 

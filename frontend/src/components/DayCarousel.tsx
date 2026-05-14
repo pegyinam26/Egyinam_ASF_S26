@@ -14,7 +14,7 @@ export default function DayCarousel({ day }: any) {
 
     return (
 
-        // <div className="grid lg:grid-cols-2 gap-10 items-center mb-16">
+       //CAROUSEL WRAPPER FOR EACH DAY
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center mb-10 md:mb-16">
 
             {/* IMAGE SECTION */}
@@ -27,15 +27,6 @@ export default function DayCarousel({ day }: any) {
                         key={index}
                         src={`/img/${day.images[index]}`}
                         alt={day.title}
-                        // className="
-                        //     w-full
-                        //     h-[520px]
-                        //     object-contain
-                        //     bg-blend-darken
-                        //     transition-all
-                        //     duration-700
-                        //     group-hover:scale-105
-                        // "
                         className="
                             w-full
                             h-[280px] sm:h-[360px] lg:h-[520px]

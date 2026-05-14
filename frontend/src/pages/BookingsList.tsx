@@ -12,6 +12,7 @@ import {
     Ban
 } from "lucide-react";
 
+//displays all the bookings on dashboard for the admin to manage
 export default function BookingsList() {
     const [bookings, setBookings] = useState<any[]>([]);
     const [search, setSearch] = useState("");
@@ -20,7 +21,7 @@ export default function BookingsList() {
     const [editForm, setEditForm] = useState<any>({});
 
     const [page, setPage] = useState(1);
-    const perPage = 10;
+    const perPage = 10; //number of pages to paginate through
 
     const fetchBookings = () => {
         fetch("http://localhost:8080/api/bookings")

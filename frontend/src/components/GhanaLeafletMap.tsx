@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet"
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Fix default Leaflet marker icons in Vite/React
+// Fixed default Leaflet marker icons in Vite/React
 const markerIcon = new L.Icon({
     iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
     iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -81,7 +81,7 @@ const locations: Record<string, any> = {
     },
 };
 
-//creating a matches string array to hold all the location strings triggered with search strings
+//creating a "matches" string array to hold all the location strings triggered with search strings
 function getLocations(dayTitle: string) {
     const title = dayTitle.toLowerCase();
     const matches: string[] = [];
@@ -206,7 +206,6 @@ export default function GhanaLeafletMap({ day }: any) {
                     Interactive Ghana Map
                 </p>
 
-                {/*<h3 className="text-2xl font-black text-amber-100 mt-2">*/}
                 <h3 className="text-xl sm:text-2xl font-black text-amber-100 mt-2">
                     Day {day.day}: {day.title}
                 </h3>

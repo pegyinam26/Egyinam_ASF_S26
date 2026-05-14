@@ -3,6 +3,7 @@ import { bookingSchema } from "../validation/bookingSchema";
 import PageBackground from "../components/PageBackground.tsx";
 import {useLocation} from "react-router-dom";
 
+//booking form to create a booking for a regular user
 export default function BookingPage() {
     const location = useLocation();
     const bookingState = location.state as any;
@@ -215,13 +216,6 @@ export default function BookingPage() {
     return (
 
         <PageBackground>
-
-            {/*<div className="*/}
-            {/*    max-w-5xl*/}
-            {/*    mx-auto*/}
-            {/*    px-6 md:px-10*/}
-            {/*    py-10*/}
-            {/*">*/}
             <div className="w-full max-w-5xl mx-auto px-0 sm:px-4 md:px-8 py-6 md:py-10">
 
                 {/* MAIN CARD */}

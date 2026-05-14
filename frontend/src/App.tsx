@@ -14,6 +14,7 @@ import AboutUsPage from "./pages/AboutUsPage.tsx";
 import UsersList from "./pages/UsersList.tsx";
 import MyBookings from "./pages/MyBookings.tsx";
 
+//shows all the routes depending on roles
 function App() {
     return (
         <>

@@ -1,5 +1,6 @@
 import bgImage from "../assets/background2.jpg";
 
+//ensuring there is a consistent background theme across the entire project as given with the bgImage imported
 export default function PageBackground({children }: any) {
     return (
         <div
