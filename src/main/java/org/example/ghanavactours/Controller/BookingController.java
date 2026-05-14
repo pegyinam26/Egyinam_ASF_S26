@@ -38,6 +38,11 @@ public class BookingController {
         return bookingService.getBookingById(id);
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Booking> getBookingsByUserId(@PathVariable Long userId) {
+        return bookingService.getBookingsByUserId(userId);
+    }
+
     //fulfilling CRUD - U - update
     @PutMapping("/{id}")
     public Booking update(@PathVariable Long id, @RequestBody Booking booking) {

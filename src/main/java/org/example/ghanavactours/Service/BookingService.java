@@ -94,6 +94,9 @@ public class BookingService {
         return bookingRepository.findById(id)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Booking not found"));
     }
+    public List<Booking> getBookingsByUserId(Long userId) {
+        return bookingRepository.findByUserId(userId);
+    }
 
     //fulfilling CRUD - U - update
     public Booking updateBooking(

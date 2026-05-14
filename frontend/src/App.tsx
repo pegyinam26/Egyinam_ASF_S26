@@ -12,6 +12,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import Footer from "./components/Footer.tsx";
 import AboutUsPage from "./pages/AboutUsPage.tsx";
 import UsersList from "./pages/UsersList.tsx";
+import MyBookings from "./pages/MyBookings.tsx";
 
 function App() {
     return (
@@ -25,6 +26,16 @@ function App() {
                         <ProtectedRoute>
                             <UserRoute>
                                 <BookingPage />
+                            </UserRoute>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/my-bookings"
+                    element={
+                        <ProtectedRoute>
+                            <UserRoute>
+                                <MyBookings />
                             </UserRoute>
                         </ProtectedRoute>
                     }

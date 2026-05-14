@@ -63,6 +63,15 @@ export default function Navbar() {
                         </Link>
                     )}
 
+                    {role === "USER" && (
+                        <Link
+                            to="/my-bookings"
+                            className={`whitespace-nowrap transition ${isActive("/my-bookings")}`}
+                        >
+                            My Bookings
+                        </Link>
+                    )}
+
                     {role === "ADMIN" && (
                         <Link to="/admin/bookings" className={`whitespace-nowrap transition ${isActive("/admin/bookings")}`}>
                             Bookings
@@ -110,7 +119,7 @@ export default function Navbar() {
                 <div
                     className={`
                         hidden md:flex justify-center relative group pointer-events-none
-                        ${shouldShiftAdinkra ? "lg:ml-60" : ""}
+                        ${shouldShiftAdinkra ? "lg:ml-80" : ""}
                     `}
                 >
                     <div className="absolute w-24 h-24 bg-yellow-400/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-500"></div>
@@ -201,6 +210,16 @@ export default function Navbar() {
                             className={`block transition ${isActive("/booking")}`}
                         >
                             Book a Trip
+                        </Link>
+                    )}
+
+                    {role === "USER" && (
+                        <Link
+                            to="/my-bookings"
+                            onClick={() => setMenuOpen(false)}
+                            className={`block transition ${isActive("/my-bookings")}`}
+                        >
+                            My Bookings
                         </Link>
                     )}
 
